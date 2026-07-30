@@ -154,7 +154,7 @@
 
   .layer__name {
     display: inline-block;
-    padding-left: 0;
+    padding-inline-start: 0;
   }
 
   .layer__what {
@@ -327,8 +327,8 @@
    ========================================================================== */
 
 .note {
-  padding-left: var(--space-4);
-  border-left: 2px solid var(--signal);
+  padding-inline-start: var(--space-4);
+  border-inline-start: 2px solid var(--signal);
   font-size: var(--step-small);
   color: var(--ink-soft);
 }
@@ -354,6 +354,26 @@
   font-family: var(--font-mono);
   font-size: var(--step-mono);
   letter-spacing: 0.03em;
+}
+
+/* Language switch in the masthead. Its label is always written in the language
+   it switches TO, in that language's own script — a reader looking for Arabic
+   scans for Arabic, not for the word "Arabic". */
+.lang-link {
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-block: var(--space-1);
+  border-bottom: 1px solid transparent;
+}
+
+.lang-link:hover {
+  color: var(--signal);
+  border-bottom-color: var(--signal);
 }
 
 .btn {
@@ -556,7 +576,7 @@
 
 .ui__side {
   padding: 0.5rem 0;
-  border-right: 1px solid var(--rule);
+  border-inline-end: 1px solid var(--rule);
   background: var(--paper-sunk);
 }
 
@@ -690,7 +710,7 @@ html[data-theme="dark"] .todo b {
 
 .prose ul.bullets {
   margin: 0 0 var(--space-4);
-  padding-left: var(--space-5);
+  padding-inline-start: var(--space-5);
   list-style: disc;
 }
 

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>مجتبى المدن — مهندس حاسب آلي</title>
+<meta name="description" content="مهندس حاسب آلي في المنطقة الشرقية بالسعودية. أنظمة Django وقواعد بيانات SQL، برمجيات مدمجة على ESP32، وVerilog، ومعالج 32 بت مبني في Logisim. كل ادعاء في هذه الصفحة مرفق بما يثبته.">
+<link rel="canonical" href="https://mjs19999.github.io/portfolio/ar/">
+<link rel="alternate" hreflang="en" href="https://mjs19999.github.io/portfolio/">
+<link rel="alternate" hreflang="ar" href="https://mjs19999.github.io/portfolio/ar/">
+<link rel="alternate" hreflang="x-default" href="https://mjs19999.github.io/portfolio/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_SA">
+<meta property="og:title" content="مجتبى المدن — مهندس حاسب آلي">
+<meta property="og:description" content="أبني في كل طبقة، من البوابات المنطقية إلى الخدمات. كل سطر يذكر ما يثبته.">
+
+<!-- Set the theme before first paint so the page never flashes the wrong one. -->
+<script>
+  (function () {
+    var stored;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    document.documentElement.dataset.theme =
+      stored ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap">
+
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/layout.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/rtl.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="masthead__name" href="#top"><b>MA</b> مجتبى المدن</a>
+    <nav class="masthead__nav" aria-label="أقسام الصفحة">
+      <a href="#work">العمل</a>
+      <a href="#built">ما بنيته</a>
+      <a href="#stack">المهارات</a>
+      <a href="#background">الدراسة</a>
+      <a href="#contact">التواصل</a>
+    </nav>
+    <a class="lang-link" href="../index.html" hreflang="en" lang="en">English</a>
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="تبديل السمة">DK</button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================================================================
+       HERO
+       =================================================================== -->
+  <section class="section section--hero" id="top">
+    <div class="shell">
+      <p class="eyebrow">مهندس حاسب آلي &middot; المنطقة الشرقية، السعودية</p>
+      <h1>أبني في كل طبقة، من البوابات المنطقية إلى الخدمات.</h1>
+      <p class="lead hero__lead">
+        معالج 32 بت وصّلته في Logisim ثم أعدت بناءه بخط أنابيب. خوارزمية AES
+        كآلة حالات كتبتُ إشاراتها بيدي في Verilog. جدولة مهام لحظية على متحكم
+        ESP32. وسجل العهد المبني على Django وPostgreSQL الذي تعمل عليه شركتي
+        اليوم. كل سطر في الجدول أدناه يذكر ما يثبته &mdash; وحين لا يوجد كود
+        منشور، يقول ذلك صراحةً بدل أن يصمت.
+      </p>
+
+      <table class="layers">
+        <caption class="u-sr">
+          الطبقات التي بنيت فيها، من طبقة الخدمة نزولًا إلى البوابات المنطقية،
+          مع الدليل على كل واحدة.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="u-sr">رقم الطبقة</span></th>
+            <th scope="col">الطبقة</th>
+            <th scope="col">ما بنيته فيها</th>
+            <th scope="col">الدليل</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="layer__num">07</td>
+            <th scope="row" class="layer__name">الخدمة</th>
+            <td class="layer__what">سجل عهد لـ 684 أصلًا و933 سجل موظف، منها 428 في عهدة موظفين حاليًا، ويشترط توقيعين في كل عملية تسليم.</td>
+            <td class="layer__proof"><a href="work/khonaini-asset-system.html">دراسة الحالة &larr;</a></td>
+          </tr>
+          <tr>
+            <td class="layer__num">06</td>
+            <th scope="row" class="layer__name">البيانات</th>
+            <td class="layer__what">تنبؤ بالطلب من سجل نقاط البيع: أكثر من 30 خاصية مشتقة، وثلاثة نماذج، يُختار أفضلها بتحقق متقاطع خماسي الطيات.</td>
+            <td class="layer__proof"><a href="https://github.com/mjs19999/smart_menu_brain" target="_blank" rel="noopener">المستودع &#8599;</a></td>
+          </tr>
+          <tr>
+            <td class="layer__num">05</td>
+            <th scope="row" class="layer__name">الرؤية</th>
+            <td class="layer__what">تحديد الأجسام والتعرف عليها وتتبعها، مدمجة في منظومة مهام لطائرة بدون طيار، واختُبرت للوصول إلى الحد الذي تتوقف عنده عن كونها موثوقة.</td>
+            <td class="layer__proof">كود يخص جهة العمل</td>
+          </tr>
+          <tr>
+            <td class="layer__num">04</td>
+            <th scope="row" class="layer__name">البرمجيات المدمجة</th>
+            <td class="layer__what">ثلاث مهام FreeRTOS تتشارك متحكم ESP32 واحدًا، بدورات 100&nbsp;ms و200&nbsp;ms ومهمة مدفوعة بالأحداث، بهذا الترتيب من الأولوية.</td>
+            <td class="layer__proof"><a href="https://github.com/mjs19999/SmartOBDII-Final" target="_blank" rel="noopener">المستودع &#8599;</a></td>
+          </tr>
+          <tr>
+            <td class="layer__num">03</td>
+            <th scope="row" class="layer__name">البروتوكول</th>
+            <td class="layer__what">استعلامات OBD-II عبر UART إلى محوّل ELM327، لفك قراءات حرارة المبرّد وسرعة الدوران والسرعة ووضع الخانق من محرك يعمل.</td>
+            <td class="layer__proof"><a href="https://github.com/mjs19999/SmartOBDII-Final" target="_blank" rel="noopener">المستودع &#8599;</a></td>
+          </tr>
+          <tr>
+            <td class="layer__num">02</td>
+            <th scope="row" class="layer__name">RTL</th>
+            <td class="layer__what">تشفير وفك تشفير AES كآلة حالات خوارزمية صريحة في Verilog &mdash; إشارات التحكم مكتوبة يدويًا لا مستنتَجة من المُركِّب.</td>
+            <td class="layer__proof"><a href="https://github.com/mjs19999/AES_in_verilog" target="_blank" rel="noopener">المستودع &#8599; 6&#9733;</a></td>
+          </tr>
+          <tr>
+            <td class="layer__num">01</td>
+            <th scope="row" class="layer__name">البوابات</th>
+            <td class="layer__what">معالج RISC بمعمارية 32 بت في Logisim، بنسخة أحادية الدورة ثم بخط أنابيب، تحققتُ منه بتشغيل خوارزمية الترتيب بالاختيار عليه بلغة التجميع.</td>
+            <td class="layer__proof"><a href="https://github.com/mjs19999/32-bit-cpu-in-logisim" target="_blank" rel="noopener">المستودع &#8599;</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="../assets/pdf/mojtaba-almadan-cv-ar.pdf">تحميل السيرة الذاتية (PDF)</a>
+        <a class="btn" href="https://github.com/mjs19999" target="_blank" rel="noopener">GitHub &#8599;</a>
+        <a class="btn" href="https://www.linkedin.com/in/mojtaba-almadan/" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       WORK
+       =================================================================== -->
+  <section class="section" id="work">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">العمل</div>
+        <p class="gutter__meta">2021 &mdash; الآن<br>السعودية</p>
+      </div>
+
+      <div class="stack-v">
+        <article class="role">
+          <div class="role__head">
+            <h3>مهندس حاسب &mdash; الأنظمة والأدوات الداخلية</h3>
+            <span class="role__org">شركة الخنيني العالمية المحدودة &middot; الجبيل &middot; يوليو 2023 &mdash; الآن</span>
+          </div>
+          <div class="role__body prose">
+            <p>
+              أبني النظام الذي يتتبع أصول الشركة وسجلات موظفيها &mdash; Django
+              فوق قاعدة بيانات علائقية &mdash; ليحل محل منتج مؤسسي قديم وجداول
+              بيانات كانت تُحدَّث يدويًا بجانبه. الحفاظ على اتساق البيانات هو
+              الجزء الذي يستهلك الجهد فعلًا؛ أما الإضافة والتعديل فهما النصف
+              السهل.
+            </p>
+            <p>
+              والوظيفة ليست برمجة فقط. أجهّز الأجهزة الطرفية وأنصّبها (نظام
+              التشغيل، المشغّلات، البرامج)، وأتتبّع أعطال الاتصال بالشبكة
+              والخوادم، وأكتب التوثيق والمواد التدريبية التي يستعملها الناس بعد
+              ذلك &mdash; وهي في العادة ما يحدد إن كانت الأداة الداخلية الجديدة
+              ستُعتمد فعلًا أم تُهمَل بهدوء.
+            </p>
+            <p>
+              <a class="link-mono" href="work/khonaini-asset-system.html">اقرأ دراسة الحالة المعمارية &larr;</a>
+            </p>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role__head">
+            <h3>مهندس دمج أنظمة الذكاء الاصطناعي</h3>
+            <span class="role__org">UAS2030 &middot; الظهران &middot; يونيو 2021 &mdash; يناير 2023</span>
+          </div>
+          <div class="role__body prose">
+            <p>
+              عملت إلى جانب متخصصين في الرؤية الحاسوبية وتعلُّم الآلة على تحديد
+              الأجسام والتعرف عليها وتتبعها، ودمجتُ هذه المكونات في منظومة مهام
+              أكبر.
+            </p>
+            <p>
+              وذهب أغلب وقتي إلى التقييم لا إلى بناء النماذج: تشغيل النظام في
+              بيئات وسيناريوهات مختلفة للوصول إلى الظروف التي يتوقف عندها عن
+              كونه موثوقًا. ولا يزال هذا أكثر ما أراه مفيدًا في هذا النوع من
+              العمل &mdash; فالنموذج الذي يعمل جيدًا في بيئة واحدة فقط لم
+              يُنجَز، بل عُرِض فحسب.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       BUILT
+       =================================================================== -->
+  <section class="section" id="built">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">ما بنيته</div>
+        <p class="gutter__meta">5 مشاريع<br>4 مستودعات عامة</p>
+      </div>
+
+      <div class="stack-v--loose stack-v">
+        <div class="section__intro">
+          <h2>خمسة أشياء بنيتها فعلًا.</h2>
+          <p class="lead">
+            ليست شبكة مملوءة لتصل إلى رقم مستدير. أربعة منها لها كود يمكنك
+            قراءته؛ والخامس ملك لجهة عملي، فله دراسة حالة معمارية بدل رابط
+            مستودع.
+          </p>
+        </div>
+
+        <article class="spec">
+          <div class="spec__head">
+            <h3 class="spec__title">نظام إدارة الأصول والموظفين الداخلي</h3>
+            <span class="tag">كود يخص جهة العمل</span>
+          </div>
+          <dl class="spec__meta">
+            <div><dt>الدور</dt><dd>المهندس الوحيد &mdash; المخطط، التطبيق، النشر، النسخ الاحتياطي، التدريب</dd></div>
+            <div><dt>التقنيات</dt><dd>Django 6.0 &middot; PostgreSQL &middot; قوالب مُصيَّرة على الخادم &middot; بلا SPA</dd></div>
+            <div><dt>البيانات</dt><dd>684 أصلًا &middot; 933 موظفًا &middot; 1,423 عملية عهدة &middot; 428 مفتوحة</dd></div>
+            <div><dt>يحل محل</dt><dd>منتج مؤسسي قديم وجداول بيانات تُحدَّث يدويًا</dd></div>
+          </dl>
+          <div class="spec__body prose">
+            <p>
+              ليس نظام جرد بالضبط &mdash; بل سجل عهدة. مهمته إثبات من تسلّم
+              مسؤولية جهاز ما، ولهذا تلتقط كل عملية تسليم توقيعين على لوحة
+              توقيع: توقيع الموظف وتوقيع الجهة المخوَّلة، وتُغلَق سجلات العهدة
+              ولا تُحذف. وكل ما يحمل تاريخ عهدة مضبوط بـ
+              <code>on_delete=PROTECT</code>: لا يمكنك حذف موظف سبق أن وقّع على
+              استلام جهاز.
+            </p>
+          </div>
+          <div class="spec__links">
+            <a class="btn" href="work/khonaini-asset-system.html">دراسة الحالة المعمارية &larr;</a>
+          </div>
+        </article>
+
+        <article class="spec">
+          <div class="spec__head">
+            <h3 class="spec__title">Menu Brain &mdash; تنبؤ بالطلب لمجموعة مطاعم</h3>
+            <span class="tag tag--signal">عام</span>
+          </div>
+          <dl class="spec__meta">
+            <div><dt>الدور</dt><dd>المهندس الوحيد</dd></div>
+            <div><dt>التقنيات</dt><dd>Django 5.1 &middot; DRF &middot; PostgreSQL 16 &middot; scikit-learn &middot; pandas &middot; Chart.js</dd></div>
+            <div><dt>النماذج</dt><dd>Gradient boosting / random forest / linear regression، يُختار أفضلها بتحقق متقاطع خماسي على R&sup2;</dd></div>
+          </dl>
+          <div class="spec__body prose">
+            <p>
+              يتنبأ بكمية كل صنف سيبيعه فرع معيّن، حتى يُطلب المخزون بناءً على
+              رقم لا على تخمين، ويُهدر طعام أقل.
+            </p>
+            <p>
+              أكثر التفكير ذهب إلى مسار اشتقاق الخصائص: ترميز دوري لوقت الأسبوع
+              والموسمية، ومتوسطات متحركة على 7 و14 و30 يومًا، وخصائص إزاحة
+              زمنية وإحصاءات متدحرجة. تُدرَّب ثلاثة نماذج انحدار على ذلك، ويُحفظ
+              صاحب أفضل R&sup2; للتنبؤ الحي. والواجهة تعمل بالعربية والإنجليزية
+              مع دعم الاتجاه من اليمين إلى اليسار.
+            </p>
+          </div>
+          <div class="spec__links">
+            <a class="btn" href="https://github.com/mjs19999/smart_menu_brain" target="_blank" rel="noopener">اقرأ الكود &#8599;</a>
+          </div>
+        </article>
+
+        <article class="spec">
+          <div class="spec__head">
+            <h3 class="spec__title">Smart OBD-II &mdash; تشخيص يستنتج بدل أن يعرض</h3>
+            <span class="tag tag--signal">عام</span>
+          </div>
+          <dl class="spec__meta">
+            <div><dt>الدور</dt><dd>المهندس الوحيد</dd></div>
+            <div><dt>التقنيات</dt><dd>C++ &middot; ESP32-WROOM-32 &middot; FreeRTOS &middot; PlatformIO &middot; LittleFS</dd></div>
+            <div><dt>يقرأ</dt><dd>PID 0x05 حرارة المبرد &middot; 0x0C سرعة الدوران &middot; 0x0D السرعة &middot; 0x11 الخانق</dd></div>
+          </dl>
+          <div class="spec__body prose">
+            <p>
+              متحكم ESP32 موصول بمنفذ OBD-II في السيارة، يقرأ قيم المحرك حيّة.
+              والفكرة أنه لا يكتفي بعرضها: محرك قواعد يراقب <em>التركيبات</em>
+              الخطرة &mdash; القراءات المقبولة كلٌّ على حدة لكنها مجتمعة تعني
+              وجود خلل &mdash; فيُشغّل مؤشرًا ضوئيًا وصفارة.
+            </p>
+            <p>
+              ثلاث مهام FreeRTOS تتشارك المتحكم، والأولويات هي التصميم نفسه.
+              قارئ OBD يعمل كل 100&nbsp;ms بأولوية عالية، لأن الإطار الضائع
+              بيانات لا تعود. وكاشف الأعطال كل 200&nbsp;ms بأولوية متوسطة. وخادم
+              الويب في الأسفل، مدفوعًا بالأحداث، لأن تأخر لوحة العرض ثانية لا
+              يكلّف شيئًا.
+            </p>
+          </div>
+          <div class="spec__links">
+            <a class="btn" href="https://github.com/mjs19999/SmartOBDII-Final" target="_blank" rel="noopener">اقرأ الكود &#8599;</a>
+          </div>
+        </article>
+
+        <article class="spec">
+          <div class="spec__head">
+            <h3 class="spec__title">AES في Verilog، كآلة حالات صريحة</h3>
+            <span class="tag tag--signal">عام &middot; 6&#9733; 4 نسخ</span>
+          </div>
+          <dl class="spec__meta">
+            <div><dt>الدور</dt><dd>عمل ثنائي، مع حسن الحسين &mdash; جامعة الملك فهد</dd></div>
+            <div><dt>التصميم</dt><dd>آلة حالات خوارزمية، بمسارَي بيانات منفصلين للتشفير وفك التشفير</dd></div>
+            <div><dt>الرخصة</dt><dd>Apache-2.0</dd></div>
+          </dl>
+          <div class="spec__body prose">
+            <p>
+              تشفير وفك تشفير AES مبنيان كآلة حالات خوارزمية صريحة، بدل ترك مسار
+              التحكم ليُستنتج من المُركِّب. عدّاد الجولات وتمكين المسجلات وشروط
+              التفرع &mdash; <code>isRound0</code> و<code>isRound9</code>
+              و<code>isRound10</code> و<code>count_lt_10</code> &mdash; كلها
+              مكتوبة صراحةً، مع مسارَي بيانات منفصلين يغطيان استبدال البايتات
+              وإزاحة الصفوف ومزج الأعمدة ومعكوساتها.
+            </p>
+            <p>
+              ستة أشخاص من خارج المقرر وضعوا له نجمة وأربعة نسخوه، وهو التقييم
+              الخارجي الوحيد الذي أملكه على أي من هذا.
+            </p>
+          </div>
+          <div class="spec__links">
+            <a class="btn" href="https://github.com/mjs19999/AES_in_verilog" target="_blank" rel="noopener">اقرأ الكود &#8599;</a>
+          </div>
+        </article>
+
+        <article class="spec">
+          <div class="spec__head">
+            <h3 class="spec__title">معالج RISC بمعمارية 32 بت، مبنيًّا مرتين</h3>
+            <span class="tag tag--signal">عام</span>
+          </div>
+          <dl class="spec__meta">
+            <div><dt>الدور</dt><dd>عمل فردي &mdash; مقرر COE301، جامعة الملك فهد</dd></div>
+            <div><dt>الأدوات</dt><dd>Logisim &middot; لغة تجميع RISC</dd></div>
+            <div><dt>الاختبار</dt><dd>خوارزمية الترتيب بالاختيار، مُجمَّعة ومُشغَّلة حتى النهاية</dd></div>
+          </dl>
+          <div class="spec__body prose">
+            <p>
+              معالج RISC بمعمارية 32 بت بُني مرة كآلة أحادية الدورة ثم مرة
+              أخرى بخط أنابيب. مسار البيانات ووحدة التحكم ووحدة الحساب والمنطق
+              وملف المسجلات، موصولة مكوّنًا مكوّنًا.
+            </p>
+            <p>
+              والتحقق منه يتم بتجميع خوارزمية ترتيب بالاختيار وتشغيلها على الآلة
+              حتى تتوقف والمصفوفة مرتبة. وهذا اختبار قاسٍ: كل تعليمة في المسار،
+              وواجهة الذاكرة، وكل إشارة تحكم، يجب أن تكون صحيحة لا مجرد معقولة.
+            </p>
+            <p>
+              وهذا هو المشروع الذي أشير إليه حين يسألني أحد إن كنت أفهم ما الذي
+              يقع تحت الكود الذي أكتبه.
+            </p>
+          </div>
+          <div class="spec__links">
+            <a class="btn" href="https://github.com/mjs19999/32-bit-cpu-in-logisim" target="_blank" rel="noopener">اقرأ الكود &#8599;</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       STACK
+       =================================================================== -->
+  <section class="section" id="stack">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">المهارات</div>
+        <p class="gutter__meta">مرتبة حسب<br>ما يثبتها</p>
+      </div>
+
+      <div class="stack-v">
+        <div class="section__intro">
+          <h2>مرتبة حسب الدليل، لا مقيّمة من مئة.</h2>
+          <p class="lead">
+            النسبة المئوية بجانب مهارة هي رقم اخترعته عن نفسي. هذه مرتبة حسب
+            أقوى ما أستطيع تقديمه كدليل، والمجموعة الأخيرة هي التي كنت سأقرؤها
+            أولًا لو كنت مكانك.
+          </p>
+        </div>
+
+        <div class="stack-v--tight stack-v">
+          <div class="tier">
+            <div class="tier__label">أشغّلها وأصونها في الإنتاج</div>
+            <ul class="tier__items">
+              <li lang="en" dir="ltr">Python</li>
+              <li lang="en" dir="ltr">Django</li>
+              <li lang="en" dir="ltr">PostgreSQL</li>
+              <li>SQL &mdash; تصميم المخططات والقيود والترحيلات</li>
+              <li>صلاحيات ومجموعات Django</li>
+              <li>النسخ الاحتياطي والاستعادة</li>
+              <li>تجهيز الأجهزة الطرفية (Windows وLinux)</li>
+              <li>تشخيص أعطال الشبكات والخوادم</li>
+              <li>التوثيق التقني والتدريب</li>
+            </ul>
+          </div>
+
+          <div class="tier">
+            <div class="tier__label">بنيت بها مشاريع حقيقية</div>
+            <ul class="tier__items">
+              <li lang="en" dir="ltr">Django REST Framework</li>
+              <li>تصميم واجهات REST</li>
+              <li lang="en" dir="ltr">scikit-learn</li>
+              <li lang="en" dir="ltr">pandas / NumPy</li>
+              <li lang="en" dir="ltr">OpenCV</li>
+              <li>C++ على ESP32</li>
+              <li lang="en" dir="ltr">FreeRTOS</li>
+              <li lang="en" dir="ltr">Verilog</li>
+              <li>التصميم الرقمي / Logisim</li>
+              <li lang="en" dir="ltr">Git</li>
+            </ul>
+          </div>
+
+          <div class="tier">
+            <div class="tier__label">أساس دراسي &mdash; جامعة الملك فهد</div>
+            <ul class="tier__items">
+              <li>معمارية الحاسب</li>
+              <li>أنظمة التشغيل</li>
+              <li>الشبكات</li>
+              <li>المعالجات الدقيقة</li>
+              <li>معالجة الإشارات</li>
+              <li>أنظمة التحكم</li>
+              <li>MQTT / LoRaWAN / Zigbee</li>
+              <li>الحوسبة الطرفية</li>
+            </ul>
+          </div>
+
+          <div class="tier tier--open">
+            <div class="tier__label">أتعلّمها الآن &mdash; ولستُ جاهزًا لمقابلة فيها بعد</div>
+            <ul class="tier__items">
+              <li>إدارة Linux أبعد من الاستخدام اليومي</li>
+              <li>systemd / journald / الصلاحيات</li>
+              <li>تشخيص الأداء</li>
+              <li>SQL أبعد من العمليات الأساسية &mdash; دوال النوافذ، EXPLAIN، الفهرسة</li>
+              <li lang="en" dir="ltr">Docker</li>
+              <li lang="en" dir="ltr">Kubernetes</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="note">
+          أُبقي هذه المجموعة الأخيرة صادقة وظاهرة على الصفحة. فما يرد فيها
+          أستطيع أن أحدّثك عمّا قرأته وبنيته به &mdash; لا أن أدّعي أني شغّلته
+          في بيئة إنتاج. وأفضّل أن تعرف الفرق قبل أن نبدأ الحديث، على أن تكتشفه
+          في منتصف جلسة مشاركة شاشة.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       BACKGROUND
+       =================================================================== -->
+  <section class="section" id="background">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">الدراسة</div>
+        <p class="gutter__meta">جامعة الملك فهد<br>2017 &mdash; الآن</p>
+      </div>
+
+      <div class="stack-v">
+        <article class="role">
+          <div class="role__head">
+            <h3>ماجستير العلوم في إنترنت الأشياء</h3>
+            <span class="role__org">جامعة الملك فهد للبترول والمعادن &middot; 2025 &mdash; الآن</span>
+          </div>
+          <div class="role__body prose">
+            <p>
+              المحوّلات، بوابات ومنصات إنترنت الأشياء، شبكات LPWAN، وMQTT
+              وZigbee وLoRaWAN، والحوسبة الطرفية، والتتبع عن بُعد، والتحليلات
+              اللحظية، وإنترنت الأشياء الصناعي، وقابلية التشغيل البيني.
+            </p>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role__head">
+            <h3>بكالوريوس هندسة الحاسب الآلي</h3>
+            <span class="role__org">جامعة الملك فهد للبترول والمعادن &middot; 2017 &mdash; 2023</span>
+          </div>
+          <div class="role__body prose">
+            <p>
+              معمارية الحاسب، والتصميم الرقمي، والمعالجات الدقيقة، ومعالجة
+              الإشارات، وأنظمة التحكم، وأنظمة التشغيل، والشبكات. المعالج وآلة
+              حالات AES خرجا كلاهما من هذه الدرجة &mdash; ومقررا المعمارية
+              والتصميم الرقمي هما حيث تبدأ طبقة البوابات في أعلى هذه الصفحة.
+            </p>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role__head">
+            <h3>مسابقة AUVSI SUAS</h3>
+            <span class="role__org">فريق جامعة الملك فهد &middot; نموذج ذكاء اصطناعي</span>
+          </div>
+          <div class="role__body prose">
+            <p>
+              صمّمت نموذج تعلّم الآلة لمشاركة الفريق بطائرة صغيرة بدون طيار،
+              ضمن حدود الدقة وزمن الاستجابة التي تفرضها مهمة تعمل على عتاد
+              حقيقي.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       CONTACT
+       =================================================================== -->
+  <section class="section" id="contact">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">التواصل</div>
+        <p class="gutter__meta">البريد أسرع<br>وسيلة</p>
+      </div>
+
+      <div class="stack-v">
+        <div class="section__intro">
+          <h2>يسعدني الحديث.</h2>
+          <p class="lead">
+            أكثر ما أكون مفيدًا فيه هو أنظمة الواجهة الخلفية، والعمل على
+            الأنظمة المدمجة، أو أي شيء يحتاج شخصًا ينتقل بين الاثنين دون
+            تسليم. وإن أردت التعمق في أي من المشاريع أعلاه فاسأل &mdash; الكود
+            كله موجود.
+          </p>
+        </div>
+
+        <dl class="contact-list">
+          <div>
+            <dt>البريد</dt>
+            <dd><a href="mailto:mojtaba.almadan@gmail.com">mojtaba.almadan@gmail.com</a></dd>
+          </div>
+          <div>
+            <dt>LinkedIn</dt>
+            <dd><a href="https://www.linkedin.com/in/mojtaba-almadan/" target="_blank" rel="noopener">linkedin.com/in/mojtaba-almadan</a></dd>
+          </div>
+          <div>
+            <dt>GitHub</dt>
+            <dd><a href="https://github.com/mjs19999" target="_blank" rel="noopener">github.com/mjs19999</a></dd>
+          </div>
+          <div>
+            <dt>المقر</dt>
+            <dd>المنطقة الشرقية، السعودية</dd>
+          </div>
+          <div>
+            <dt>السيرة الذاتية</dt>
+            <dd><a href="../assets/pdf/mojtaba-almadan-cv-ar.pdf">mojtaba-almadan-cv-ar.pdf</a></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer__inner">
+    <span>مجتبى المدن &middot; المنطقة الشرقية، السعودية</span>
+    <span>
+      HTML وCSS ثابتان، بلا خطوة بناء &mdash;
+      <a href="https://github.com/mjs19999/portfolio" target="_blank" rel="noopener">المصدر</a>
+      &middot;
+      <a href="../index.html" hreflang="en" lang="en">English</a>
+    </span>
+  </div>
+</footer>
+
+<script src="../assets/js/theme.js" defer></script>
+<script src="../assets/js/nav.js" defer></script>
+</body>
+</html>

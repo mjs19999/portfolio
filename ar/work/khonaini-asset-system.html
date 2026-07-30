@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>نظام إدارة أصول KIC — دراسة حالة — مجتبى المدن</title>
+<meta name="description" content="دراسة معمارية لنظام داخلي لتتبع عهدة أصول تقنية المعلومات: 684 أصلًا و933 سجل موظف و1,423 عملية عهدة. مبني على Django وPostgreSQL، مع التقاط توقيعين في كل عملية تسليم.">
+<link rel="canonical" href="https://mjs19999.github.io/portfolio/ar/work/khonaini-asset-system.html">
+<link rel="alternate" hreflang="en" href="https://mjs19999.github.io/portfolio/work/khonaini-asset-system.html">
+<link rel="alternate" hreflang="ar" href="https://mjs19999.github.io/portfolio/ar/work/khonaini-asset-system.html">
+<link rel="alternate" hreflang="x-default" href="https://mjs19999.github.io/portfolio/work/khonaini-asset-system.html">
+
+<script>
+  (function () {
+    var stored;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    document.documentElement.dataset.theme =
+      stored ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap">
+
+<link rel="stylesheet" href="../../assets/css/tokens.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<link rel="stylesheet" href="../../assets/css/layout.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<link rel="stylesheet" href="../../assets/css/rtl.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="masthead__name" href="../index.html"><b>MA</b> مجتبى المدن</a>
+    <nav class="masthead__nav" aria-label="أقسام الصفحة">
+      <a href="../index.html#built">&rarr; كل المشاريع</a>
+    </nav>
+    <a class="lang-link" href="../../work/khonaini-asset-system.html" hreflang="en" lang="en">English</a>
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="تبديل السمة">DK</button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section section--hero">
+    <div class="shell">
+      <p class="eyebrow">دراسة حالة &middot; شركة الخنيني العالمية المحدودة &middot; يوليو 2023 &mdash; الآن</p>
+      <h1>النظام الذي يعرف مَن بيده الجهاز.</h1>
+      <p class="lead hero__lead">
+        منصة داخلية لعهدة أصول تقنية المعلومات: ما الذي تملكه الشركة، ومن
+        يحمله الآن، ومن وقّع على استلامه. مبنية على Django وPostgreSQL، لتحل
+        محل منتج قديم وجداول بيانات كانت عدة إدارات تحدّثها يدويًا.
+      </p>
+
+      <dl class="spec__meta u-spaced">
+        <div><dt>البيانات الحية</dt><dd>684 أصلًا &middot; 933 سجل موظف (910 نشط) &middot; 1,423 عملية عهدة &middot; 428 في عهدة موظفين الآن</dd></div>
+        <div><dt>التقنيات</dt><dd>Django 6.0 &middot; PostgreSQL &middot; قوالب مُصيَّرة على الخادم &middot; بلا SPA وبلا خطوة بناء</dd></div>
+        <div><dt>البيانات المرجعية</dt><dd>22 مشروعًا &middot; 11 تصنيفًا &middot; 10 علامات تجارية</dd></div>
+        <div><dt>الوصول</dt><dd>5 حسابات موزّعة على 4 مجموعات صلاحيات، مضبوطة على مستوى كل شاشة</dd></div>
+        <div><dt>الدور</dt><dd>المهندس الوحيد &mdash; المخطط، والتطبيق، والنشر، والنسخ الاحتياطي، والتدريب</dd></div>
+      </dl>
+
+      <p class="note u-spaced">
+        المستودع خاص: فيه سجلات موظفين وأرقام هويات وتوقيعات ممسوحة. لذلك هذه
+        الصفحة هي التصميم لا الشيفرة &mdash; المخطط، وكيف تُكتب عملية تسليم
+        العهدة، والقراران اللذان أدافع عنهما، والقرار الذي كنت سأعكسه.
+      </p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       PROBLEM
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">المشكلة</div>
+        <p class="gutter__meta">قبل</p>
+      </div>
+      <div class="prose">
+        <p>
+          كان هناك مصدران للحقيقة نفسها. تطبيق قديم يحمل جزءًا من جرد الأصول،
+          وجداول بيانات تحمل الباقي، إضافة إلى كل ما لم يكن المنتج القديم قادرًا
+          على تمثيله &mdash; وهو يشمل الشيء الوحيد الذي كان الناس يحتاجون فعلًا
+          إلى البحث عنه: مَن بيده جهاز معيّن الآن.
+        </p>
+        <p>
+          والنتائج كانت متوقعة. الأصل نفسه قد يوجد مرتين تحت وسمين مختلفين. وقد
+          يغادر موظف دون أن يُسجَّل في أي مكان أنه أعاد عهدته. وحين يُفقد حاسب
+          محمول، لم يكن هناك مستند عليه توقيع يقول من الذي قبِل المسؤولية عنه.
+        </p>
+        <p>
+          وهذه النقطة الأخيرة هي التي شكّلت التصميم كله. هذا ليس نظام جرد
+          بالضبط. إنه <strong>سجل عهدة</strong>، ووظيفته أن يثبت سلسلة الحيازة
+          بعد وقوع الحدث.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       DATA MODEL
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">نموذج البيانات</div>
+        <p class="gutter__meta">6 جداول<br>14 ترحيلًا</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            ستة جداول. أهمها <code>ASSETASSIGNMENT</code>، وهو ليس جدول ربط
+            متعدد-إلى-متعدد بل حدث له خصائصه: متى بدأ، ومتى انتهى، وصورتا توقيع.
+            الأصل الذي ليس له سجل عهدة مفتوح موجود في المستودع؛ والذي له سجل
+            مفتوح في يد أحدهم.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <svg class="diagram" viewBox="0 0 940 620" role="img"
+               aria-label="مخطط العلاقات بين الكيانات. العلامة التجارية والتصنيف لكل منهما أصول متعددة، محمية عند الحذف. الأصل والموظف لكل منهما سجلات عهدة متعددة، محمية عند الحذف. المشروع يرتبط بالموظف وبسجل العهدة مع التعيين إلى قيمة فارغة عند الحذف.">
+
+            <rect class="box" x="20" y="40" width="150" height="72" rx="2"/>
+            <text class="entity" x="34" y="62">BRAND</text>
+            <text class="field" x="34" y="82">id  PK</text>
+            <text class="field" x="34" y="98">name  UQ</text>
+
+            <rect class="box" x="20" y="150" width="150" height="72" rx="2"/>
+            <text class="entity" x="34" y="172">CATEGORY</text>
+            <text class="field" x="34" y="192">id  PK</text>
+            <text class="field" x="34" y="208">name  UQ</text>
+
+            <rect class="box box--key" x="250" y="40" width="200" height="170" rx="2"/>
+            <text class="entity" x="264" y="62">ASSET</text>
+            <text class="field" x="264" y="82">id  PK</text>
+            <text class="field" x="264" y="98">name</text>
+            <text class="field" x="264" y="114">brand_id  FK</text>
+            <text class="field" x="264" y="130">category_id  FK</text>
+            <text class="field" x="264" y="146">model  ← free text</text>
+            <text class="field" x="264" y="162">serial_no</text>
+            <text class="field" x="264" y="178">condition</text>
+            <text class="field" x="264" y="194">price, dates, …</text>
+
+            <rect class="box box--key" x="530" y="40" width="200" height="186" rx="2"/>
+            <text class="entity" x="544" y="62">ASSETASSIGNMENT</text>
+            <text class="field" x="544" y="82">id  PK</text>
+            <text class="field" x="544" y="98">asset_id  FK</text>
+            <text class="field" x="544" y="114">employee_id  FK</text>
+            <text class="field" x="544" y="130">project_id  FK</text>
+            <text class="field" x="544" y="146">assigned_at</text>
+            <text class="field" x="544" y="162">returned_at  NULL</text>
+            <text class="field" x="544" y="178">employee_signature</text>
+            <text class="field" x="544" y="194">authority_signature</text>
+            <text class="field" x="544" y="210">notes, emails</text>
+
+            <rect class="box box--key" x="770" y="40" width="160" height="156" rx="2"/>
+            <text class="entity" x="784" y="62">EMPLOYEE</text>
+            <text class="field" x="784" y="82">id  PK</text>
+            <text class="field" x="784" y="98">employee_no  UQ</text>
+            <text class="field" x="784" y="114">name</text>
+            <text class="field" x="784" y="130">project_id  FK</text>
+            <text class="field" x="784" y="146">position</text>
+            <text class="field" x="784" y="162">is_active</text>
+            <text class="field" x="784" y="178">contact, govt id</text>
+
+            <rect class="box" x="530" y="300" width="200" height="90" rx="2"/>
+            <text class="entity" x="544" y="322">PROJECT</text>
+            <text class="field" x="544" y="342">id  PK</text>
+            <text class="field" x="544" y="358">name</text>
+            <text class="field" x="544" y="374">code  UQ</text>
+
+            <path class="edge" d="M170 76 H250"/>
+            <text class="card" x="176" y="70">1</text>
+            <text class="card" x="238" y="70">N</text>
+            <text class="card" x="192" y="90">PROTECT</text>
+
+            <path class="edge" d="M170 186 H210 V120 H250"/>
+            <text class="card" x="176" y="180">1</text>
+            <text class="card" x="238" y="114">N</text>
+            <text class="card" x="214" y="112">PROTECT</text>
+
+            <path class="edge" d="M450 100 H530"/>
+            <text class="card" x="456" y="94">1</text>
+            <text class="card" x="518" y="94">N</text>
+            <text class="card" x="472" y="114">PROTECT</text>
+
+            <path class="edge" d="M770 100 H730"/>
+            <text class="card" x="756" y="94">1</text>
+            <text class="card" x="736" y="94">N</text>
+            <text class="card" x="734" y="114">PROTECT</text>
+
+            <path class="edge" d="M630 300 V226"/>
+            <text class="card" x="636" y="294">1</text>
+            <text class="card" x="636" y="240">N</text>
+            <text class="card" x="646" y="270">SET_NULL</text>
+
+            <path class="edge" d="M730 345 H850 V196"/>
+            <text class="card" x="736" y="339">1</text>
+            <text class="card" x="856" y="210">N</text>
+            <text class="card" x="762" y="339">SET_NULL</text>
+          </svg>
+          <figcaption class="figure__cap">
+            شكل 1 &mdash; المخطط الحقيقي، بحقول مختصرة. تعليقات
+            <code>on_delete</code> هي التصميم نفسه: كل ما يحمل تاريخ عهدة
+            <code>PROTECT</code>، وكل ما هو تنظيمي <code>SET_NULL</code>. وقيمة
+            <code>returned_at</code> الفارغة تعني أن العهدة ما زالت مفتوحة.
+            السجلات تُغلق ولا تُحذف، فتاريخ عهدة أي أصل استعلام لا عملية تنقيب.
+          </figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3>لماذا يرفض نصف المفاتيح الأجنبية الحذف</h3>
+          <p>
+            <code>Asset.brand</code> و<code>Asset.category</code>
+            و<code>AssetAssignment.asset</code>
+            و<code>AssetAssignment.employee</code> كلها
+            <code>on_delete=PROTECT</code>. أما <code>Employee.project</code>
+            و<code>AssetAssignment.project</code> فهما <code>SET_NULL</code>.
+            هذا الفصل مقصود، وهو القرار الذي أدافع عنه أولًا.
+          </p>
+          <p>
+            لا يمكنك حذف موظف سبق أن وقّع على استلام جهاز. حذفه يعني إتلاف
+            الدليل على أنه فعل ذلك &mdash; وهو الشيء الوحيد الذي وُجد النظام
+            ليحفظه. فالموظف الذي يغادر يصبح <code>is_active = False</code>؛ و23
+            من أصل 933 سجلًا غير نشطة لا محذوفة. أما المشاريع فمختلفة: انتهاء
+            مشروع أمر طبيعي، ولا يصح أن يأخذ معه تاريخ عهدة الأصول، فتصبح تلك
+            المراجع فارغة ويبقى سجل العهدة.
+          </p>
+          <p>
+            والنتيجة العملية أن التطبيق يكاد لا يملك مسارات حذف، وأن قاعدة
+            البيانات هي التي تفرض ذلك بدل الوثوق بأن التطبيق سيتذكّره. وهذا كان
+            المقصد من ترك جداول البيانات: قاعدة لا يستطيع أحد تخطّيها بالخطأ.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       CONSTRAINT
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">القيد</div>
+        <p class="gutter__meta">الذي لم<br>يكن يعمل</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            يجب ألّا يكون الأصل الواحد مفتوحًا لشخصين في وقت واحد. هذا هو الثابت
+            الأساسي، وأول محاولاتي لفرضه كانت خاطئة بطريقة تستحق التدوين.
+          </p>
+          <p>
+            الترحيل الأول أعلن ما يلي:
+          </p>
+          <figure class="figure">
+            <dl class="spec__meta">
+              <div><dt>0001</dt><dd>unique_together = {("asset", "returned_at")}</dd></div>
+              <div><dt>0007</dt><dd>unique_together = set()   &nbsp;&rarr; أُزيل</dd></div>
+            </dl>
+            <figcaption class="figure__cap">
+              شكل 2 &mdash; بينهما ستة ترحيلات.
+            </figcaption>
+          </figure>
+          <p>
+            كان المقصود: لا يمكن أن يكون للأصل أكثر من سجل واحد قيمة
+            <code>returned_at</code> فيه فارغة. والمشكلة أن هذا لا يعمل، ولا
+            يعمل لسبب يسهل قوله ويسهل نسيانه &mdash; <strong>في SQL، القيمة
+            الفارغة لا تساوي القيمة الفارغة.</strong> الفهرس الفريد يعامل كل
+            قيمة فارغة على أنها مختلفة، فلا يتعارض
+            <code>(الأصل&nbsp;42، فارغ)</code> مع
+            <code>(الأصل&nbsp;42، فارغ)</code>. أي أن القيد كان يسمح تحديدًا
+            بالحالة التي كُتب ليمنعها، وفي الوقت نفسه قد يعترض على سجلات مشروعة
+            تصادف أن لها الطابع الزمني نفسه للإرجاع.
+          </p>
+          <p>
+            والأداة الصحيحة هي <strong>الفهرس الفريد الجزئي</strong> &mdash;
+            قاعدة تفرّد تنطبق على مجموعة مُرشَّحة من السجلات فقط. في PostgreSQL
+            تُكتب <code>CREATE UNIQUE INDEX … WHERE returned_at IS NULL</code>،
+            وفي Django تُكتب هكذا:
+          </p>
+          <figure class="figure">
+            <dl class="spec__meta">
+              <div><dt>القيد</dt><dd>UniqueConstraint(<br>&nbsp;&nbsp;fields=["asset"],<br>&nbsp;&nbsp;condition=Q(returned_at__isnull=True),<br>&nbsp;&nbsp;name="one_open_assignment_per_asset",<br>)</dd></div>
+            </dl>
+            <figcaption class="figure__cap">
+              شكل 3 &mdash; تفرّد على السجلات المفتوحة وحدها. سجلات العهدة
+              المغلقة غير مقيّدة، فيمكن تسليم الأصل وإرجاعه أي عدد من المرات،
+              لكن لا يمكن أن يكون في عهدة أكثر من شخص في آن واحد.
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- عند تطبيق القيد، حوّل هذه الفقرة إلى صيغة الماضي وحدّث النقطة
+             المقابلة في قسم "الثغرات المعروفة" أدناه. هذان الموضعان فقط هما
+             اللذان يصفانه على أنه معلّق. -->
+        <div class="prose">
+          <p>
+            ولأكون صريحًا بشأن الوضع الحالي: هذا القيد
+            <strong>ليس في قاعدة البيانات بعد</strong>. منذ الترحيل 0007 وحتى
+            الآن، كان الثابت مفروضًا من مسار التطبيق وحده &mdash; إذ يبحث مسار
+            التسليم عن سجل عهدة مفتوح ويغلقه قبل إنشاء التالي &mdash; وهو ما
+            يعمل إلى أن يقوم طلبان بذلك في اللحظة نفسها. وهو التغيير التالي الذي
+            أنفّذه، ويأتي مع إصلاح المعاملة المذكور في
+            <a href="#gaps">الثغرات المعروفة</a> أدناه.
+          </p>
+          <p>
+            والترحيل سيُطبَّق دون مشاكل. راجعت سجلات العهدة المفتوحة الـ428
+            جميعها ولا يوجد أصل مفتوح أكثر من مرة، فليس هناك ما يحتاج تسوية
+            أولًا &mdash; وهذا حظ لا أمان. فالشخص الواحد الذي يستخدم أداة داخلية
+            على شبكة محلية نادرًا ما يتسابق مع نفسه.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       WRITE PATH
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">مسار الكتابة</div>
+        <p class="gutter__meta">تسليم<br>أصل</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            يتم تسليم الأصول عبر معالج خطوات: اختيار الموظف، ثم أصل واحد أو
+            أكثر، ثم توقيع الطرفين على الشاشة، ثم التأكيد. وخطوة التأكيد هي حيث
+            تعيش كل القواعد.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <dl class="spec__meta">
+            <div><dt>1 &middot; الصلاحية</dt><dd><code>@login_required</code> ثم <code>@permission_required("core.add_assetassignment", raise_exception=True)</code></dd></div>
+            <div><dt>2 &middot; التواقيع</dt><dd>توقيعا الموظف والجهة المخوَّلة إلزاميان؛ يُحوَّل الـ data-URL من لوحة التوقيع إلى ملف؛ بحد أقصى 19&nbsp;MB؛ وتُرفض الرفعات المنتهية</dd></div>
+            <div><dt>3 &middot; التحقق</dt><dd>تُجمَّع الأخطاء في قائمة وتُعاد على صفحة التأكيد بدل رميها كاستثناء</dd></div>
+            <div><dt>4 &middot; لكل أصل</dt><dd>البحث عن سجل عهدة قيمته <code>returned_at IS NULL</code> &rarr; إغلاقه بـ <code>timezone.now()</code></dd></div>
+            <div><dt>5 &middot; لكل أصل</dt><dd>إنشاء سجل العهدة الجديد، وارثًا مشروع الموظف</dd></div>
+            <div><dt>6 &middot; لكل أصل</dt><dd>إرفاق صورتَي التوقيع، بحفظ مرتين ليتمكن <code>upload_to</code> من تحديد المسار حسب الدور</dd></div>
+            <div><dt>7 &middot; التحويل</dt><dd>العودة إلى قائمة الأصول</dd></div>
+          </dl>
+          <figcaption class="figure__cap">
+            شكل 4 &mdash; الخطوة 4 نقل لا رفض: تسليم أصل يحمله شخص آخر يغلق
+            عهدته تلقائيًا بدل أن يصدر خطأ. وكان ذلك اختيارًا مقصودًا &mdash;
+            فالأجهزة في الواقع تنتقل من مكتب إلى مكتب دون أن تمر بتقنية
+            المعلومات أولًا، والنظام الذي يرفض تسجيل ما وقع فعلًا يُلتَف عليه
+            ببساطة.
+          </figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3>توقيعان، ومسألة عالقة في Django</h3>
+          <p>
+            كل سجل عهدة يحمل صورتين: الموظف وهو يستلم الجهاز، والجهة المخوَّلة
+            وهي تفرج عنه. ولا واحدة منهما اختيارية، وكلتاهما تُلتقط على لوحة
+            توقيع في المتصفح، وهناك صلاحية منفصلة
+            <code>view_signatures</code> تتحكم بمن يستطيع الاطلاع عليهما لاحقًا
+            &mdash; فهي تواقيع أشخاص حقيقيين لا زينة.
+          </p>
+          <p>
+            وحفظهما كشف ثغرة صغيرة في Django. الدالة المُمرَّرة إلى
+            <code>upload_to</code> تستقبل كائن النموذج واسم الملف، لكنها لا
+            تستقبل <em>أي حقل</em> استدعاها &mdash; فمع وجود حقلَي
+            <code>ImageField</code> على نموذج واحد لا تستطيع التمييز بين توقيع
+            الموظف وتوقيع الجهة المخوَّلة، وسيقع كلاهما على المسار نفسه. والحل
+            الذي اتبعته هو ضبط خاصية مؤقتة على الكائن قبل كل عملية حفظ، وقراءتها
+            داخل الدالة لاختيار اسم الملف، ثم حذفها بعد ذلك:
+          </p>
+          <figure class="figure">
+            <dl class="spec__meta">
+              <div><dt>المسار</dt><dd>signatures/&lt;assignment_id&gt;/employee.png<br>signatures/&lt;assignment_id&gt;/authority.png</dd></div>
+              <div><dt>الكلفة</dt><dd>استدعاءان إضافيان لـ <code>save(update_fields=[…])</code> لكل سجل عهدة، لأن المعرّف يجب أن يوجد قبل بناء المسار</dd></div>
+            </dl>
+            <figcaption class="figure__cap">
+              شكل 5 &mdash; الحل يعمل وهو محصور، لكنه حالة مهرَّبة عبر خاصية على
+              الكائن، وكنت أفضّل دالتين صريحتين. وتسمية الملفات حسب الدور بدل
+              حسب الرفع تعني أنه يمكن العثور على توقيع انطلاقًا من معرّف سجل
+              العهدة وحده، وهو ما يهم حين يسأل أحدهم من وقّع على جهاز قبل
+              سنتين.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       INTERFACE
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">الواجهة</div>
+        <p class="gutter__meta">رسم توضيحي،<br>لا لقطة شاشة</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            قوالب Django مُصيَّرة على الخادم. بلا SPA، وبلا خطوة بناء، وبلا إطار
+            JavaScript &mdash; والـJavaScript الحقيقي الوحيد هو لوحة التوقيع
+            والنافذة المنبثقة التي تستضيف المعالجات. وكل مدخل في الشريط الجانبي
+            مضبوط بصلاحية، فحسابان في مجموعتين مختلفتين يريان قائمتين مختلفتين.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <div class="ui">
+            <div class="ui__bar">
+              <span>KIC IT Asset Management System</span>
+              <span>Assign assets &nbsp;·&nbsp; signed in as kic-it</span>
+            </div>
+            <div class="ui__body">
+              <div class="ui__side">
+                <i>Home</i>
+                <i data-on>Assets</i>
+                <i>Employees</i>
+                <i>Assets history</i>
+                <i>Employees history</i>
+                <i>Brands</i>
+                <i>Categories</i>
+                <i>Projects</i>
+              </div>
+              <div class="ui__main">
+                <div class="ui__row ui__row--split">
+                  <strong>Assets</strong>
+                  <span class="ui__chip">+ Add asset</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__search">Search&hellip;</span>
+                  <span class="ui__chip">Search</span>
+                  <span class="ui__chip">Export CSV</span>
+                  <span class="ui__chip">Export Excel</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__chip">&laquo; Prev</span>
+                  <span class="ui__chip" data-on>1</span>
+                  <span class="ui__chip">2</span>
+                  <span class="ui__chip">3</span>
+                  <span class="ui__chip">&hellip;</span>
+                  <span class="ui__chip">14</span>
+                  <span class="ui__chip">Next &raquo;</span>
+                </div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#&nbsp;&#8645;</th>
+                      <th>Asset id&nbsp;&#8645;</th>
+                      <th>Name&nbsp;&#8645;</th>
+                      <th>S/N&nbsp;&#8645;</th>
+                      <th>Brand&nbsp;&#8645;</th>
+                      <th>Model&nbsp;&#8645;</th>
+                      <th>Status</th>
+                      <th>Emp no</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1</td><td>0412</td><td>Desktop</td><td>XXXXXXX</td><td>Brand A</td><td>Model 1000</td><td>Available</td><td>&ndash;</td></tr>
+                    <tr><td>2</td><td>0413</td><td>Laptop</td><td>XXXXXXX</td><td>Brand B</td><td>Model 2000</td><td>Assigned</td><td>0091</td></tr>
+                    <tr><td>3</td><td>0414</td><td>Monitor 24"</td><td>XXXXXXX</td><td>Brand A</td><td>Model 24H</td><td>Assigned</td><td>0143</td></tr>
+                    <tr><td>4</td><td>0415</td><td>Printer</td><td>XXXXXXX</td><td>Brand C</td><td>Model 7740</td><td>Available</td><td>&ndash;</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <figcaption class="figure__cap">
+            شكل 6 &mdash; <strong>رسم توضيحي للواجهة، أُعيد رسمه لهذه الصفحة
+            بأسلوبها. ليس لقطة شاشة، وكل علامة تجارية وطراز ورقم تسلسلي ورقم
+            فيه من اختراعي</strong> &mdash; فالشاشات الحقيقية تحمل أسماء موظفين
+            وأرقام هويات وأرقام جوالات وتواقيع، ولا شيء من ذلك مكانه صفحة
+            عامة. أما ما هو مطابق فهو البنية: شريط جانبي كل مدخل فيه مضبوط
+            بصلاحية، وحقل بحث واحد على الجدول كله، وأعمدة قابلة للفرز، وتصدير
+            CSV وExcel، و14 صفحة من الأصول بهذا الحجم، وعمود حالة يُشتق من سجل
+            العهدة المفتوح لا مخزّن على الأصل. وواجهة النظام نفسها بالإنجليزية.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       OPERATIONS
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">التشغيل</div>
+        <p class="gutter__meta">النسخ الاحتياطي<br>والاستعادة</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            أمران إداريان، لأن سجل عهدة يفقد تاريخه أسوأ من عدم وجود سجل أصلًا.
+            <code>backup_core</code> يكتب ثلاثة مخرجات؛ و<code>restore_core</code>
+            يعيدها، ويمكن تخطي كل جزء على حدة بـ <code>--no-src</code> أو
+            <code>--no-db</code> أو <code>--no-signatures</code>.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <dl class="spec__meta">
+            <div><dt>قاعدة البيانات</dt><dd><code>dumpdata --natural-foreign --natural-primary --exclude=contenttypes --exclude=auth.Permission</code></dd></div>
+            <div><dt>التواقيع</dt><dd>شجرة تواقيع الوسائط، مضغوطة &mdash; الصور هي الدليل، فتسافر مع السجلات التي تشير إليها</dd></div>
+            <div><dt>الشيفرة</dt><dd><code>config/</code> و<code>core/</code> و<code>static/</code> مضغوطة</dd></div>
+            <div><dt>التسمية</dt><dd>ملف بطابع زمني إضافة إلى مؤشر <code>_latest</code>، ليكون للاستعادة خيار افتراضي معقول</dd></div>
+          </dl>
+          <figcaption class="figure__cap">
+            شكل 7 &mdash; خياران <code>--exclude</code> موجودان بسبب عملية
+            استعادة فشلت، لا لأن درسًا تعليميًا قال ذلك. فـ<code>dumpdata</code>
+            يُسلسِل <code>contenttypes</code> و<code>auth.Permission</code>، ثم
+            يتعارض <code>loaddata</code> مع السجلات التي أنشأتها ترحيلات Django
+            نفسها في قاعدة البيانات الجديدة. واستثناؤهما، مع استخدام المفاتيح
+            الطبيعية ليصمد ارتباط المفاتيح الأجنبية عبر تسلسلات مفاتيح مختلفة،
+            هو ما يجعل الرحلة ذهابًا وإيابًا تعمل فعلًا.
+          </figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>
+            وسبب معرفتي بهذا أن أول عملية استعادة فشلت بخطأ في تكامل البيانات،
+            وهي معلّم أفضل من عملية ناجحة. ويعني ذلك أيضًا أن الجواب الصادق على
+            سؤال «هل سبق أن استعدت نسخة احتياطية؟» هو نعم، أكثر من مرة، وأعرف
+            أي الخيارات تهم.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       WHAT I'D CHANGE
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">ما كنت<br>سأغيّره</div>
+        <p class="gutter__meta">أمران</p>
+      </div>
+      <div>
+        <div class="prose">
+          <h3>1. كان يجب أن يكون <code>model</code> جدولًا</h3>
+          <p>
+            <code>brand</code> و<code>category</code> مفتاحان أجنبيان إلى جداول
+            مرجعية. أما <code>model</code> فحقل <code>CharField</code> نصي حر.
+            وفي حينه بدا ذلك عمليًا &mdash; فطُرز الأجهزة بالآلاف ولم أرغب في
+            صيانة فهرس لها. لكن ما اشتراه ذلك فعلًا هو التالي:
+          </p>
+        </div>
+
+        <figure class="figure">
+          <dl class="spec__meta">
+            <div><dt>الأصول</dt><dd>684</dd></div>
+            <div><dt>قيم <code>model</code> المختلفة</dt><dd>255</dd></div>
+            <div><dt>&hellip; بعد توحيد حالة الأحرف وإزالة الترقيم</dt><dd>183 &mdash; أي أن 72 منها كانت مجرد اختلافات في التنسيق</dd></div>
+            <div><dt>عائلة Dell OptiPlex</dt><dd>326 أصلًا، مكتوبة بـ<strong>71 طريقة مختلفة</strong></dd></div>
+            <div><dt>عائلة Lenovo Think&hellip;</dt><dd>84 أصلًا، مكتوبة بـ34 طريقة مختلفة</dd></div>
+          </dl>
+          <figcaption class="figure__cap">
+            شكل 8 &mdash; مقيسة على البيانات الحية. ومن صور OptiPlex المختلفة:
+            <code>OPTIPLEX-7000</code> و<code>OptiPlex 7000</code>
+            و<code>Optiplex7000</code> و<code>OPTI-PLEX 7000</code>
+            و<code>OPTIPOLEX 7000</code> و<code>Optiolex 7000 tower</code>.
+            جاء معظمها مع استيراد جداول البيانات القديمة، وكُتب الباقي يدويًا
+            بعد ذلك، لأن لا شيء كان يمنعه.
+          </figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>
+            والضرر العملي أنك لا تستطيع الإجابة عن سؤال «كم لدينا من OptiPlex
+            7000؟» بـ<code>GROUP BY</code>، وهو تحديدًا نوع السؤال الذي بُني
+            النظام للإجابة عنه. فالتجميع على <code>model</code> يعيد 255 مجموعة
+            لثلاثين جهازًا حقيقيًا تقريبًا.
+          </p>
+          <p>
+            وكشفت مراجعتها صنفًا ثانيًا أقبح من الخلل: مع غياب أي تحقق على عمود
+            نصي حر، تنتهي القيم في العمود الخطأ تمامًا.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <dl class="spec__meta">
+            <div><dt>الأصول</dt><dd>10 منها الرقم التسلسلي منسوخ داخل <code>model</code>؛ و3 فيها اسم الأصل؛ و25 تحمل قيمة رقمية بديلة</dd></div>
+            <div><dt>الموظفون</dt><dd>2 اسم الشخص في عمود رقم الهوية و2 في عمود الجوال؛ و6 تحمل القيمة نفسها في العمودين</dd></div>
+            <div><dt>الاكتمال</dt><dd>561 من أصل 933 موظفًا بلا رقم هوية مسجّل إطلاقًا؛ و27 من الباقين ليست بصيغة الهوية الوطنية ذات العشرة أرقام</dd></div>
+          </dl>
+          <figcaption class="figure__cap">
+            شكل 9 &mdash; لا شيء من هذا خطأ مطبعي يرتكبه إنسان مرتين. هذا ما
+            يفعله استيراد جدول بيانات حين لا تتطابق أعمدة المصدر ولا يعترض شيء
+            بعده. فـ<code>CharField</code> بلا مُتحقِّق يقبل أي شيء، وبعد 684
+            سجلًا تكتشف ما الذي كان يعنيه «أي شيء».
+          </figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>
+            ولذلك للإصلاح نفسه شق ثانٍ: مُتحقِّقات وفحوص صيغة على الأعمدة ذات
+            الشكل المعروف &mdash; الهوية الوطنية، ورقم الجوال، والرقم التسلسلي
+            &mdash; مفروضة على مستوى قاعدة البيانات بـ<code>CheckConstraint</code>
+            لا في نموذج إدخال فقط، حتى لا يستطيع الاستيراد الجماعي القادم
+            الالتفاف عليها كما فعل السابق.
+          </p>
+
+          <h3>2. نموذج المستخدم المخصص، أُضيف ثم أُزيل</h3>
+          <p>
+            الترحيل 0013 أدخل نموذج <code>User</code> مخصصًا يرث
+            <code>AbstractUser</code>، بصلاحيتَي <code>edit_users</code>
+            و<code>view_users_readonly</code>. والترحيل 0014 حذفه مرة أخرى.
+          </p>
+          <p>
+            والدرس خاص بـDjango وموثّق جيدًا، وتعلّمته رغم ذلك: تبديل
+            <code>AUTH_USER_MODEL</code> قرار تتخذه عمليًا قبل الترحيل الأول لا
+            بعد ثلاثة عشر. فما إن تصبح لجداول أخرى مفاتيح أجنبية إلى
+            <code>auth.User</code> حتى يتحول تغييره إلى مشكلة ترحيل لا تتناسب مع
+            الفائدة. وما كنت أريده فعلًا هو صلاحيات مخصصة، وهي لا تتطلب نموذج
+            مستخدم مخصصًا &mdash; ومن هناك جاءت الصلاحيتان على
+            <code>AssetAssignment</code> بدلًا من ذلك.
+          </p>
+          <p>
+            ولا يزال أثران من هذا الالتفاف في الشيفرة: استيراد
+            <code>AbstractUser</code> غير المستخدم في أعلى
+            <code>models.py</code>، وتعليق قديم بجانب
+            <code>AUTH_USER_MODEL</code>. تركتهما إلى أن أكتب هذا بصدق؛ ويجب أن
+            يُحذفا.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       KNOWN GAPS
+       ===================================================================== -->
+  <section class="section" id="gaps">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">الثغرات المعروفة</div>
+        <p class="gutter__meta">عمل مفتوح</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            أشياء أعرف أنها خاطئة ولم أصلحها بعد. ذكرها أرخص من أن تُسأل عنها.
+          </p>
+          <ul class="bullets">
+            <li>
+              <strong>مسار التسليم ليس ضمن معاملة.</strong>
+              <code>unassign_confirm</code> يعمل داخل
+              <code>transaction.atomic()</code>. أما <code>assign_confirm</code>
+              فلا &mdash; إذ يمر على الأصول المختارة، فيغلق سجل عهدة قائمًا
+              وينشئ آخر جديدًا في كل دورة، بقراءة ثم كتابة وبلا قفل على السجل.
+              ولذلك نتيجتان: طلبان متزامنان على الأصل نفسه قد ينشئان سجلَي عهدة
+              مفتوحين، وفشل في منتصف تسليم متعدد الأصول يترك الأصول الأولى
+              مثبَّتة والباقي لا. والإصلاح هو الفهرس الفريد الجزئي أعلاه، مع
+              <code>atomic()</code> حول الحلقة، و<code>select_for_update()</code>
+              على استعلام سجل العهدة المفتوح.
+            </li>
+            <li>
+              <strong>لا توجد اختبارات.</strong> ملف <code>core/tests.py</code>
+              ما زال الملف المكوَّن من خمسة أسطر الذي أنشأه
+              <code>startapp</code>. ولنظام قيمته كلها ثابت واحد يخص العهدة،
+              فإن أول اختبار ينبغي كتابته واضح، وغيابه أقل ما في هذه الصفحة
+              قابلية للدفاع.
+            </li>
+            <li>
+              <strong>نظافة البيانات المرجعية.</strong> إضافة إلى
+              <code>model</code>: 528 من أصل 684 أصلًا بلا وسم خدمة، وعمود
+              <code>invoice_number</code> عمود قديم حلّ محله
+              <code>vendor</code> ولا يزال يحمل محتواه السابق، والقيم البديلة
+              في شكل 9 كلها ما زالت موجودة.
+            </li>
+            <li>
+              <strong>بقايا من التفافة نموذج المستخدم.</strong> استيراد
+              <code>AbstractUser</code> غير مستخدم، وتعليق قديم بجانب
+              <code>AUTH_USER_MODEL</code>. أمر تافه، لكنه من النوع الذي يجعل
+              القارئ يتساءل عمّا تُرك ناقصًا غيره.
+            </li>
+          </ul>
+          <p>
+            والترتيب مقصود: ثغرة التزامن والاختبارات الغائبة مهمة واحدة، لأن
+            الاختبار الذي يثبت أن الأصل لا يمكن أن يكون في عهدة شخصين هو نفسه
+            الاختبار الذي يثبت أن الإصلاح نجح.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">التالي</div>
+      </div>
+      <div class="prose">
+        <p>
+          <a class="link-mono" href="../index.html#built">&rarr; العودة إلى كل المشاريع</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer__inner">
+    <span>مجتبى المدن &middot; المنطقة الشرقية، السعودية</span>
+    <span>
+      <a href="../index.html">الرئيسية</a>
+      &middot;
+      <a href="../../work/khonaini-asset-system.html" hreflang="en" lang="en">English</a>
+    </span>
+  </div>
+</footer>
+
+<script src="../../assets/js/theme.js" defer></script>
+</body>
+</html>

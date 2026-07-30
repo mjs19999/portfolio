@@ -248,12 +248,12 @@
 
 .skip-link {
   position: absolute;
-  left: -9999px;
+  inset-inline-start: -9999px;
   z-index: 50;
 }
 
 .skip-link:focus {
-  left: var(--shell-pad);
+  inset-inline-start: var(--shell-pad);
   top: var(--space-2);
   padding: var(--space-2) var(--space-3);
   background: var(--paper-raised);

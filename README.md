@@ -9,19 +9,46 @@ Static HTML and CSS. No framework, no build step, no bundler. Clone it and open
 ## Structure
 
 ```
-index.html                        the page
-work/khonaini-asset-system.html   case study for the one project with no public code
-assets/css/tokens.css             colour, type scale, spacing — light and dark
-assets/css/base.css               reset and element-level typography
-assets/css/layout.css             masthead, shell, section grid, footer
-assets/css/components.css         layer table, spec blocks, tiers, controls
-assets/js/theme.js                theme toggle (18 lines)
-assets/js/nav.js                  scrollspy for the nav (24 lines)
-assets/pdf/                       CV
+index.html                           home, English
+work/khonaini-asset-system.html      case study, English
+ar/index.html                        home, Arabic (dir="rtl")
+ar/work/khonaini-asset-system.html   case study, Arabic
+assets/css/tokens.css                colour, type scale, spacing — light and dark
+assets/css/base.css                  reset and element-level typography
+assets/css/layout.css                masthead, shell, section grid, footer
+assets/css/components.css            layer table, spec blocks, tiers, controls
+assets/css/rtl.css                   Arabic fonts + direction fixes, loaded only by ar/
+assets/js/theme.js                   theme toggle (18 lines)
+assets/js/nav.js                     scrollspy for the nav (24 lines)
+assets/pdf/                          both CVs (the editable .docx files live outside this repo)
 ```
 
-Two external requests: Google Fonts (Archivo, Newsreader, IBM Plex Mono). No
-icon library, no animation library, no analytics.
+One external request per page: Google Fonts. English loads Archivo, Newsreader
+and IBM Plex Mono; Arabic loads IBM Plex Sans Arabic, Noto Naskh Arabic and IBM
+Plex Mono. No icon library, no animation library, no analytics.
+
+## Bilingual
+
+Two real pages rather than a JavaScript toggle, so an Arabic link can be shared,
+indexed, and read with JavaScript disabled. They are cross-linked with
+`hreflang`, and each language's switch is labelled in its own script.
+
+The layout stylesheets use logical properties (`padding-inline-start`,
+`border-inline-end`, `text-align: start`), so direction mirrors on its own.
+`rtl.css` only carries what logical properties cannot express: the Arabic font
+stack, the mirrored `box-shadow` accent, and the typographic corrections Arabic
+needs — no letter-spacing (it breaks cursive joining), no `text-transform`,
+looser leading.
+
+**Section ids stay in English** (`#work`, `#built`, `#stack`) in both pages on
+purpose. Anchors keep working across languages and one `nav.js` serves both.
+
+Both pages exist in both languages, and each links to its own-language CV.
+Editing rule: **content changes must be made in all four files.**
+
+The ER diagram and the interface sketch stay left-to-right on the Arabic pages.
+Technical drawings conventionally do, and mirroring them would put the foreign
+keys on the wrong side of the relationships.
 
 ## The one design rule
 
