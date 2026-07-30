@@ -1,0 +1,17 @@
+# Private working notes. Deliberately untracked.
+#
+# CONTENT-TODO.md describes security findings in a separate, private employer
+# repository. This repo is public AND the Pages workflow uploads the whole
+# repository root, so committing that file would publish those findings at
+# mjs19999.github.io/portfolio/CONTENT-TODO.md. Keep it local.
+CONTENT-TODO.md
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp

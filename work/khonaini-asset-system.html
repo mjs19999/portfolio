@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>KIC Asset Management — a case study — Mojtaba Almadan</title>
+<meta name="description" content="Architecture write-up for an internal IT asset and custody-tracking system: 684 assets, 933 employees, 1,423 assignment records. Django and PostgreSQL, with dual signature capture on every custody transfer.">
+
+<script>
+  (function () {
+    var stored;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    document.documentElement.dataset.theme =
+      stored ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400..600&display=swap">
+
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/layout.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="masthead__name" href="../index.html"><b>MA</b> Mojtaba Almadan</a>
+    <nav class="masthead__nav" aria-label="Sections">
+      <a href="../index.html#built">&larr; All projects</a>
+    </nav>
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch theme">DK</button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section section--hero">
+    <div class="shell">
+      <p class="eyebrow">Case study &middot; Khonaini International Company Ltd. &middot; Jul 2023 &mdash; present</p>
+      <h1>The system that knows who has the laptop.</h1>
+      <p class="lead hero__lead">
+        An internal platform for IT asset custody: what the company owns, who is
+        holding it right now, and who signed for it. Django and PostgreSQL,
+        replacing a legacy product and the spreadsheets several departments were
+        keeping alongside it.
+      </p>
+
+      <dl class="spec__meta u-spaced">
+        <div><dt>Live data</dt><dd>684 assets &middot; 933 employee records (910 active) &middot; 1,423 assignment records &middot; 428 currently in someone's hands</dd></div>
+        <div><dt>Stack</dt><dd>Django 6.0 &middot; PostgreSQL &middot; server-rendered templates &middot; no SPA, no build step</dd></div>
+        <div><dt>Reference data</dt><dd>22 projects &middot; 11 categories &middot; 10 brands</dd></div>
+        <div><dt>Access</dt><dd>5 accounts across 4 permission groups, gated per view</dd></div>
+        <div><dt>Role</dt><dd>Sole engineer &mdash; schema, application, deployment, backups, training</dd></div>
+      </dl>
+
+      <p class="note u-spaced">
+        The repository is private: it holds employee records, government ID
+        numbers and scanned signatures. So this page is the design rather than
+        the code &mdash; the schema, how a custody transfer is written, the two
+        decisions I would defend, and the one I would reverse.
+      </p>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       PROBLEM
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Problem</div>
+        <p class="gutter__meta">Before</p>
+      </div>
+      <div class="prose">
+        <p>
+          Two systems of record held the same facts. A legacy application had
+          part of the asset inventory; spreadsheets held the rest, plus
+          everything the legacy product could not represent &mdash; which
+          included the only thing anyone actually needed to look up, namely who
+          currently has a given machine.
+        </p>
+        <p>
+          The consequences were the predictable ones. The same asset could exist
+          twice under two labels. An employee could leave without their
+          equipment being returned in any record. And when a laptop went
+          missing, there was no document with a signature on it saying who had
+          accepted responsibility for it.
+        </p>
+        <p>
+          That last point is what shaped the whole design. This is not really an
+          inventory system. It is a <strong>custody ledger</strong>, and its job
+          is to be able to prove a chain of possession after the fact.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       DATA MODEL
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Data model</div>
+        <p class="gutter__meta">6 tables<br>14 migrations</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            Six tables. The interesting one is <code>ASSETASSIGNMENT</code>,
+            which is not a many-to-many join but an event with its own
+            attributes: when it started, when it ended, and two signature
+            images. An asset with no open assignment is in the store. An asset
+            with one is in someone's hands.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <svg class="diagram" viewBox="0 0 940 620" role="img"
+               aria-label="Entity relationship diagram. Brand and Category each have many Assets, protected on delete. Asset and Employee each have many AssetAssignments, protected on delete. Project relates to Employee and AssetAssignment with set-null on delete.">
+
+            <!-- BRAND -->
+            <rect class="box" x="20" y="40" width="150" height="72" rx="2"/>
+            <text class="entity" x="34" y="62">BRAND</text>
+            <text class="field" x="34" y="82">id  PK</text>
+            <text class="field" x="34" y="98">name  UQ</text>
+
+            <!-- CATEGORY -->
+            <rect class="box" x="20" y="150" width="150" height="72" rx="2"/>
+            <text class="entity" x="34" y="172">CATEGORY</text>
+            <text class="field" x="34" y="192">id  PK</text>
+            <text class="field" x="34" y="208">name  UQ</text>
+
+            <!-- ASSET -->
+            <rect class="box box--key" x="250" y="40" width="200" height="170" rx="2"/>
+            <text class="entity" x="264" y="62">ASSET</text>
+            <text class="field" x="264" y="82">id  PK</text>
+            <text class="field" x="264" y="98">name</text>
+            <text class="field" x="264" y="114">brand_id  FK</text>
+            <text class="field" x="264" y="130">category_id  FK</text>
+            <text class="field" x="264" y="146">model  ← free text</text>
+            <text class="field" x="264" y="162">serial_no</text>
+            <text class="field" x="264" y="178">condition</text>
+            <text class="field" x="264" y="194">price, dates, …</text>
+
+            <!-- ASSETASSIGNMENT -->
+            <rect class="box box--key" x="530" y="40" width="200" height="186" rx="2"/>
+            <text class="entity" x="544" y="62">ASSETASSIGNMENT</text>
+            <text class="field" x="544" y="82">id  PK</text>
+            <text class="field" x="544" y="98">asset_id  FK</text>
+            <text class="field" x="544" y="114">employee_id  FK</text>
+            <text class="field" x="544" y="130">project_id  FK</text>
+            <text class="field" x="544" y="146">assigned_at</text>
+            <text class="field" x="544" y="162">returned_at  NULL</text>
+            <text class="field" x="544" y="178">employee_signature</text>
+            <text class="field" x="544" y="194">authority_signature</text>
+            <text class="field" x="544" y="210">notes, emails</text>
+
+            <!-- EMPLOYEE -->
+            <rect class="box box--key" x="770" y="40" width="160" height="156" rx="2"/>
+            <text class="entity" x="784" y="62">EMPLOYEE</text>
+            <text class="field" x="784" y="82">id  PK</text>
+            <text class="field" x="784" y="98">employee_no  UQ</text>
+            <text class="field" x="784" y="114">name</text>
+            <text class="field" x="784" y="130">project_id  FK</text>
+            <text class="field" x="784" y="146">position</text>
+            <text class="field" x="784" y="162">is_active</text>
+            <text class="field" x="784" y="178">contact, govt id</text>
+
+            <!-- PROJECT -->
+            <rect class="box" x="530" y="300" width="200" height="90" rx="2"/>
+            <text class="entity" x="544" y="322">PROJECT</text>
+            <text class="field" x="544" y="342">id  PK</text>
+            <text class="field" x="544" y="358">name</text>
+            <text class="field" x="544" y="374">code  UQ</text>
+
+            <!-- Edges -->
+            <path class="edge" d="M170 76 H250"/>
+            <text class="card" x="176" y="70">1</text>
+            <text class="card" x="238" y="70">N</text>
+            <text class="card" x="192" y="90">PROTECT</text>
+
+            <path class="edge" d="M170 186 H210 V120 H250"/>
+            <text class="card" x="176" y="180">1</text>
+            <text class="card" x="238" y="114">N</text>
+            <text class="card" x="214" y="112">PROTECT</text>
+
+            <path class="edge" d="M450 100 H530"/>
+            <text class="card" x="456" y="94">1</text>
+            <text class="card" x="518" y="94">N</text>
+            <text class="card" x="472" y="114">PROTECT</text>
+
+            <path class="edge" d="M770 100 H730"/>
+            <text class="card" x="756" y="94">1</text>
+            <text class="card" x="736" y="94">N</text>
+            <text class="card" x="734" y="114">PROTECT</text>
+
+            <path class="edge" d="M630 300 V226"/>
+            <text class="card" x="636" y="294">1</text>
+            <text class="card" x="636" y="240">N</text>
+            <text class="card" x="646" y="270">SET_NULL</text>
+
+            <path class="edge" d="M730 345 H850 V196"/>
+            <text class="card" x="736" y="339">1</text>
+            <text class="card" x="856" y="210">N</text>
+            <text class="card" x="762" y="339">SET_NULL</text>
+          </svg>
+          <figcaption class="figure__cap">
+            Fig. 1 &mdash; The real schema, fields abbreviated. The
+            <code>on_delete</code> annotations are the design: everything that
+            carries custody history is <code>PROTECT</code>, everything
+            organisational is <code>SET_NULL</code>. A null
+            <code>returned_at</code> means the assignment is open. Rows are
+            closed, never deleted, so the custody history of any asset is a
+            query rather than an excavation.
+          </figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3>Why half the foreign keys refuse to delete</h3>
+          <p>
+            <code>Asset.brand</code>, <code>Asset.category</code>,
+            <code>AssetAssignment.asset</code> and
+            <code>AssetAssignment.employee</code> are all
+            <code>on_delete=PROTECT</code>. <code>Employee.project</code> and
+            <code>AssetAssignment.project</code> are <code>SET_NULL</code>.
+            That split is deliberate, and it is the decision I would defend
+            first.
+          </p>
+          <p>
+            You cannot delete an employee who has ever signed for a machine.
+            Deleting them would destroy the evidence that they did &mdash; which
+            is the one thing the system exists to hold. So an employee who
+            leaves gets <code>is_active = False</code>; 23 of the 933 records
+            are inactive rather than absent. Projects are different: a project
+            ending is normal, and it should not take an asset's history with it,
+            so those references go null and the assignment survives.
+          </p>
+          <p>
+            The practical consequence is that the app has almost no delete
+            paths, and the database enforces that rather than trusting the
+            application to remember. That was the point of leaving the
+            spreadsheets: a rule nobody can accidentally skip.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       THE CONSTRAINT — the best story in the project
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Constraint</div>
+        <p class="gutter__meta">The one that<br>didn't work</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            One asset should never be open to two people at once. That is the
+            core invariant, and my first attempt to enforce it was wrong in a
+            way worth writing down.
+          </p>
+          <p>
+            The initial migration declared:
+          </p>
+          <figure class="figure">
+            <dl class="spec__meta">
+              <div><dt>0001</dt><dd>unique_together = {("asset", "returned_at")}</dd></div>
+              <div><dt>0007</dt><dd>unique_together = set()   &nbsp;&larr; removed</dd></div>
+            </dl>
+            <figcaption class="figure__cap">
+              Fig. 2 &mdash; Six migrations apart.
+            </figcaption>
+          </figure>
+          <p>
+            The intent was: an asset can only have one row where
+            <code>returned_at</code> is null. The problem is that this does not
+            work, and it does not work for a reason that is easy to say and easy
+            to forget &mdash; <strong>in SQL, null is not equal to
+            null.</strong> A unique index treats every null as distinct, so
+            <code>(asset&nbsp;42, null)</code> and
+            <code>(asset&nbsp;42, null)</code> do not collide. The constraint
+            permitted precisely the situation it was written to forbid, while
+            still being able to fire on legitimate rows that happened to share a
+            return timestamp.
+          </p>
+          <p>
+            The right tool is a <strong>partial unique index</strong> &mdash; a
+            uniqueness rule that applies to a filtered subset of rows. In
+            PostgreSQL that is <code>CREATE UNIQUE INDEX … WHERE returned_at IS
+            NULL</code>; in Django it is:
+          </p>
+          <figure class="figure">
+            <dl class="spec__meta">
+              <div><dt>constraint</dt><dd>UniqueConstraint(<br>&nbsp;&nbsp;fields=["asset"],<br>&nbsp;&nbsp;condition=Q(returned_at__isnull=True),<br>&nbsp;&nbsp;name="one_open_assignment_per_asset",<br>)</dd></div>
+            </dl>
+            <figcaption class="figure__cap">
+              Fig. 3 &mdash; Uniqueness over the open rows only. Closed
+              assignments are unconstrained, so an asset can be issued and
+              returned any number of times, but only ever held once.
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- When the constraint has shipped, move this paragraph to the past
+             tense and update the matching bullet in the "Known gaps" section
+             below. Those are the only two places that describe it as pending. -->
+        <div class="prose">
+          <p>
+            To be straight about the current state: that constraint is
+            <strong>not in the database yet</strong>. Between migration 0007 and
+            now, the invariant has been enforced by the application flow alone
+            &mdash; the issue path looks for an open assignment and closes it
+            before creating the next one &mdash; which works right up until two
+            requests do it at the same time. It is the next change I am making,
+            and it goes in alongside the transaction fix in the
+            <a href="#gaps">known gaps</a> below.
+          </p>
+          <p>
+            The migration will apply cleanly. I checked all 428 open assignments
+            and no asset is open more than once, so there is nothing to
+            reconcile first &mdash; which is luck rather than safety. One person
+            using an internal tool on a LAN very rarely races against
+            themselves.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       WRITE PATH
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Write path</div>
+        <p class="gutter__meta">Issuing<br>an asset</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            Issuing assets happens through a wizard: pick the employee, pick one
+            or more assets, both parties sign on screen, confirm. The confirm
+            step is where all the rules live.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <dl class="spec__meta">
+            <div><dt>1 &middot; Auth</dt><dd><code>@login_required</code> then <code>@permission_required("core.add_assetassignment", raise_exception=True)</code></dd></div>
+            <div><dt>2 &middot; Signatures</dt><dd>Both employee and authority signatures required; data-URL from the signature pad decoded to a file; 19&nbsp;MB ceiling; expired uploads rejected</dd></div>
+            <div><dt>3 &middot; Validate</dt><dd>Errors collected into a list and re-rendered on the confirm page rather than thrown</dd></div>
+            <div><dt>4 &middot; Per asset</dt><dd>Find any assignment with <code>returned_at IS NULL</code> &rarr; close it with <code>timezone.now()</code></dd></div>
+            <div><dt>5 &middot; Per asset</dt><dd>Create the new assignment, inheriting the employee's project</dd></div>
+            <div><dt>6 &middot; Per asset</dt><dd>Attach each signature image, saving twice so <code>upload_to</code> can resolve the per-role path</dd></div>
+            <div><dt>7 &middot; Redirect</dt><dd>Back to the asset list</dd></div>
+          </dl>
+          <figcaption class="figure__cap">
+            Fig. 4 &mdash; Step 4 is a transfer, not a rejection: issuing an
+            asset someone else holds closes their assignment automatically
+            rather than erroring. That was a deliberate choice &mdash; in
+            practice equipment moves desk to desk without coming back to IT
+            first, and a system that refuses to record what already happened
+            just gets worked around.
+          </figcaption>
+        </figure>
+
+        <div class="prose">
+          <h3>Two signatures, and a Django wrinkle</h3>
+          <p>
+            Every assignment carries two images: the employee accepting the
+            equipment and an authority releasing it. Neither is optional, both
+            are captured on a signature pad in the browser, and a separate
+            <code>view_signatures</code> permission controls who can look at
+            them afterwards &mdash; they are specimen signatures of real people,
+            not decoration.
+          </p>
+          <p>
+            Storing them exposed a small gap in Django. An
+            <code>upload_to</code> callable receives the model instance and the
+            filename, but not <em>which field</em> triggered it &mdash; so with
+            two <code>ImageField</code>s on one model it cannot tell an employee
+            signature from an authority signature, and both would land on the
+            same path. My workaround is to set a temporary attribute on the
+            instance before each save, read it inside the callable to choose the
+            filename, and delete it afterwards:
+          </p>
+          <figure class="figure">
+            <dl class="spec__meta">
+              <div><dt>path</dt><dd>signatures/&lt;assignment_id&gt;/employee.png<br>signatures/&lt;assignment_id&gt;/authority.png</dd></div>
+              <div><dt>cost</dt><dd>Two extra <code>save(update_fields=[…])</code> calls per assignment, because the id must exist before the path can be built</dd></div>
+            </dl>
+            <figcaption class="figure__cap">
+              Fig. 5 &mdash; It works and it is contained, but it is state
+              smuggled through an instance attribute, and I would rather have
+              two explicit callables. Naming the files by role instead of by
+              upload means a signature can be found from an assignment id alone,
+              which matters when someone asks who signed for a machine two years
+              ago.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       INTERFACE
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Interface</div>
+        <p class="gutter__meta">Sketch, not<br>a screenshot</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            Server-rendered Django templates. No SPA, no build step, no
+            JavaScript framework &mdash; the only real JavaScript is the
+            signature pad and the modal that hosts the wizards. Every sidebar
+            entry is gated on a permission, so two accounts in different groups
+            see different navigation.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <div class="ui">
+            <div class="ui__bar">
+              <span>KIC IT Asset Management System</span>
+              <span>Assign assets &nbsp;·&nbsp; signed in as kic-it</span>
+            </div>
+            <div class="ui__body">
+              <div class="ui__side">
+                <i>Home</i>
+                <i data-on>Assets</i>
+                <i>Employees</i>
+                <i>Assets history</i>
+                <i>Employees history</i>
+                <i>Brands</i>
+                <i>Categories</i>
+                <i>Projects</i>
+              </div>
+              <div class="ui__main">
+                <div class="ui__row ui__row--split">
+                  <strong>Assets</strong>
+                  <span class="ui__chip">+ Add asset</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__search">Search&hellip;</span>
+                  <span class="ui__chip">Search</span>
+                  <span class="ui__chip">Export CSV</span>
+                  <span class="ui__chip">Export Excel</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__chip">&laquo; Prev</span>
+                  <span class="ui__chip" data-on>1</span>
+                  <span class="ui__chip">2</span>
+                  <span class="ui__chip">3</span>
+                  <span class="ui__chip">&hellip;</span>
+                  <span class="ui__chip">14</span>
+                  <span class="ui__chip">Next &raquo;</span>
+                </div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#&nbsp;&#8645;</th>
+                      <th>Asset id&nbsp;&#8645;</th>
+                      <th>Name&nbsp;&#8645;</th>
+                      <th>S/N&nbsp;&#8645;</th>
+                      <th>Brand&nbsp;&#8645;</th>
+                      <th>Model&nbsp;&#8645;</th>
+                      <th>Status</th>
+                      <th>Emp no</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1</td><td>0412</td><td>Desktop</td><td>XXXXXXX</td><td>Brand A</td><td>Model 1000</td><td>Available</td><td>&ndash;</td></tr>
+                    <tr><td>2</td><td>0413</td><td>Laptop</td><td>XXXXXXX</td><td>Brand B</td><td>Model 2000</td><td>Assigned</td><td>0091</td></tr>
+                    <tr><td>3</td><td>0414</td><td>Monitor 24"</td><td>XXXXXXX</td><td>Brand A</td><td>Model 24H</td><td>Assigned</td><td>0143</td></tr>
+                    <tr><td>4</td><td>0415</td><td>Printer</td><td>XXXXXXX</td><td>Brand C</td><td>Model 7740</td><td>Available</td><td>&ndash;</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <figcaption class="figure__cap">
+            Fig. 6 &mdash; <strong>An interface sketch, redrawn for this page in
+            this site's own styling. It is not a screenshot, and every brand,
+            model, serial and number in it is invented</strong> &mdash; the real
+            screens carry employee names, government ID numbers, mobile numbers
+            and signatures, none of which belongs on a public page. What is
+            faithful is the structure: a sidebar where every entry is gated on a
+            permission, one search box over the whole table, sortable columns,
+            CSV and Excel export, 14 pages of assets at this page size, and a
+            status column resolved through the open assignment rather than
+            stored on the asset.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       OPERATIONS
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Operations</div>
+        <p class="gutter__meta">Backup<br>&amp; restore</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            Two management commands, because a custody ledger that loses its
+            history is worse than no ledger. <code>backup_core</code> writes
+            three artifacts; <code>restore_core</code> puts them back, and each
+            part can be skipped independently with
+            <code>--no-src</code>, <code>--no-db</code> or
+            <code>--no-signatures</code>.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <dl class="spec__meta">
+            <div><dt>Database</dt><dd><code>dumpdata --natural-foreign --natural-primary --exclude=contenttypes --exclude=auth.Permission</code></dd></div>
+            <div><dt>Signatures</dt><dd>The media signatures tree, zipped &mdash; the images are the evidence, so they travel with the rows that reference them</dd></div>
+            <div><dt>Source</dt><dd><code>config/</code>, <code>core/</code>, <code>static/</code> zipped</dd></div>
+            <div><dt>Naming</dt><dd>Timestamped file plus a <code>_latest</code> pointer, so restore has a sane default</dd></div>
+          </dl>
+          <figcaption class="figure__cap">
+            Fig. 7 &mdash; The two <code>--exclude</code> flags are there
+            because of a failed restore, not because a tutorial said so.
+            <code>dumpdata</code> serialises <code>contenttypes</code> and
+            <code>auth.Permission</code>, then <code>loaddata</code> collides
+            with the rows Django's own migrations have already created in the
+            fresh database. Excluding both, and using natural keys so foreign
+            keys survive different primary key sequences, is what makes the
+            round-trip actually work.
+          </figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>
+            The reason I know that is that the first restore failed on an
+            integrity error, which is a better teacher than a working one. It
+            also means the honest answer to "have you ever restored a backup" is
+            yes, more than once, and I know which flags matter.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       WHAT I'D CHANGE
+       ===================================================================== -->
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">What I'd<br>change</div>
+        <p class="gutter__meta">Two things</p>
+      </div>
+      <div>
+        <div class="prose">
+          <h3>1. <code>model</code> should have been a table</h3>
+          <p>
+            <code>brand</code> and <code>category</code> are foreign keys to
+            reference tables. <code>model</code> is a free-text
+            <code>CharField</code>. At the time that looked like pragmatism
+            &mdash; there are thousands of hardware models and I did not want to
+            maintain a catalogue of them. What it actually bought was this:
+          </p>
+        </div>
+
+        <figure class="figure">
+          <dl class="spec__meta">
+            <div><dt>Assets</dt><dd>684</dd></div>
+            <div><dt>Distinct <code>model</code> strings</dt><dd>255</dd></div>
+            <div><dt>&hellip; after lowercasing and removing punctuation</dt><dd>183 &mdash; so 72 were pure formatting variants</dd></div>
+            <div><dt>Dell OptiPlex family</dt><dd>326 assets, spelled <strong>71 different ways</strong></dd></div>
+            <div><dt>Lenovo Think&hellip; family</dt><dd>84 assets, spelled 34 different ways</dd></div>
+          </dl>
+          <figcaption class="figure__cap">
+            Fig. 8 &mdash; Measured over the live data. The OptiPlex variants
+            include <code>OPTIPLEX-7000</code>, <code>OptiPlex 7000</code>,
+            <code>Optiplex7000</code>, <code>OPTI-PLEX 7000</code>,
+            <code>OPTIPOLEX 7000</code> and <code>Optiolex 7000 tower</code>.
+            Most arrived with the legacy spreadsheet import and the rest were
+            typed in afterwards, because nothing stopped them.
+          </figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>
+            The practical damage is that you cannot answer "how many OptiPlex
+            7000s do we have" with a <code>GROUP BY</code>, which is the sort of
+            question the system was built to answer. Grouping by
+            <code>model</code> returns 255 groups for maybe thirty real
+            machines.
+          </p>
+          <p>
+            Auditing it turned up a second, uglier class of defect: with no
+            validation on a free-text column, values end up in the wrong column
+            entirely.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <dl class="spec__meta">
+            <div><dt>Assets</dt><dd>10 have the serial number copied into <code>model</code>; 3 have the asset name there; 25 hold a purely numeric placeholder</dd></div>
+            <div><dt>Employees</dt><dd>2 have the person's name in the government-ID column and 2 in the mobile column; 6 have the same value in both</dd></div>
+            <div><dt>Completeness</dt><dd>561 of 933 employees have no government ID recorded at all; 27 of the rest are not in the 10-digit national-ID format</dd></div>
+          </dl>
+          <figcaption class="figure__cap">
+            Fig. 9 &mdash; None of these are typos a person would make twice.
+            They are what a spreadsheet import does when the source columns
+            don't line up and nothing downstream objects. A
+            <code>CharField</code> with no validator accepts anything, and 684
+            rows later you find out what "anything" meant.
+          </figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>
+            So the same fix has a second half: validators and format checks on
+            the columns that have a known shape &mdash; national ID, mobile
+            number, serial number &mdash; enforced at the database level with
+            <code>CheckConstraint</code> rather than only in a form, so the next
+            bulk import cannot route around them the way the last one did.
+          </p>
+          <p>
+            The fix is a <code>Model</code> table with a foreign key to
+            <code>Brand</code>, and a data migration to collapse the existing
+            strings into it. That migration is the interesting part: exact
+            matching after normalisation gets from 255 to 183, and the remaining
+            gap needs fuzzy clustering &mdash; PostgreSQL's
+            <code>pg_trgm</code> similarity over the normalised strings, with
+            the ambiguous clusters reviewed by hand rather than guessed at. It
+            is a day of work I should have spent before importing 684 rows
+            instead of after.
+          </p>
+
+          <h3>2. The custom user model, added and then removed</h3>
+          <p>
+            Migration 0013 introduced a custom <code>User</code> extending
+            <code>AbstractUser</code>, with <code>edit_users</code> and
+            <code>view_users_readonly</code> permissions. Migration 0014 deleted
+            it again.
+          </p>
+          <p>
+            The lesson is a Django-specific one that is well documented and that
+            I learned anyway: swapping <code>AUTH_USER_MODEL</code> is
+            effectively a decision you make before the first migration, not
+            after thirteen. Once other tables have foreign keys into
+            <code>auth.User</code>, changing it is a migration problem out of
+            proportion to the benefit. What I actually wanted was custom
+            permissions, and those do not require a custom user model &mdash;
+            which is where the two permissions on
+            <code>AssetAssignment</code> came from instead.
+          </p>
+          <p>
+            Two traces of the detour are still in the tree: an unused
+            <code>AbstractUser</code> import at the top of
+            <code>models.py</code>, and a stale comment next to
+            <code>AUTH_USER_MODEL</code>. I left them until I write this up
+            honestly; they should go.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       KNOWN GAPS
+       ===================================================================== -->
+  <section class="section" id="gaps">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Known gaps</div>
+        <p class="gutter__meta">Open work</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p>
+            Things I know are wrong and have not fixed yet. Listing them is
+            cheaper than being asked.
+          </p>
+          <ul class="bullets">
+            <li>
+              <strong>The issue path is not transactional.</strong>
+              <code>unassign_confirm</code> runs inside
+              <code>transaction.atomic()</code>. <code>assign_confirm</code>
+              does not &mdash; it loops over the selected assets, closing an
+              existing assignment and creating a new one per iteration, with a
+              read-then-write and no row lock. Two consequences: concurrent
+              requests for the same asset could both create an open assignment,
+              and a failure halfway through a multi-asset issue leaves the
+              earlier assets committed and the rest not. The fix is the partial
+              unique index above plus <code>atomic()</code> around the loop, and
+              <code>select_for_update()</code> on the open-assignment lookup.
+            </li>
+            <li>
+              <strong>No test suite.</strong> <code>core/tests.py</code> is still
+              the five-line file <code>startapp</code> generated. For a system
+              whose entire value is one invariant about custody, the first test
+              to write is obvious, and its absence is the least defensible thing
+              on this page.
+            </li>
+            <li>
+              <strong>Reference-data hygiene.</strong> Beyond
+              <code>model</code>: 528 of 684 assets have no service tag,
+              <code>invoice_number</code> is a legacy column now superseded by
+              <code>vendor</code> and still carrying its old contents, and the
+              placeholder values in Fig. 9 are all still there.
+            </li>
+            <li>
+              <strong>Leftovers from the user-model detour.</strong> An unused
+              <code>AbstractUser</code> import and a stale comment beside
+              <code>AUTH_USER_MODEL</code>. Trivial, but they are the kind of
+              thing that makes a reader wonder what else was left half-done.
+            </li>
+          </ul>
+          <p>
+            The order is deliberate: the concurrency gap and the missing tests
+            are the same job, because the test that proves an asset cannot be
+            held twice is also the test that proves the fix worked.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Next</div>
+      </div>
+      <div class="prose">
+        <p>
+          <a class="link-mono" href="../index.html#built">&larr; Back to all projects</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer__inner">
+    <span>Mojtaba Almadan &middot; Eastern Province, Saudi Arabia</span>
+    <span><a href="../index.html">Home</a></span>
+  </div>
+</footer>
+
+<script src="../assets/js/theme.js" defer></script>
+</body>
+</html>

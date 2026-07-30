@@ -1,965 +1,606 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="dark">
+<html lang="en" dir="ltr" data-theme="light">
 <head>
-<meta charset="UTF-8" />
-<title>Mojtaba Almadan | Computer &amp; IT Engineer</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Mojtaba Almadan — Computer & Information Technology Engineer. Backend systems, AI integration, and IT operations." />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-<style>
-  :root{
-    --accent:#38bdf8;
-    --accent-alt:#a855f7;
-    --accent-soft:rgba(56,189,248,0.16);
-    --danger:#f97373;
-    --success:#4ade80;
-    --radius-lg:18px;
-    --radius-md:12px;
-    --radius-pill:999px;
-    --nav-height:70px;
-    --tf:0.2s ease-out;
-    --tm:0.3s ease;
-  }
-  html[data-theme="dark"]{
-    --bg:#05060a;
-    --bg-grad:radial-gradient(circle at top left,#0f172a 0,#020617 40%,#000 100%);
-    --bg-alt:#0e1424;
-    --bg-elevated:#121a2e;
-    --card-bg:rgba(15,23,42,0.92);
-    --card-bg-hover:rgba(56,189,248,0.10);
-    --accent-fg:#38bdf8;
-    --accent-alt-fg:#c084fc;
-    --text:#f5f7ff;
-    --text-strong:#e5f9ff;
-    --text-muted:#9aa3c1;
-    --text-soft:#cbd5f5;
-    --border:rgba(148,163,184,0.28);
-    --border-strong:rgba(148,163,184,0.55);
-    --shadow-soft:0 18px 45px rgba(2,6,23,0.65);
-    --shadow-subtle:0 10px 30px rgba(2,6,23,0.6);
-    --header-bg:linear-gradient(to right, rgba(10,14,26,0.92), rgba(10,14,26,0.86));
-    --input-bg:rgba(255,255,255,0.03);
-    --success-bg:rgba(22,163,74,0.22);
-    --success-border:rgba(74,222,128,0.45);
-    --success-text:#bbf7d0;
-  }
-  html[data-theme="light"]{
-    --bg:#eef2f9;
-    --bg-grad:radial-gradient(circle at top left,#ffffff 0,#e9eef8 45%,#dde5f3 100%);
-    --bg-alt:#ffffff;
-    --bg-elevated:#ffffff;
-    --card-bg:#ffffff;
-    --card-bg-hover:rgba(56,189,248,0.08);
-    --accent-fg:#0369a1;
-    --accent-alt-fg:#7e22ce;
-    --text:#0f172a;
-    --text-strong:#0b1324;
-    --text-muted:#5b6577;
-    --text-soft:#334155;
-    --border:rgba(15,23,42,0.12);
-    --border-strong:rgba(15,23,42,0.22);
-    --shadow-soft:0 18px 40px rgba(15,23,42,0.12);
-    --shadow-subtle:0 10px 24px rgba(15,23,42,0.1);
-    --header-bg:linear-gradient(to right, rgba(255,255,255,0.92), rgba(255,255,255,0.88));
-    --input-bg:rgba(15,23,42,0.03);
-    --success-bg:rgba(22,163,74,0.12);
-    --success-border:rgba(22,163,74,0.35);
-    --success-text:#15803d;
-  }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Mojtaba Almadan — computer engineer</title>
+<meta name="description" content="Computer engineer in Eastern Province, Saudi Arabia. Django and SQL systems, ESP32 firmware, Verilog, and a 32-bit processor built in Logisim. Every claim links to the code.">
+<link rel="canonical" href="https://mjs19999.github.io/portfolio/">
 
-  *{margin:0;padding:0;box-sizing:border-box;}
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mojtaba Almadan — computer engineer">
+<meta property="og:description" content="I build at every layer, from gates to services. Every claim links to the code.">
 
-  body{
-    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Tahoma",sans-serif;
-    background:var(--bg-grad);
-    background-attachment:fixed;
-    color:var(--text);
-    min-height:100vh;
-    line-height:1.6;
-    overflow-x:hidden;
-    scroll-behavior:smooth;
-    transition:background var(--tm), color var(--tm);
-  }
-  [dir="rtl"] body{ font-family:system-ui,-apple-system,"Segoe UI","Tahoma","Geeza Pro",sans-serif; }
+<!-- Set the theme before first paint so the page never flashes the wrong one. -->
+<script>
+  (function () {
+    var stored;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    document.documentElement.dataset.theme =
+      stored ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  })();
+</script>
 
-  .bg-particles{position:fixed;inset:0;overflow:hidden;z-index:-2;pointer-events:none;
-    background:
-      radial-gradient(circle at 10% 20%, rgba(56,189,248,0.15), transparent 60%),
-      radial-gradient(circle at 90% 10%, rgba(168,85,247,0.14), transparent 65%),
-      radial-gradient(circle at 10% 80%, rgba(52,211,153,0.14), transparent 55%);
-  }
-  html[data-theme="light"] .bg-particles{ opacity:0.6; }
-  .particle{position:absolute;width:4px;height:4px;border-radius:999px;background:var(--accent);box-shadow:0 0 12px rgba(56,189,248,0.7);opacity:0.5;}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400..600&display=swap">
 
-  main{position:relative;z-index:1;}
-  .container{width:min(1120px,92vw);margin:0 auto;}
-  section{padding:80px 0;position:relative;}
-  @media (max-width:768px){ section{padding:56px 0;} }
-
-  .section-title{display:inline-flex;align-items:center;gap:10px;font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-fg);margin-bottom:14px;font-weight:600;}
-  .section-title::before{content:"";width:32px;height:1.5px;background:linear-gradient(90deg,transparent,var(--accent));}
-  [dir="rtl"] .section-title::before{background:linear-gradient(270deg,transparent,var(--accent));}
-  .section-heading{font-size:clamp(1.6rem,3vw,2.15rem);font-weight:700;margin-bottom:18px;color:var(--text-strong);}
-  .section-subtitle{color:var(--text-muted);max-width:640px;font-size:0.95rem;}
-
-  header{position:sticky;top:0;z-index:40;backdrop-filter:blur(16px);background:var(--header-bg);border-bottom:1px solid var(--border);transition:background var(--tm), border-color var(--tm);}
-  .nav-inner{height:var(--nav-height);display:flex;align-items:center;justify-content:space-between;gap:14px;}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:0.05em;font-size:0.92rem;text-transform:uppercase;color:var(--text-strong);}
-  .logo-mark{width:32px;height:32px;border-radius:999px;background:radial-gradient(circle at 30% 20%,#38bdf8,#4f46e5 55%,#0f172a 100%);display:inline-flex;align-items:center;justify-content:center;color:#e5f9ff;font-size:0.85rem;box-shadow:0 0 15px rgba(56,189,248,0.7);flex-shrink:0;}
-
-  nav{display:flex;align-items:center;gap:18px;font-size:0.87rem;}
-  nav a{color:var(--text-muted);text-decoration:none;position:relative;padding:4px 0;transition:color var(--tf);font-weight:500;}
-  nav a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:1.5px;background:linear-gradient(90deg,var(--accent),var(--accent-alt));transition:width var(--tf);}
-  [dir="rtl"] nav a::after{left:auto;right:0;}
-  nav a:hover{color:var(--accent-fg);}
-  nav a:hover::after{width:100%;}
-
-  .nav-actions{display:flex;align-items:center;gap:8px;}
-
-  .btn{border-radius:var(--radius-pill);border:1px solid transparent;padding:9px 16px;font-size:0.85rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent-soft),var(--card-bg));color:var(--accent-fg);box-shadow:var(--shadow-subtle);position:relative;overflow:hidden;transition:transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color var(--tf), background var(--tm), color var(--tm); font-family:inherit;}
-  .btn:hover{transform:translateY(-1px) scale(1.02);border-color:rgba(56,189,248,0.85);}
-  .btn-outline{background:transparent;color:var(--text-muted);border-color:var(--border-strong);box-shadow:none;}
-  .btn-outline:hover{color:var(--accent-fg);border-color:var(--accent-fg);background:var(--card-bg-hover);}
-  .btn-sm{padding:7px 10px;font-size:0.8rem;}
-
-  .icon-btn{width:40px;height:40px;border-radius:999px;border:1px solid var(--border-strong);background:var(--card-bg);color:var(--text);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background var(--tf), transform var(--tf), color var(--tf);font-size:0.85rem;flex-shrink:0;}
-  .icon-btn:hover{color:var(--accent-fg);border-color:var(--accent-fg);transform:translateY(-1px);}
-
-  .lang-btn{font-weight:700;font-size:0.72rem;letter-spacing:0.02em;}
-
-  .burger{display:none;width:38px;height:38px;border-radius:999px;border:1px solid var(--border-strong);background:var(--card-bg);align-items:center;justify-content:center;cursor:pointer;transition:background var(--tf);flex-shrink:0;}
-  .burger span{position:relative;width:16px;height:2px;border-radius:999px;background:var(--text);}
-  .burger span::before,.burger span::after{content:"";position:absolute;left:0;width:16px;height:2px;border-radius:999px;background:var(--text);transition:transform var(--tm), top var(--tm), opacity var(--tm);}
-  .burger span::before{top:-5px;}
-  .burger span::after{top:5px;}
-  .burger.active span{background:transparent;}
-  .burger.active span::before{top:0;transform:rotate(45deg);}
-  .burger.active span::after{top:0;transform:rotate(-45deg);}
-
-  .mobile-nav{position:fixed;inset:var(--nav-height) 0 auto 0;background:var(--bg-alt);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transform:translateY(-100%);transition:transform var(--tm);z-index:35;box-shadow:var(--shadow-soft);}
-  .mobile-nav.open{transform:translateY(0);}
-  .mobile-nav-inner{padding:16px 4vw 18px;display:flex;flex-direction:column;gap:4px;}
-  .mobile-nav-inner a{color:var(--text-muted);text-decoration:none;padding:10px 4px;font-size:1rem;border-bottom:1px solid var(--border);font-weight:500;}
-  .mobile-nav-inner a:hover{color:var(--accent-fg);}
-
-  @media (max-width:880px){ nav{display:none;} .burger{display:inline-flex;} }
-  @media (max-width:520px){ .nav-actions .btn-outline.linkedin-desktop{display:none;} }
-
-  .hero{min-height:calc(100vh - var(--nav-height));display:flex;align-items:center;padding-top:40px;padding-bottom:40px;}
-  .hero-grid{display:grid;grid-template-columns:3fr 2.2fr;gap:40px;align-items:center;}
-  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
-
-  .hero-kicker{display:inline-flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;background:var(--card-bg);border-radius:999px;border:1px solid var(--border-strong);font-size:0.82rem;color:var(--text-muted);margin-bottom:16px;flex-wrap:wrap;}
-  [dir="rtl"] .hero-kicker{padding:4px 4px 4px 12px;}
-  .hero-kicker-badge{padding:4px 10px;border-radius:999px;background:radial-gradient(circle at 0 0,rgba(56,189,248,0.5),rgba(15,23,42,0.9));color:#e5f9ff;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;}
-
-  .hero-title{font-size:clamp(2.1rem,4vw,3.1rem);line-height:1.18;font-weight:800;margin-bottom:16px;color:var(--text-strong);}
-  .hero-title span.gradient{background:linear-gradient(120deg,#38bdf8,#a855f7,#22c55e);background-clip:text;-webkit-background-clip:text;color:transparent;}
-  html[data-theme="light"] .hero-title span.gradient{background:linear-gradient(120deg,#0284c7,#9333ea,#16a34a);background-clip:text;-webkit-background-clip:text;}
-  .hero-subtitle{color:var(--text-muted);max-width:560px;font-size:0.98rem;margin-bottom:22px;}
-  .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px;}
-  .tag-pill{border-radius:999px;border:1px solid var(--border-strong);padding:5px 12px;font-size:0.75rem;color:var(--text-muted);display:inline-flex;align-items:center;gap:6px;background:var(--card-bg);}
-  .tag-pill i{color:var(--accent-fg);font-size:0.8rem;}
-  .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px;}
-  .hero-meta{display:flex;flex-wrap:wrap;gap:16px;font-size:0.8rem;color:var(--text-muted);}
-  .hero-meta span{display:inline-flex;align-items:center;gap:6px;}
-  .hero-meta i{color:var(--accent-fg);}
-  @media (max-width:600px){ .hero-meta span{width:100%;} }
-
-  .hero-card{border-radius:22px;background:var(--card-bg);padding:22px 20px;box-shadow:var(--shadow-soft);border:1px solid var(--border-strong);position:relative;overflow:hidden;}
-  .hero-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:10px;flex-wrap:wrap;}
-  .hero-avatar{width:44px;height:44px;border-radius:999px;border:2px solid rgba(56,189,248,0.75);display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 20%,#38bdf8,#0f172a 70%);color:#e5f9ff;font-weight:700;flex-shrink:0;}
-  .hero-status{font-size:0.72rem;color:var(--success-text);padding:5px 10px;border-radius:999px;background:var(--success-bg);border:1px solid var(--success-border);display:inline-flex;align-items:center;gap:6px;font-weight:600;white-space:nowrap;}
-  .hero-status i{color:var(--success);}
-  .hero-card-title{font-size:0.82rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-strong);margin-bottom:14px;font-weight:700;}
-  .hero-card-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;font-size:0.8rem;color:var(--text-soft);}
-  .metric-label{font-size:0.7rem;color:var(--text-muted);margin-bottom:2px;}
-  .hero-card-footer{margin-top:18px;padding-top:12px;border-top:1px dashed var(--border-strong);display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--text-soft);gap:10px;flex-wrap:wrap;}
-  .hero-stack{display:flex;flex-wrap:wrap;gap:6px;}
-  .hero-stack span{border-radius:999px;padding:3px 8px;background:var(--input-bg);border:1px solid var(--border-strong);font-size:0.7rem;}
-
-  .about-grid{display:grid;grid-template-columns:1.2fr 1.2fr;gap:36px;align-items:flex-start;}
-  @media (max-width:900px){ .about-grid{grid-template-columns:1fr;} }
-  .about-text{color:var(--text-muted);font-size:0.95rem;}
-  .about-text p + p{margin-top:12px;}
-  .about-highlights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px;}
-  @media (max-width:640px){ .about-highlights{grid-template-columns:1fr;} }
-  .about-highlight{padding:12px 14px;border-radius:var(--radius-md);border:1px solid var(--border);background:var(--card-bg);font-size:0.82rem;color:var(--text-muted);}
-  .about-highlight strong{display:block;font-size:0.85rem;margin-bottom:4px;color:var(--accent-fg);}
-
-  .about-timeline{border-radius:var(--radius-lg);padding:20px 18px;background:var(--card-bg);border:1px solid var(--border-strong);box-shadow:var(--shadow-subtle);font-size:0.85rem;}
-  .timeline-label{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-strong);margin-bottom:10px;font-weight:700;}
-  .timeline-item{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;padding:10px 0;border-top:1px solid var(--border);}
-  .timeline-item:first-of-type{border-top:none;}
-  .timeline-dot{width:8px;height:8px;border-radius:999px;background:var(--accent);margin-top:6px;box-shadow:0 0 10px rgba(56,189,248,0.6);}
-  .timeline-meta{color:var(--text-soft);font-weight:600;}
-  .timeline-meta span{font-size:0.74rem;color:var(--text-muted);display:block;font-weight:500;margin-top:2px;}
-  .timeline-desc{color:var(--text-muted);font-size:0.8rem;margin-top:4px;}
-
-  .projects-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0 24px;flex-wrap:wrap;}
-  .filter-group{display:flex;flex-wrap:wrap;gap:8px;}
-  .filter-chip{border-radius:999px;padding:6px 13px;font-size:0.78rem;border:1px solid var(--border-strong);background:var(--card-bg);color:var(--text-muted);cursor:pointer;transition:background var(--tf), border-color var(--tf), color var(--tf), transform 0.15s ease-out;font-family:inherit;font-weight:500;}
-  .filter-chip.active{background:radial-gradient(circle at 0 0,rgba(56,189,248,0.35),rgba(15,23,42,0.6));color:#e5f9ff;border-color:var(--accent-fg);transform:translateY(-1px);}
-  html[data-theme="light"] .filter-chip.active{background:linear-gradient(135deg,var(--accent-fg),var(--accent-alt-fg));color:#fff;border-color:transparent;}
-  .toolbar-hint{font-size:0.75rem;color:var(--text-muted);display:flex;align-items:center;gap:6px;}
-
-  .projects-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
-  @media (max-width:960px){ .projects-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
-  @media (max-width:640px){ .projects-grid{grid-template-columns:1fr;} }
-
-  .project-card{border-radius:var(--radius-lg);background:var(--card-bg);border:1px solid var(--border);padding:16px 16px 18px;box-shadow:var(--shadow-subtle);position:relative;overflow:hidden;transform-origin:center;transition:transform 0.18s ease-out, box-shadow 0.18s ease-out, border-color 0.18s ease-out, background 0.2s ease-out;}
-  .project-card:hover{transform:translateY(-4px) scale(1.015);box-shadow:var(--shadow-soft);border-color:var(--accent-fg);background:var(--card-bg-hover);}
-  .project-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px;}
-  .project-title{font-size:0.95rem;font-weight:700;color:var(--text-strong);}
-  .project-sub{font-size:0.76rem;color:var(--text-muted);margin-top:3px;}
-  .project-chip{padding:4px 9px;border-radius:999px;font-size:0.68rem;border:1px solid var(--accent-fg);color:var(--accent-fg);background:var(--input-bg);display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-weight:600;}
-  .project-desc{font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;}
-  .project-meta{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;font-size:0.75rem;color:var(--text-soft);flex-wrap:wrap;}
-  .project-tags{display:flex;flex-wrap:wrap;gap:5px;}
-  .project-tag{border-radius:999px;border:1px solid var(--border-strong);padding:2px 9px;font-size:0.7rem;color:var(--text-soft);background:var(--input-bg);}
-  .project-links{display:inline-flex;align-items:center;gap:6px;color:var(--accent-fg);font-weight:600;font-size:0.73rem;}
-
-  .skills-layout{display:grid;grid-template-columns:1.3fr 1.1fr;gap:30px;align-items:flex-start;}
-  @media (max-width:900px){ .skills-layout{grid-template-columns:1fr;} }
-  .skills-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
-  .skills-tab{border-radius:999px;padding:6px 13px;font-size:0.78rem;border:1px solid var(--border-strong);background:var(--card-bg);color:var(--text-muted);cursor:pointer;transition:background var(--tf), color var(--tf), border-color var(--tf);font-family:inherit;font-weight:500;}
-  .skills-tab.active{background:radial-gradient(circle at 0 0,rgba(56,189,248,0.35),rgba(15,23,42,0.6));color:#e5f9ff;border-color:var(--accent-fg);}
-  html[data-theme="light"] .skills-tab.active{background:linear-gradient(135deg,var(--accent-fg),var(--accent-alt-fg));color:#fff;border-color:transparent;}
-
-  .skill-item{padding:8px 0;overflow:hidden;}
-  .skill-header{display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:6px;}
-  .skill-name{color:var(--text-soft);font-weight:600;}
-  .skill-level{color:var(--text-muted);font-size:0.75rem;}
-  .skill-bar{height:6px;border-radius:999px;background:var(--input-bg);border:1px solid var(--border);overflow:hidden;}
-  .skill-bar-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--accent-fg),var(--accent-alt-fg));}
-  .skills-summary{margin-top:14px;font-size:0.83rem;color:var(--text-muted);}
-
-  .skills-radar{border-radius:var(--radius-lg);padding:20px 18px;background:var(--card-bg);border:1px solid var(--border-strong);box-shadow:var(--shadow-subtle);font-size:0.85rem;color:var(--text-muted);}
-  .skills-radar-title{font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-strong);margin-bottom:8px;font-weight:700;}
-  .skills-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
-  .skill-badge{border-radius:999px;padding:6px 11px;font-size:0.74rem;border:1px solid var(--border-strong);background:var(--input-bg);color:var(--text-soft);display:inline-flex;align-items:center;gap:6px;}
-  .skill-badge i{color:var(--accent-fg);}
-
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;margin-top:24px;}
-  @media (max-width:880px){ .contact-grid{grid-template-columns:1fr;} }
-  .contact-card{border-radius:var(--radius-lg);padding:22px 20px;background:var(--card-bg);border:1px solid var(--border-strong);box-shadow:var(--shadow-subtle);display:flex;flex-direction:column;gap:16px;}
-  .contact-row strong{display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent-fg);margin-bottom:4px;}
-  .contact-row span, .contact-row a{font-size:0.9rem;color:var(--text-soft);}
-  .contact-row a{color:var(--accent-fg);text-decoration:none;font-weight:600;}
-  .contact-direct{margin-top:auto;padding-top:14px;border-top:1px dashed var(--border-strong);}
-  .contact-direct .btn{width:100%;justify-content:center;}
-
-  form{border-radius:var(--radius-lg);padding:22px 20px;background:var(--card-bg);border:1px solid var(--border-strong);box-shadow:var(--shadow-subtle);display:flex;flex-direction:column;gap:14px;height:100%;}
-  .form-group{display:flex;flex-direction:column;gap:6px;}
-  .form-group label{font-size:0.82rem;color:var(--text-soft);font-weight:600;}
-  .form-group input, .form-group textarea{
-    background:var(--input-bg);border:1px solid var(--border-strong);border-radius:var(--radius-md);
-    padding:10px 12px;color:var(--text);font-size:0.9rem;font-family:inherit;transition:border-color var(--tf), background var(--tf);
-  }
-  .form-group input:focus, .form-group textarea:focus{outline:none;border-color:var(--accent-fg);background:var(--card-bg);}
-  .form-group textarea{min-height:110px;resize:vertical;}
-  .error-msg{font-size:0.75rem;color:var(--danger);min-height:1em;}
-  .form-footer{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:auto;}
-  .form-status{font-size:0.8rem;color:var(--accent-fg);}
-
-  footer{text-align:center;padding:26px 4vw 34px;font-size:0.82rem;color:var(--text-muted);border-top:1px solid var(--border);}
-  footer span{color:var(--text-soft);font-weight:600;}
-
-  .reveal{opacity:1;}
-
-  ::selection{background:rgba(56,189,248,0.35);}
-
-  @media (max-width:420px){
-    .hero-card-metrics{grid-template-columns:1fr;}
-    .about-highlights{grid-template-columns:1fr;}
-  }
-</style>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
 </head>
 <body>
-  <div class="bg-particles" id="particles"></div>
 
-  <div class="mobile-nav" id="mobileNav">
-    <div class="mobile-nav-inner">
-      <a href="#hero" data-i18n="nav.home">Home</a>
-      <a href="#about" data-i18n="nav.about">About</a>
-      <a href="#projects" data-i18n="nav.projects">Projects</a>
-      <a href="#skills" data-i18n="nav.skills">Skills</a>
-      <a href="#contact" data-i18n="nav.contact">Contact</a>
-    </div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="masthead__name" href="#top"><b>MA</b> Mojtaba Almadan</a>
+    <nav class="masthead__nav" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#built">Built</a>
+      <a href="#stack">Stack</a>
+      <a href="#background">Background</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch theme">DK</button>
   </div>
+</header>
 
-  <header>
-    <div class="container nav-inner">
-      <div class="logo">
-        <div class="logo-mark" data-i18n="logo.mark">MA</div>
-        <span data-i18n="logo.name">Mojtaba Almadan</span>
-      </div>
-      <nav>
-        <a href="#hero" data-i18n="nav.home">Home</a>
-        <a href="#about" data-i18n="nav.about">About</a>
-        <a href="#projects" data-i18n="nav.projects">Projects</a>
-        <a href="#skills" data-i18n="nav.skills">Skills</a>
-        <a href="#contact" data-i18n="nav.contact">Contact</a>
-      </nav>
-      <div class="nav-actions">
-        <button class="icon-btn" id="themeToggle" type="button" data-i18n-title="a11y.themeToggle" aria-label="Toggle theme">
-          <i class="fa-solid fa-moon" id="themeIcon"></i>
-        </button>
-        <button class="icon-btn lang-btn" id="langToggle" type="button" data-i18n-title="a11y.langToggle" aria-label="Switch language">
-          <span id="langLabel">AR</span>
-        </button>
-        <a class="btn-outline btn linkedin-desktop" href="https://www.linkedin.com/in/mojtaba-almadan/" target="_blank" rel="noopener">
-          <i class="fa-brands fa-linkedin"></i> LinkedIn
-        </a>
-        <button class="burger" id="burgerBtn" type="button" data-i18n-aria-label="a11y.burger" aria-label="Toggle navigation">
-          <span></span>
-        </button>
+<main id="main">
+
+  <!-- ===================================================================
+       HERO — the thesis, then the evidence for it.
+       =================================================================== -->
+  <section class="section section--hero" id="top">
+    <div class="shell">
+      <p class="eyebrow">Computer engineer &middot; Eastern Province, Saudi Arabia</p>
+      <h1>I build at every layer, from gates to services.</h1>
+      <p class="lead hero__lead">
+        A 32-bit processor wired up in Logisim and then pipelined. AES as a
+        hand-drawn state machine in Verilog. Real-time task scheduling on an
+        ESP32. The Django and PostgreSQL custody ledger my company runs on now.
+        Every row below says what backs it &mdash; and where there is no public
+        code, it says that instead.
+      </p>
+
+      <table class="layers">
+        <caption class="u-sr">
+          The layers I have built at, from the service layer down to the gates,
+          with the artifact that backs each one.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="u-sr">Layer number</span></th>
+            <th scope="col">Layer</th>
+            <th scope="col">What I built there</th>
+            <th scope="col">Backed by</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="layer__num">07</td>
+            <th scope="row" class="layer__name">Service</th>
+            <td class="layer__what">A custody ledger for 684 assets and 933 employee records, 428 currently signed out, with two signatures required on every transfer.</td>
+            <td class="layer__proof"><a href="work/khonaini-asset-system.html">Case study &rarr;</a></td>
+          </tr>
+          <tr>
+            <td class="layer__num">06</td>
+            <th scope="row" class="layer__name">Data</th>
+            <td class="layer__what">Demand forecasting over point-of-sale history: 30+ engineered features, three models, the winner picked by 5-fold cross-validation.</td>
+            <td class="layer__proof"><a href="https://github.com/mjs19999/smart_menu_brain" target="_blank" rel="noopener">Repo &#8599;</a></td>
+          </tr>
+          <tr>
+            <td class="layer__num">05</td>
+            <th scope="row" class="layer__name">Vision</th>
+            <td class="layer__what">Object identification, recognition and tracking, integrated into a UAS mission pipeline and tested to find where it stopped being reliable.</td>
+            <td class="layer__proof">Employer's code</td>
+          </tr>
+          <tr>
+            <td class="layer__num">04</td>
+            <th scope="row" class="layer__name">Firmware</th>
+            <td class="layer__what">Three FreeRTOS tasks sharing one ESP32, scheduled at 100&nbsp;ms, 200&nbsp;ms and event-driven, in that order of priority.</td>
+            <td class="layer__proof"><a href="https://github.com/mjs19999/SmartOBDII-Final" target="_blank" rel="noopener">Repo &#8599;</a></td>
+          </tr>
+          <tr>
+            <td class="layer__num">03</td>
+            <th scope="row" class="layer__name">Protocol</th>
+            <td class="layer__what">OBD-II PID queries over UART to an ELM327 adapter, decoding live coolant, RPM, speed and throttle readings off a running engine.</td>
+            <td class="layer__proof"><a href="https://github.com/mjs19999/SmartOBDII-Final" target="_blank" rel="noopener">Repo &#8599;</a></td>
+          </tr>
+          <tr>
+            <td class="layer__num">02</td>
+            <th scope="row" class="layer__name">RTL</th>
+            <td class="layer__what">AES encryption and decryption as an explicit algorithmic state machine in Verilog &mdash; control signals written by hand, not inferred.</td>
+            <td class="layer__proof"><a href="https://github.com/mjs19999/AES_in_verilog" target="_blank" rel="noopener">Repo &#8599; 6&#9733;</a></td>
+          </tr>
+          <tr>
+            <td class="layer__num">01</td>
+            <th scope="row" class="layer__name">Gates</th>
+            <td class="layer__what">A 32-bit RISC processor in Logisim, single-cycle and then pipelined, validated by running a selection sort on it in assembly.</td>
+            <td class="layer__proof"><a href="https://github.com/mjs19999/32-bit-cpu-in-logisim" target="_blank" rel="noopener">Repo &#8599;</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="assets/pdf/mojtaba-almadan-cv.pdf">Download CV (PDF)</a>
+        <a class="btn" href="https://github.com/mjs19999" target="_blank" rel="noopener">GitHub &#8599;</a>
+        <a class="btn" href="https://www.linkedin.com/in/mojtaba-almadan/" target="_blank" rel="noopener">LinkedIn &#8599;</a>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section id="hero" class="hero">
-      <div class="container hero-grid">
-        <div class="hero-left reveal">
-          <div class="hero-kicker">
-            <span class="hero-kicker-badge" data-i18n="hero.kickerBadge">Computer &amp; IT Engineer</span>
-            <span data-i18n="hero.kickerCompany">Khonaini International Company Ltd. • Eastern Province</span>
+  <!-- ===================================================================
+       WORK
+       =================================================================== -->
+  <section class="section" id="work">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Work</div>
+        <p class="gutter__meta">2021 &mdash; present<br>Saudi Arabia</p>
+      </div>
+
+      <div class="stack-v">
+        <article class="role">
+          <div class="role__head">
+            <h3>Computer Engineer &mdash; Systems &amp; Internal Tools</h3>
+            <span class="role__org">Khonaini International Company Ltd. &middot; Jubail &middot; Jul 2023 &mdash; present</span>
           </div>
-          <h1 class="hero-title" data-i18n="hero.title">
-            Building reliable systems from <span class="gradient">IoT to AI</span> and scalable backend tools.
-          </h1>
-          <p class="hero-subtitle" data-i18n="hero.subtitle">
-            Mojtaba is a Computer &amp; Information Technology Engineer at Khonaini International Company, with a bachelor's degree in Computer Engineering from KFUPM and currently pursuing a master's degree. He designs production-grade solutions across internal tools, AI integration, and full-stack automation.
+          <div class="role__body prose">
+            <p>
+              I'm building the system that tracks our assets and employee
+              records &mdash; Django over a relational database &mdash; to
+              replace a legacy enterprise product and the spreadsheets that
+              were being maintained by hand next to it. Keeping the data
+              consistent is the part that actually takes the work; the CRUD is
+              the easy half.
+            </p>
+            <p>
+              The job is not only code. I image and provision endpoints (OS,
+              drivers, software), chase down network and server connectivity
+              problems, and write the documentation and training material
+              people use afterwards &mdash; which is usually what decides
+              whether a new internal tool gets adopted or quietly ignored.
+            </p>
+            <p>
+              <a class="link-mono" href="work/khonaini-asset-system.html">Read the architecture write-up &rarr;</a>
+            </p>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role__head">
+            <h3>AI Integration Engineer</h3>
+            <span class="role__org">UAS2030 &middot; Dhahran &middot; Jun 2021 &mdash; Jan 2023</span>
+          </div>
+          <div class="role__body prose">
+            <p>
+              I worked alongside computer-vision and machine-learning
+              specialists on object identification, recognition and tracking,
+              and integrated those components into a larger mission pipeline.
+            </p>
+            <p>
+              Much of my time went to evaluation rather than model-building:
+              running the system across different environments and scenarios to
+              find the conditions where it stopped being reliable. That is
+              still the part of this kind of work I find most useful &mdash; a
+              model that performs well in one setting and nowhere else hasn't
+              been finished, it has been demonstrated.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       BUILT — spec blocks, one per project. Anything without an artifact
+       says so in the open.
+       =================================================================== -->
+  <section class="section" id="built">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Built</div>
+        <p class="gutter__meta">5 projects<br>4 public repos</p>
+      </div>
+
+      <div class="stack-v--loose stack-v">
+        <div class="section__intro">
+          <h2>Five things I have actually built.</h2>
+          <p class="lead">
+            Not a grid padded out to a round number. Four of these have code
+            you can read; the fifth belongs to my employer, so it gets an
+            architecture write-up instead of a repository link.
           </p>
-          <div class="hero-tags">
-            <span class="tag-pill"><i class="fa-solid fa-building"></i> <span data-i18n="hero.tag1">Computer Engineer - Systems &amp; Internal Tools (Khonaini)</span></span>
-            <span class="tag-pill"><i class="fa-solid fa-user-graduate"></i> <span data-i18n="hero.tag2">BSc Computer Engineering - KFUPM</span></span>
-            <span class="tag-pill"><i class="fa-solid fa-book-open"></i> <span data-i18n="hero.tag3">Currently pursuing Master's studies</span></span>
-            <span class="tag-pill"><i class="fa-solid fa-brain"></i> <span data-i18n="hero.tag4">Robotics, AI &amp; full-stack system design</span></span>
-          </div>
-          <div class="hero-actions">
-            <button class="btn" onclick="document.querySelector('#projects').scrollIntoView({behavior:'smooth'})">
-              <i class="fa-solid fa-bolt"></i> <span data-i18n="hero.ctaProjects">View projects &amp; experience</span>
-            </button>
-            <button class="btn-outline btn" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
-              <i class="fa-regular fa-paper-plane"></i> <span data-i18n="hero.ctaContact">Contact</span>
-            </button>
-          </div>
-          <div class="hero-meta">
-            <span><i class="fa-solid fa-location-dot"></i> <span data-i18n="hero.meta1">Eastern Province, Saudi Arabia</span></span>
-            <span><i class="fa-solid fa-diagram-project"></i> <span data-i18n="hero.meta2">From embedded &amp; robotics to backend Django systems</span></span>
-            <span><i class="fa-solid fa-laptop-code"></i> <span data-i18n="hero.meta3">Comfortable with Ubuntu, SQL, and scalable infrastructure</span></span>
-          </div>
         </div>
 
-        <div class="hero-right reveal">
-          <div class="hero-card" id="heroCard">
-            <div class="hero-card-header">
-              <div style="display:flex;align-items:center;gap:10px;">
-                <div class="hero-avatar" data-i18n="logo.mark">MA</div>
-                <div>
-                  <div style="font-size:0.85rem;font-weight:700;" data-i18n="hero.cardSnapshot">Professional snapshot</div>
-                  <div style="font-size:0.8rem;color:var(--text-muted);" data-i18n="hero.cardSnapshotSub">Computer &amp; IT Engineer • Khonaini</div>
-                </div>
-              </div>
-              <div class="hero-status">
-                <i class="fa-solid fa-circle"></i> <span data-i18n="hero.status">Open to technical interviews</span>
-              </div>
-            </div>
-            <div class="hero-card-title">
-              <i class="fa-solid fa-terminal"></i> <span data-i18n="hero.cardFocus">Core focus areas</span>
-            </div>
-            <div class="hero-card-metrics">
-              <div>
-                <div class="metric-label" data-i18n="hero.m1label">Systems &amp; Internal Tools</div>
-                <div data-i18n="hero.m1val">Django, REST APIs, SQL, asset &amp; employee management systems</div>
-              </div>
-              <div>
-                <div class="metric-label" data-i18n="hero.m2label">AI &amp; Computer Vision</div>
-                <div data-i18n="hero.m2val">Object detection, OpenCV, AI integration into pipelines</div>
-              </div>
-              <div>
-                <div class="metric-label" data-i18n="hero.m3label">IT Operations</div>
-                <div data-i18n="hero.m3val">Deployment, OS &amp; drivers, network troubleshooting, documentation</div>
-              </div>
-              <div>
-                <div class="metric-label" data-i18n="hero.m4label">Academic foundation</div>
-                <div data-i18n="hero.m4val">Computer Architecture, OS, Networking, Control &amp; Digital Design</div>
-              </div>
-            </div>
-            <div class="hero-card-footer">
-              <div data-i18n="hero.footerNote">Combines strong academic fundamentals with hands-on experience delivering real systems in enterprise environments.</div>
-              <div class="hero-stack">
-                <span>Python</span><span>Django</span><span>SQL</span><span>OpenCV</span>
-              </div>
-            </div>
+        <article class="spec">
+          <div class="spec__head">
+            <h3 class="spec__title">Internal asset &amp; employee management system</h3>
+            <span class="tag">Employer's code</span>
           </div>
-        </div>
+          <dl class="spec__meta">
+            <div><dt>Role</dt><dd>Sole engineer &mdash; schema, app, deployment, backups, training</dd></div>
+            <div><dt>Stack</dt><dd>Django 6.0 &middot; PostgreSQL &middot; server-rendered templates &middot; no SPA</dd></div>
+            <div><dt>Live data</dt><dd>684 assets &middot; 933 employees &middot; 1,423 assignments &middot; 428 open</dd></div>
+            <div><dt>Replaces</dt><dd>A legacy enterprise product and hand-maintained spreadsheets</dd></div>
+            <div><dt>Status</dt><dd>In daily use at Khonaini International Company</dd></div>
+          </dl>
+          <div class="spec__body prose">
+            <p>
+              Not really an inventory system &mdash; a custody ledger. Its job is
+              to prove who accepted responsibility for a machine, so every
+              transfer captures two signatures on a pad, the employee's and an
+              authority's, and assignment rows are closed rather than deleted.
+              Everything that carries custody history is
+              <code>on_delete=PROTECT</code>: you cannot delete an employee who
+              has ever signed for equipment.
+            </p>
+            <p>
+              The write-up covers the schema, the write path, a uniqueness
+              constraint I got wrong and why, the backup and restore commands,
+              and the two decisions I would reverse.
+            </p>
+          </div>
+          <div class="spec__links">
+            <a class="btn" href="work/khonaini-asset-system.html">Architecture write-up &rarr;</a>
+          </div>
+        </article>
+
+        <article class="spec">
+          <div class="spec__head">
+            <h3 class="spec__title">Menu Brain &mdash; demand forecasting for a restaurant group</h3>
+            <span class="tag tag--signal">Public</span>
+          </div>
+          <dl class="spec__meta">
+            <div><dt>Role</dt><dd>Sole engineer</dd></div>
+            <div><dt>Stack</dt><dd>Django 5.1 &middot; DRF &middot; PostgreSQL 16 &middot; scikit-learn &middot; pandas &middot; Chart.js</dd></div>
+            <div><dt>Models</dt><dd>Gradient boosting / random forest / linear regression, selected by 5-fold CV on R&sup2;</dd></div>
+            <div><dt>Features</dt><dd>30+, built from point-of-sale history</dd></div>
+          </dl>
+          <div class="spec__body prose">
+            <p>
+              Forecasts how much of each menu item a given branch will sell, so
+              inventory can be ordered against a number rather than a hunch,
+              and less food gets thrown away.
+            </p>
+            <p>
+              The feature pipeline is where most of the thinking went: cyclical
+              encoding for time-of-week and seasonality, 7/14/30-day moving
+              averages, lag features and rolling statistics. Three regression
+              models get trained on that, and whichever has the best 5-fold
+              cross-validated R&sup2; is serialised with joblib and used for
+              live predictions. Interface runs in Arabic and English with
+              right-to-left handling.
+            </p>
+          </div>
+          <div class="spec__links">
+            <a class="btn" href="https://github.com/mjs19999/smart_menu_brain" target="_blank" rel="noopener">Read the code &#8599;</a>
+          </div>
+        </article>
+
+        <article class="spec">
+          <div class="spec__head">
+            <h3 class="spec__title">Smart OBD-II &mdash; a diagnostic that reasons instead of reporting</h3>
+            <span class="tag tag--signal">Public</span>
+          </div>
+          <dl class="spec__meta">
+            <div><dt>Role</dt><dd>Sole engineer</dd></div>
+            <div><dt>Stack</dt><dd>C++ &middot; ESP32-WROOM-32 &middot; FreeRTOS &middot; PlatformIO &middot; LittleFS</dd></div>
+            <div><dt>Reads</dt><dd>PID 0x05 coolant &middot; 0x0C RPM &middot; 0x0D speed &middot; 0x11 throttle</dd></div>
+            <div><dt>Link</dt><dd>ELM327 adapter over UART</dd></div>
+          </dl>
+          <div class="spec__body prose">
+            <p>
+              An ESP32 plugged into a car's OBD-II port, reading live engine
+              parameters. The point is that it doesn't just display them: a
+              rule engine watches for dangerous <em>combinations</em> &mdash;
+              readings that are each individually fine but together mean
+              something is wrong &mdash; and raises an LED and a buzzer.
+            </p>
+            <p>
+              Three FreeRTOS tasks share the chip, and the priorities are the
+              design. The OBD reader runs every 100&nbsp;ms at high priority,
+              because a dropped frame is data you cannot get back. The fault
+              detector runs every 200&nbsp;ms at medium. The web server sits at
+              the bottom, event-driven, because a dashboard that lags by a
+              second costs nothing. A page served out of LittleFS shows the
+              live values.
+            </p>
+          </div>
+          <div class="spec__links">
+            <a class="btn" href="https://github.com/mjs19999/SmartOBDII-Final" target="_blank" rel="noopener">Read the code &#8599;</a>
+          </div>
+        </article>
+
+        <article class="spec">
+          <div class="spec__head">
+            <h3 class="spec__title">AES in Verilog, as an explicit state machine</h3>
+            <span class="tag tag--signal">Public &middot; 6&#9733; 4 forks</span>
+          </div>
+          <dl class="spec__meta">
+            <div><dt>Role</dt><dd>Pair, with Hasan Alhussain &mdash; KFUPM</dd></div>
+            <div><dt>Stack</dt><dd>Verilog</dd></div>
+            <div><dt>Design</dt><dd>Algorithmic state machine, separate encrypt / decrypt datapaths</dd></div>
+            <div><dt>License</dt><dd>Apache-2.0</dd></div>
+          </dl>
+          <div class="spec__body prose">
+            <p>
+              AES encryption and decryption built as an explicit algorithmic
+              state machine rather than leaving the control path to be inferred
+              by the synthesiser. The round counter, the register enables and
+              the branch conditions &mdash;
+              <code>isRound0</code>, <code>isRound9</code>,
+              <code>isRound10</code>, <code>count_lt_10</code> &mdash; are all
+              written out, with separate datapaths for encryption and
+              decryption covering byte substitution, shift rows, mix columns
+              and their inverses.
+            </p>
+            <p>
+              Six people outside the course have starred it and four have
+              forked it, which is the only external validation I have on any of
+              this.
+            </p>
+          </div>
+          <div class="spec__links">
+            <a class="btn" href="https://github.com/mjs19999/AES_in_verilog" target="_blank" rel="noopener">Read the code &#8599;</a>
+          </div>
+        </article>
+
+        <article class="spec">
+          <div class="spec__head">
+            <h3 class="spec__title">A 32-bit RISC processor, built twice</h3>
+            <span class="tag tag--signal">Public</span>
+          </div>
+          <dl class="spec__meta">
+            <div><dt>Role</dt><dd>Sole author &mdash; KFUPM COE301</dd></div>
+            <div><dt>Stack</dt><dd>Logisim &middot; RISC assembly</dd></div>
+            <div><dt>Variants</dt><dd>Single-cycle, then pipelined</dd></div>
+            <div><dt>Test</dt><dd>Selection sort, assembled and run to completion</dd></div>
+          </dl>
+          <div class="spec__body prose">
+            <p>
+              A 32-bit RISC processor built once as a single-cycle machine and
+              then again with a pipeline. Datapath, control unit, ALU and
+              register file wired component by component.
+            </p>
+            <p>
+              It is validated by assembling a selection sort and running it on
+              the machine until it halts with the array in order. That is a
+              harsh test: every instruction in the path, the memory interface
+              and every control signal has to be right, not merely plausible.
+            </p>
+            <p>
+              This is the project I point at when someone asks whether I
+              understand what is underneath the code I write.
+            </p>
+          </div>
+          <div class="spec__links">
+            <a class="btn" href="https://github.com/mjs19999/32-bit-cpu-in-logisim" target="_blank" rel="noopener">Read the code &#8599;</a>
+          </div>
+        </article>
+
+        <p class="gutter__meta">
+          Also on GitHub:
+          <a href="https://github.com/mjs19999/khums-calculator" target="_blank" rel="noopener">khums-calculator</a>
+          &mdash; a small single-page tool, no build step, works offline.
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="about">
-      <div class="container about-grid">
-        <div class="reveal">
-          <div class="section-title" data-i18n="about.tag">About Me</div>
-          <h2 class="section-heading" data-i18n="about.heading">Computer engineer connecting robotics, AI, and full-stack systems.</h2>
-          <p class="about-text" data-i18n="about.p1">Mojtaba graduated with a Bachelor's in Computer Engineering from King Fahd University of Petroleum &amp; Minerals (KFUPM), and is currently pursuing a master's degree to deepen his expertise in intelligent and scalable systems.</p>
-          <p class="about-text" data-i18n="about.p2">Professionally, he works as a Computer &amp; Information Technology Engineer at Khonaini International Company, where he designs and implements internal asset and employee management systems with Django and SQL, replaces legacy enterprise tools, and manages IT infrastructure from OS deployments to network troubleshooting.</p>
-          <p class="about-text" data-i18n="about.p3">Previously at UAS2030, he contributed as an AI Integration Engineer, collaborating on object identification, recognition, and tracking systems, and integrating AI components into larger pipelines with a focus on reliability and teamwork.</p>
-          <div class="about-highlights">
-            <div class="about-highlight"><strong data-i18n="about.h1t">Current role - Khonaini</strong><span data-i18n="about.h1d">Designs and maintains internal systems for assets and employees using Django and relational databases, while overseeing deployments, drivers, and connectivity in production environments.</span></div>
-            <div class="about-highlight"><strong data-i18n="about.h2t">AI Integration - UAS2030</strong><span data-i18n="about.h2d">Helped develop AI systems for object tracking and evaluation across varying environments, integrating models into a larger robotics/mission pipeline.</span></div>
-            <div class="about-highlight"><strong data-i18n="about.h3t">Academic foundation - KFUPM</strong><span data-i18n="about.h3d">Completed coursework in Computer Architecture, Digital Design, Microprocessors, Signal Processing, Control Systems, Operating Systems, and Networking.</span></div>
-            <div class="about-highlight"><strong data-i18n="about.h4t">Soft skills</strong><span data-i18n="about.h4d">Structured problem-solving, technical communication, cross-functional collaboration, adaptability, priority management, and attention to detail.</span></div>
-          </div>
-        </div>
-        <div class="reveal">
-          <div class="about-timeline">
-            <div class="timeline-label" data-i18n="about.timelineLabel">Professional journey</div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div>
-                <div class="timeline-meta" data-i18n="about.t1title">Computer Engineer - Systems &amp; Internal Tools<span data-i18n="about.t1sub">Khonaini International Company • Jul 2023 - Present</span></div>
-                <div class="timeline-desc" data-i18n="about.t1desc">Builds and maintains an internal asset and employee management platform using Django and SQL, replacing manual and legacy software workflows, and providing clear documentation and training for end-users.</div>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div>
-                <div class="timeline-meta" data-i18n="about.t2title">AI Integration Engineer<span data-i18n="about.t2sub">UAS2030 • Jun 2021 - Jan 2023</span></div>
-                <div class="timeline-desc" data-i18n="about.t2desc">Developed and integrated AI modules for object identification, recognition, and tracking, and helped test system reliability across diverse environments and scenarios.</div>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div>
-                <div class="timeline-meta" data-i18n="about.t3title">Bachelor's in Computer Engineering<span data-i18n="about.t3sub">KFUPM • 2017 - 2023</span></div>
-                <div class="timeline-desc" data-i18n="about.t3desc">Built a strong foundation in computer engineering topics while exploring robotics, AI, and system-level design.</div>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div>
-                <div class="timeline-meta" data-i18n="about.t4title">Master's studies in progress<span data-i18n="about.t4sub">Current</span></div>
-                <div class="timeline-desc" data-i18n="about.t4desc">Continuing graduate-level studies to deepen expertise in advanced software systems, AI, and data-driven engineering, complementing ongoing professional experience.</div>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div>
-                <div class="timeline-meta" data-i18n="about.t5title">AUSVI SUAS competition<span data-i18n="about.t5sub">AI/ML Model Design</span></div>
-                <div class="timeline-desc" data-i18n="about.t5desc">Participated in SUAS competition, contributing a robust AI/ML model for UAS tasks, building on skills in computer vision and real-time decision making.</div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- ===================================================================
+       STACK — grouped by evidence, not scored out of 100.
+       =================================================================== -->
+  <section class="section" id="stack">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Stack</div>
+        <p class="gutter__meta">Grouped by<br>what backs it</p>
       </div>
-    </section>
 
-    <section id="projects">
-      <div class="container">
-        <div class="reveal">
-          <div class="section-title" data-i18n="projects.tag">Projects &amp; Experience</div>
-          <h2 class="section-heading" data-i18n="projects.heading">Systems that span internal tools, AI, and automation.</h2>
-          <p class="section-subtitle" data-i18n="projects.sub">A mix of professional roles and selected technical work demonstrating full-stack thinking, AI integration, and infrastructure-aware engineering.</p>
+      <div class="stack-v">
+        <div class="section__intro">
+          <h2>Grouped by evidence, not scored out of a hundred.</h2>
+          <p class="lead">
+            A percentage next to a skill is a number I made up about myself.
+            These are grouped by the strongest thing I can offer as proof, and
+            the last group is the one I would want to read first.
+          </p>
         </div>
 
-        <div class="projects-toolbar reveal">
-          <div class="filter-group" id="projectFilters">
-            <button class="filter-chip active" data-filter="all" data-i18n="projects.filterAll">All</button>
-            <button class="filter-chip" data-filter="backend" data-i18n="projects.filterBackend">Backend / Web</button>
-            <button class="filter-chip" data-filter="ai" data-i18n="projects.filterAi">AI / Computer Vision</button>
-            <button class="filter-chip" data-filter="infra" data-i18n="projects.filterInfra">IT &amp; Systems</button>
+        <div class="stack-v--tight stack-v">
+          <div class="tier">
+            <div class="tier__label">Shipped, and I maintain it</div>
+            <ul class="tier__items">
+              <li>Python</li>
+              <li>Django</li>
+              <li>PostgreSQL</li>
+              <li>SQL &mdash; schema design, constraints, migrations</li>
+              <li>Django permissions &amp; groups</li>
+              <li>Backup &amp; restore</li>
+              <li>Endpoint provisioning (Windows, Linux)</li>
+              <li>Network &amp; server troubleshooting</li>
+              <li>Technical documentation &amp; training</li>
+            </ul>
           </div>
-          <div class="toolbar-hint"><i class="fa-solid fa-magnet" style="color:var(--accent-fg);"></i> <span data-i18n="projects.hint">Hover over cards to feel the micro-interactions.</span></div>
+
+          <div class="tier">
+            <div class="tier__label">Built real projects with</div>
+            <ul class="tier__items">
+              <li>Django REST Framework</li>
+              <li>REST API design</li>
+              <li>scikit-learn</li>
+              <li>pandas / NumPy</li>
+              <li>OpenCV</li>
+              <li>C++ on ESP32</li>
+              <li>FreeRTOS</li>
+              <li>Verilog</li>
+              <li>Logisim / digital design</li>
+              <li>Git</li>
+            </ul>
+          </div>
+
+          <div class="tier">
+            <div class="tier__label">Coursework foundations &mdash; KFUPM</div>
+            <ul class="tier__items">
+              <li>Computer architecture</li>
+              <li>Operating systems</li>
+              <li>Networking</li>
+              <li>Microprocessors</li>
+              <li>Signal processing</li>
+              <li>Control systems</li>
+              <li>MQTT / LoRaWAN / Zigbee</li>
+              <li>Edge computing</li>
+            </ul>
+          </div>
+
+          <div class="tier tier--open">
+            <div class="tier__label">Learning now &mdash; not yet interview-ready</div>
+            <ul class="tier__items">
+              <li>Linux administration beyond daily use</li>
+              <li>systemd / journald / permissions</li>
+              <li>Performance triage</li>
+              <li>SQL past CRUD &mdash; window functions, EXPLAIN, indexing</li>
+              <li>Docker</li>
+              <li>Kubernetes</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="projects-grid" id="projectsGrid">
-          <article class="project-card reveal" data-tags="backend infra">
-            <div class="project-top">
-              <div><div class="project-title" data-i18n="projects.p1title">Internal Asset &amp; Employee Management System</div><div class="project-sub">Django • REST APIs • SQL</div></div>
-              <div class="project-chip"><i class="fa-solid fa-database"></i> <span data-i18n="projects.p1chip">Backend</span></div>
-            </div>
-            <p class="project-desc" data-i18n="projects.p1desc">Designed and implemented a scalable internal system at Khonaini to manage assets and employee data, replacing legacy software and manual datasheets with a Django and SQL-backed platform focused on data consistency and maintainability.</p>
-            <div class="project-meta">
-              <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Django</span><span class="project-tag">REST</span><span class="project-tag">SQL</span></div>
-              <div class="project-links"><span data-i18n="projects.p1link">Production-grade internal tooling</span></div>
-            </div>
-          </article>
-
-          <article class="project-card reveal" data-tags="infra">
-            <div class="project-top">
-              <div><div class="project-title" data-i18n="projects.p2title">IT Infrastructure &amp; Deployment Automation</div><div class="project-sub" data-i18n="projects.p2sub">OS deployment • Drivers • Networking</div></div>
-              <div class="project-chip"><i class="fa-solid fa-network-wired"></i> <span data-i18n="projects.p2chip">IT Ops</span></div>
-            </div>
-            <p class="project-desc" data-i18n="projects.p2desc">Provisioned and configured enterprise endpoints and compute resources (OS imaging, software, drivers), troubleshot network and server connectivity issues, and authored user-focused documentation and training materials to support reliable daily operations.</p>
-            <div class="project-meta">
-              <div class="project-tags"><span class="project-tag">Windows / Linux</span><span class="project-tag" data-i18n="projects.p2tag2">Networking</span><span class="project-tag" data-i18n="projects.p2tag3">Documentation</span></div>
-              <div class="project-links"><span data-i18n="projects.p2link">Reliable daily operations</span></div>
-            </div>
-          </article>
-
-          <article class="project-card reveal" data-tags="ai backend">
-            <div class="project-top">
-              <div><div class="project-title" data-i18n="projects.p3title">AI Integration for Object Tracking</div><div class="project-sub" data-i18n="projects.p3sub">UAS2030 • AI pipelines</div></div>
-              <div class="project-chip"><i class="fa-solid fa-brain"></i> <span data-i18n="projects.p3chip">AI Integration</span></div>
-            </div>
-            <p class="project-desc" data-i18n="projects.p3desc">Worked with computer vision and ML specialists at UAS2030 to integrate AI modules for object identification, recognition, and tracking into a larger mission pipeline, conducting experiments to validate reliability in different conditions.</p>
-            <div class="project-meta">
-              <div class="project-tags"><span class="project-tag" data-i18n="projects.p3tag1">AI pipelines</span><span class="project-tag" data-i18n="projects.p3tag2">Object tracking</span><span class="project-tag" data-i18n="projects.p3tag3">Testing</span></div>
-              <div class="project-links"><span data-i18n="projects.p3link">End-to-end AI integration</span></div>
-            </div>
-          </article>
-
-          <article class="project-card reveal" data-tags="ai">
-            <div class="project-top">
-              <div><div class="project-title" data-i18n="projects.p4title">SUAS AI/ML Model for Competition</div><div class="project-sub" data-i18n="projects.p4sub">AUSVI SUAS • Robotics</div></div>
-              <div class="project-chip"><i class="fa-solid fa-drone"></i> SUAS</div>
-            </div>
-            <p class="project-desc" data-i18n="projects.p4desc">Participated in the AUSVI SUAS competition, designing a robust AI/ML model for unmanned aerial systems tasks, combining computer vision and robotics-oriented constraints.</p>
-            <div class="project-meta">
-              <div class="project-tags"><span class="project-tag">Computer vision</span><span class="project-tag" data-i18n="projects.p4tag2">Robotics</span><span class="project-tag" data-i18n="projects.p4tag3">Competition</span></div>
-              <div class="project-links"><span data-i18n="projects.p4link">Mission-driven AI model</span></div>
-            </div>
-          </article>
-
-          <article class="project-card reveal" data-tags="backend ai">
-            <div class="project-top">
-              <div><div class="project-title" data-i18n="projects.p5title">Full-stack &amp; System Design Practice</div><div class="project-sub">Python • Django • APIs</div></div>
-              <div class="project-chip"><i class="fa-solid fa-layer-group"></i> Full-stack</div>
-            </div>
-            <p class="project-desc" data-i18n="projects.p5desc">Continuously refines full-stack skills including RESTful API design, database modeling, and integration of AI components into backend services, with an emphasis on maintainable and testable code.</p>
-            <div class="project-meta">
-              <div class="project-tags"><span class="project-tag">Full-stack</span><span class="project-tag">APIs</span><span class="project-tag" data-i18n="projects.p5tag3">Database design</span></div>
-              <div class="project-links"><span data-i18n="projects.p5link">From concept to deployment</span></div>
-            </div>
-          </article>
-
-          <article class="project-card reveal" data-tags="infra backend">
-            <div class="project-top">
-              <div><div class="project-title" data-i18n="projects.p6title">Technical Documentation &amp; Training</div><div class="project-sub" data-i18n="projects.p6sub">User guides • IT runbooks</div></div>
-              <div class="project-chip"><i class="fa-solid fa-scroll"></i> <span data-i18n="projects.p6chip">Enablement</span></div>
-            </div>
-            <p class="project-desc" data-i18n="projects.p6desc">Produces clear documentation and training materials for internal tools and IT systems, helping non-technical users adopt new workflows and ensuring smoother hand-offs across teams.</p>
-            <div class="project-meta">
-              <div class="project-tags"><span class="project-tag" data-i18n="projects.p6tag1">Documentation</span><span class="project-tag" data-i18n="projects.p6tag2">User training</span><span class="project-tag" data-i18n="projects.p6tag3">Support</span></div>
-              <div class="project-links"><span data-i18n="projects.p6link">Communication as leverage</span></div>
-            </div>
-          </article>
-        </div>
+        <p class="note">
+          I keep that last group honest and on the page. If something is listed
+          there, I can tell you what I have read and built with it &mdash; not
+          that I have run it in production. I would rather you know which is
+          which before we start talking than find out halfway through a screen
+          share.
+        </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="skills">
-      <div class="container">
-        <div class="reveal">
-          <div class="section-title" data-i18n="skills.tag">Skills</div>
-          <h2 class="section-heading" data-i18n="skills.heading">From backend Django systems to AI &amp; infrastructure.</h2>
-          <p class="section-subtitle" data-i18n="skills.sub">Interactive skill bars highlight the blend of backend, AI, and IT operations skills grounded in both industry work and academic training.</p>
-        </div>
-        <div class="skills-layout">
-          <div class="reveal">
-            <div class="skills-tabs" id="skillsTabs">
-              <button class="skills-tab active" data-scope="all" data-i18n="skills.tabAll">All</button>
-              <button class="skills-tab" data-scope="backend" data-i18n="skills.tabBackend">Backend &amp; Web</button>
-              <button class="skills-tab" data-scope="ai" data-i18n="skills.tabAi">AI &amp; Computer Vision</button>
-              <button class="skills-tab" data-scope="infra" data-i18n="skills.tabInfra">IT &amp; Systems</button>
-            </div>
-            <div class="skills-list" id="skillsList">
-              <div class="skill-item" data-scope="backend"><div class="skill-header"><span class="skill-name" data-i18n="skills.s1name">Python &amp; Django</span><span class="skill-level" data-i18n="skills.lvlAdv">Advanced</span></div><div class="skill-bar"><div class="skill-bar-fill" data-level="90"></div></div></div>
-              <div class="skill-item" data-scope="backend"><div class="skill-header"><span class="skill-name" data-i18n="skills.s2name">RESTful APIs &amp; Database Design</span><span class="skill-level" data-i18n="skills.lvlAdv">Advanced</span></div><div class="skill-bar"><div class="skill-bar-fill" data-level="85"></div></div></div>
-              <div class="skill-item" data-scope="backend"><div class="skill-header"><span class="skill-name" data-i18n="skills.s3name">SQL &amp; Data Modeling</span><span class="skill-level" data-i18n="skills.lvlAdv">Advanced</span></div><div class="skill-bar"><div class="skill-bar-fill" data-level="85"></div></div></div>
-              <div class="skill-item" data-scope="ai"><div class="skill-header"><span class="skill-name" data-i18n="skills.s4name">AI Integration &amp; Object Detection</span><span class="skill-level" data-i18n="skills.lvlInt">Intermediate+</span></div><div class="skill-bar"><div class="skill-bar-fill" data-level="80"></div></div></div>
-              <div class="skill-item" data-scope="ai"><div class="skill-header"><span class="skill-name" data-i18n="skills.s5name">OpenCV &amp; Model Integration</span><span class="skill-level" data-i18n="skills.lvlInt">Intermediate+</span></div><div class="skill-bar"><div class="skill-bar-fill" data-level="80"></div></div></div>
-              <div class="skill-item" data-scope="infra"><div class="skill-header"><span class="skill-name" data-i18n="skills.s6name">IT Systems &amp; Deployment</span><span class="skill-level" data-i18n="skills.lvlAdv">Advanced</span></div><div class="skill-bar"><div class="skill-bar-fill" data-level="88"></div></div></div>
-              <div class="skill-item" data-scope="infra"><div class="skill-header"><span class="skill-name" data-i18n="skills.s7name">Network &amp; Connectivity Troubleshooting</span><span class="skill-level" data-i18n="skills.lvlAdv">Advanced</span></div><div class="skill-bar"><div class="skill-bar-fill" data-level="85"></div></div></div>
-              <div class="skill-item" data-scope="infra"><div class="skill-header"><span class="skill-name" data-i18n="skills.s8name">Technical Documentation &amp; Training</span><span class="skill-level" data-i18n="skills.lvlAdv">Advanced</span></div><div class="skill-bar"><div class="skill-bar-fill" data-level="88"></div></div></div>
-              <div class="skill-item" data-scope="backend ai infra"><div class="skill-header"><span class="skill-name" data-i18n="skills.s9name">Structured Problem-solving &amp; Collaboration</span><span class="skill-level" data-i18n="skills.lvlAdv">Advanced</span></div><div class="skill-bar"><div class="skill-bar-fill" data-level="90"></div></div></div>
-            </div>
-            <p class="skills-summary" data-i18n="skills.summary">Mojtaba's profile mixes strong backend engineering (Python/Django/SQL), AI integration experience, and practical IT systems work, supported by solid communication and cross-functional collaboration.</p>
-          </div>
-          <div class="skills-radar reveal">
-            <div class="skills-radar-title" data-i18n="skills.radarTitle">How this translates in practice</div>
-            <p data-i18n="skills.radarText">In day-to-day work, this means being able to scope and build internal tools end-to-end, debug issues across the stack (from database to network), and integrate AI modules into existing services while keeping performance and usability in mind.</p>
-            <div class="skills-badges">
-              <span class="skill-badge"><i class="fa-solid fa-bug"></i> <span data-i18n="skills.b1">Root-cause analysis</span></span>
-              <span class="skill-badge"><i class="fa-solid fa-scroll"></i> <span data-i18n="skills.b2">Clear documentation</span></span>
-              <span class="skill-badge"><i class="fa-solid fa-network-wired"></i> <span data-i18n="skills.b3">Infra awareness</span></span>
-              <span class="skill-badge"><i class="fa-solid fa-code"></i> <span data-i18n="skills.b4">Clean, maintainable code</span></span>
-              <span class="skill-badge"><i class="fa-solid fa-users-gear"></i> <span data-i18n="skills.b5">Cross-functional collaboration</span></span>
-            </div>
-          </div>
-        </div>
+  <!-- ===================================================================
+       BACKGROUND
+       =================================================================== -->
+  <section class="section" id="background">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Background</div>
+        <p class="gutter__meta">KFUPM<br>2017 &mdash; present</p>
       </div>
-    </section>
 
-    <section id="contact">
-      <div class="container">
-        <div class="reveal">
-          <div class="section-title" data-i18n="contact.tag">Contact</div>
-          <h2 class="section-heading" data-i18n="contact.heading">Let's talk about making systems more reliable and intelligent.</h2>
-          <p class="section-subtitle" data-i18n="contact.sub">Whether it's backend tools, AI integration, or IT operations, Mojtaba is open to conversations about roles, collaborations, and technical challenges.</p>
-        </div>
-        <div class="contact-grid">
-          <div class="contact-card reveal">
-            <div class="contact-row"><strong data-i18n="contact.basedLabel">Based in</strong><span data-i18n="contact.basedVal">Eastern Province, Saudi Arabia</span></div>
-            <div class="contact-row"><strong data-i18n="contact.roleLabel">Current role</strong><span data-i18n="contact.roleVal">Computer &amp; Information Technology Engineer at Khonaini International Company Ltd., focusing on internal tools, deployments, and IT support.</span></div>
-            <div class="contact-row"><strong data-i18n="contact.eduLabel">Education</strong><span data-i18n="contact.eduVal">Bachelor's in Computer Engineering from KFUPM; currently pursuing a master's degree to build further depth in software and AI systems.</span></div>
-            <div class="contact-row"><strong>LinkedIn</strong><a href="https://www.linkedin.com/in/mojtaba-almadan/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;"><i class="fa-brands fa-linkedin"></i> linkedin.com/in/mojtaba-almadan</a></div>
-            <div class="contact-direct">
-              <a class="btn" href="mailto:mojtaba.almadan@gmail.com?subject=Portfolio%20inquiry" style="text-decoration:none;">
-                <i class="fa-regular fa-envelope"></i> <span data-i18n="contact.emailDirect">Email mojtaba.almadan@gmail.com directly</span>
-              </a>
-            </div>
+      <div class="stack-v">
+        <article class="role">
+          <div class="role__head">
+            <h3>MSc, Internet of Things</h3>
+            <span class="role__org">King Fahd University of Petroleum &amp; Minerals &middot; 2025 &mdash; present</span>
           </div>
-          <div class="reveal">
-            <form id="contactForm" novalidate>
-              <div class="form-group">
-                <label for="name" data-i18n="contact.nameLabel">Name *</label>
-                <input id="name" type="text" data-i18n-placeholder="contact.namePh" placeholder="Your name" required />
-                <div class="error-msg" id="nameError"></div>
-              </div>
-              <div class="form-group">
-                <label for="email" data-i18n="contact.emailLabel">Email *</label>
-                <input id="email" type="email" placeholder="you@company.com" required dir="ltr" />
-                <div class="error-msg" id="emailError"></div>
-              </div>
-              <div class="form-group">
-                <label for="message" data-i18n="contact.msgLabel">How can Mojtaba help? *</label>
-                <textarea id="message" data-i18n-placeholder="contact.msgPh" placeholder="Share context about the role, project, or system you'd like to discuss." required></textarea>
-                <div class="error-msg" id="messageError"></div>
-              </div>
-              <div class="form-footer">
-                <button type="submit" class="btn"><i class="fa-regular fa-paper-plane"></i> <span data-i18n="contact.send">Send message</span></button>
-                <div class="form-status" id="formStatus"></div>
-              </div>
-            </form>
+          <div class="role__body prose">
+            <p>
+              Transducers, IoT gateways and platforms, LPWAN, MQTT, Zigbee and
+              LoRaWAN, edge computing, telematics, real-time analytics,
+              industrial IoT and interoperability.
+            </p>
           </div>
-        </div>
+        </article>
+
+        <article class="role">
+          <div class="role__head">
+            <h3>BSc, Computer Engineering</h3>
+            <span class="role__org">King Fahd University of Petroleum &amp; Minerals &middot; 2017 &mdash; 2023</span>
+          </div>
+          <div class="role__body prose">
+            <p>
+              Computer architecture, digital design, microprocessors, signal
+              processing, control systems, operating systems and networking. The
+              processor and the AES state machine both came out of this degree
+              &mdash; the architecture and digital design courses are where the
+              gates layer at the top of this page starts.
+            </p>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role__head">
+            <h3>AUVSI SUAS competition</h3>
+            <span class="role__org">KFUPM team &middot; AI / ML model</span>
+          </div>
+          <div class="role__body prose">
+            <p>
+              Designed the machine-learning model for the team's small
+              unmanned-aircraft entry, working within the accuracy and latency
+              limits that a mission running on real hardware imposes.
+            </p>
+          </div>
+        </article>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer>
-    <span data-i18n="footer.built">Built by</span> <span data-i18n="logo.name">Mojtaba Almadan</span> • <span data-i18n="footer.tag">Ready for live portfolio demos.</span>
-  </footer>
+  <!-- ===================================================================
+       CONTACT — a plain list of ways to reach a person.
+       =================================================================== -->
+  <section class="section" id="contact">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Contact</div>
+        <p class="gutter__meta">Email is<br>fastest</p>
+      </div>
 
-<script>
-const MAILTO_ADDRESS = "mojtaba.almadan@gmail.com";
+      <div class="stack-v">
+        <div class="section__intro">
+          <h2>Happy to talk.</h2>
+          <p class="lead">
+            I'm most useful on backend systems, embedded work, or anything that
+            needs someone who can move between the two without a handover. If
+            you want to dig into any of the projects above, ask &mdash; the
+            code is all there.
+          </p>
+        </div>
 
-const I18N = {
-en: {
-  "a11y.themeToggle":"Toggle dark/light mode","a11y.langToggle":"Switch language","a11y.burger":"Toggle navigation",
-  "nav.home":"Home","nav.about":"About","nav.projects":"Projects","nav.skills":"Skills","nav.contact":"Contact",
-  "logo.mark":"MA","logo.name":"Mojtaba Almadan",
-  "hero.kickerBadge":"Computer &amp; IT Engineer","hero.kickerCompany":"Khonaini International Company Ltd. • Eastern Province",
-  "hero.title":"Building reliable systems from <span class=\"gradient\">IoT to AI</span> and scalable backend tools.",
-  "hero.subtitle":"Mojtaba is a Computer &amp; Information Technology Engineer at Khonaini International Company, with a bachelor's degree in Computer Engineering from KFUPM and currently pursuing a master's degree. He designs production-grade solutions across internal tools, AI integration, and full-stack automation.",
-  "hero.tag1":"Computer Engineer - Systems &amp; Internal Tools (Khonaini)","hero.tag2":"BSc Computer Engineering - KFUPM","hero.tag3":"Currently pursuing Master's studies","hero.tag4":"Robotics, AI &amp; full-stack system design",
-  "hero.ctaProjects":"View projects &amp; experience","hero.ctaContact":"Contact",
-  "hero.meta1":"Eastern Province, Saudi Arabia","hero.meta2":"From embedded &amp; robotics to backend Django systems","hero.meta3":"Comfortable with Ubuntu, SQL, and scalable infrastructure",
-  "hero.cardSnapshot":"Professional snapshot","hero.cardSnapshotSub":"Computer &amp; IT Engineer • Khonaini","hero.status":"Open to technical interviews","hero.cardFocus":"Core focus areas",
-  "hero.m1label":"Systems &amp; Internal Tools","hero.m1val":"Django, REST APIs, SQL, asset &amp; employee management systems",
-  "hero.m2label":"AI &amp; Computer Vision","hero.m2val":"Object detection, OpenCV, AI integration into pipelines",
-  "hero.m3label":"IT Operations","hero.m3val":"Deployment, OS &amp; drivers, network troubleshooting, documentation",
-  "hero.m4label":"Academic foundation","hero.m4val":"Computer Architecture, OS, Networking, Control &amp; Digital Design",
-  "hero.footerNote":"Combines strong academic fundamentals with hands-on experience delivering real systems in enterprise environments.",
-  "about.tag":"About Me","about.heading":"Computer engineer connecting robotics, AI, and full-stack systems.",
-  "about.p1":"Mojtaba graduated with a Bachelor's in Computer Engineering from King Fahd University of Petroleum &amp; Minerals (KFUPM), and is currently pursuing a master's degree to deepen his expertise in intelligent and scalable systems.",
-  "about.p2":"Professionally, he works as a Computer &amp; Information Technology Engineer at Khonaini International Company, where he designs and implements internal asset and employee management systems with Django and SQL, replaces legacy enterprise tools, and manages IT infrastructure from OS deployments to network troubleshooting.",
-  "about.p3":"Previously at UAS2030, he contributed as an AI Integration Engineer, collaborating on object identification, recognition, and tracking systems, and integrating AI components into larger pipelines with a focus on reliability and teamwork.",
-  "about.h1t":"Current role - Khonaini","about.h1d":"Designs and maintains internal systems for assets and employees using Django and relational databases, while overseeing deployments, drivers, and connectivity in production environments.",
-  "about.h2t":"AI Integration - UAS2030","about.h2d":"Helped develop AI systems for object tracking and evaluation across varying environments, integrating models into a larger robotics/mission pipeline.",
-  "about.h3t":"Academic foundation - KFUPM","about.h3d":"Completed coursework in Computer Architecture, Digital Design, Microprocessors, Signal Processing, Control Systems, Operating Systems, and Networking.",
-  "about.h4t":"Soft skills","about.h4d":"Structured problem-solving, technical communication, cross-functional collaboration, adaptability, priority management, and attention to detail.",
-  "about.timelineLabel":"Professional journey",
-  "about.t1title":"Computer Engineer - Systems &amp; Internal Tools","about.t1sub":"Khonaini International Company • Jul 2023 - Present","about.t1desc":"Builds and maintains an internal asset and employee management platform using Django and SQL, replacing manual and legacy software workflows, and providing clear documentation and training for end-users.",
-  "about.t2title":"AI Integration Engineer","about.t2sub":"UAS2030 • Jun 2021 - Jan 2023","about.t2desc":"Developed and integrated AI modules for object identification, recognition, and tracking, and helped test system reliability across diverse environments and scenarios.",
-  "about.t3title":"Bachelor's in Computer Engineering","about.t3sub":"KFUPM • 2017 - 2023","about.t3desc":"Built a strong foundation in computer engineering topics while exploring robotics, AI, and system-level design.",
-  "about.t4title":"Master's studies in progress","about.t4sub":"Current","about.t4desc":"Continuing graduate-level studies to deepen expertise in advanced software systems, AI, and data-driven engineering, complementing ongoing professional experience.",
-  "about.t5title":"AUSVI SUAS competition","about.t5sub":"AI/ML Model Design","about.t5desc":"Participated in SUAS competition, contributing a robust AI/ML model for UAS tasks, building on skills in computer vision and real-time decision making.",
-  "projects.tag":"Projects &amp; Experience","projects.heading":"Systems that span internal tools, AI, and automation.","projects.sub":"A mix of professional roles and selected technical work demonstrating full-stack thinking, AI integration, and infrastructure-aware engineering.",
-  "projects.filterAll":"All","projects.filterBackend":"Backend / Web","projects.filterAi":"AI / Computer Vision","projects.filterInfra":"IT &amp; Systems","projects.hint":"Hover over cards to feel the micro-interactions.",
-  "projects.p1title":"Internal Asset &amp; Employee Management System","projects.p1chip":"Backend","projects.p1desc":"Designed and implemented a scalable internal system at Khonaini to manage assets and employee data, replacing legacy software and manual datasheets with a Django and SQL-backed platform focused on data consistency and maintainability.","projects.p1link":"Production-grade internal tooling",
-  "projects.p2title":"IT Infrastructure &amp; Deployment Automation","projects.p2sub":"OS deployment • Drivers • Networking","projects.p2chip":"IT Ops","projects.p2desc":"Provisioned and configured enterprise endpoints and compute resources (OS imaging, software, drivers), troubleshot network and server connectivity issues, and authored user-focused documentation and training materials to support reliable daily operations.","projects.p2tag2":"Networking","projects.p2tag3":"Documentation","projects.p2link":"Reliable daily operations",
-  "projects.p3title":"AI Integration for Object Tracking","projects.p3sub":"UAS2030 • AI pipelines","projects.p3chip":"AI Integration","projects.p3desc":"Worked with computer vision and ML specialists at UAS2030 to integrate AI modules for object identification, recognition, and tracking into a larger mission pipeline, conducting experiments to validate reliability in different conditions.","projects.p3tag1":"AI pipelines","projects.p3tag2":"Object tracking","projects.p3tag3":"Testing","projects.p3link":"End-to-end AI integration",
-  "projects.p4title":"SUAS AI/ML Model for Competition","projects.p4sub":"AUSVI SUAS • Robotics","projects.p4desc":"Participated in the AUSVI SUAS competition, designing a robust AI/ML model for unmanned aerial systems tasks, combining computer vision and robotics-oriented constraints.","projects.p4tag2":"Robotics","projects.p4tag3":"Competition","projects.p4link":"Mission-driven AI model",
-  "projects.p5title":"Full-stack &amp; System Design Practice","projects.p5desc":"Continuously refines full-stack skills including RESTful API design, database modeling, and integration of AI components into backend services, with an emphasis on maintainable and testable code.","projects.p5tag3":"Database design","projects.p5link":"From concept to deployment",
-  "projects.p6title":"Technical Documentation &amp; Training","projects.p6sub":"User guides • IT runbooks","projects.p6chip":"Enablement","projects.p6desc":"Produces clear documentation and training materials for internal tools and IT systems, helping non-technical users adopt new workflows and ensuring smoother hand-offs across teams.","projects.p6tag1":"Documentation","projects.p6tag2":"User training","projects.p6tag3":"Support","projects.p6link":"Communication as leverage",
-  "skills.tag":"Skills","skills.heading":"From backend Django systems to AI &amp; infrastructure.","skills.sub":"Interactive skill bars highlight the blend of backend, AI, and IT operations skills grounded in both industry work and academic training.",
-  "skills.tabAll":"All","skills.tabBackend":"Backend &amp; Web","skills.tabAi":"AI &amp; Computer Vision","skills.tabInfra":"IT &amp; Systems",
-  "skills.s1name":"Python &amp; Django","skills.s2name":"RESTful APIs &amp; Database Design","skills.s3name":"SQL &amp; Data Modeling","skills.s4name":"AI Integration &amp; Object Detection","skills.s5name":"OpenCV &amp; Model Integration","skills.s6name":"IT Systems &amp; Deployment","skills.s7name":"Network &amp; Connectivity Troubleshooting","skills.s8name":"Technical Documentation &amp; Training","skills.s9name":"Structured Problem-solving &amp; Collaboration",
-  "skills.lvlAdv":"Advanced","skills.lvlInt":"Intermediate+",
-  "skills.summary":"Mojtaba's profile mixes strong backend engineering (Python/Django/SQL), AI integration experience, and practical IT systems work, supported by solid communication and cross-functional collaboration.",
-  "skills.radarTitle":"How this translates in practice","skills.radarText":"In day-to-day work, this means being able to scope and build internal tools end-to-end, debug issues across the stack (from database to network), and integrate AI modules into existing services while keeping performance and usability in mind.",
-  "skills.b1":"Root-cause analysis","skills.b2":"Clear documentation","skills.b3":"Infra awareness","skills.b4":"Clean, maintainable code","skills.b5":"Cross-functional collaboration",
-  "contact.tag":"Contact","contact.heading":"Let's talk about making systems more reliable and intelligent.","contact.sub":"Whether it's backend tools, AI integration, or IT operations, Mojtaba is open to conversations about roles, collaborations, and technical challenges.",
-  "contact.basedLabel":"Based in","contact.basedVal":"Eastern Province, Saudi Arabia",
-  "contact.roleLabel":"Current role","contact.roleVal":"Computer &amp; Information Technology Engineer at Khonaini International Company Ltd., focusing on internal tools, deployments, and IT support.",
-  "contact.eduLabel":"Education","contact.eduVal":"Bachelor's in Computer Engineering from KFUPM; currently pursuing a master's degree to build further depth in software and AI systems.",
-  "contact.emailDirect":"Email mojtaba.almadan@gmail.com directly",
-  "contact.nameLabel":"Name *","contact.namePh":"Your name","contact.emailLabel":"Email *","contact.msgLabel":"How can Mojtaba help? *","contact.msgPh":"Share context about the role, project, or system you'd like to discuss.","contact.send":"Send message",
-  "contact.errName":"Please enter your name.","contact.errEmail":"Please enter your email.","contact.errEmailInvalid":"Please enter a valid email.","contact.errMessage":"Please add a short message.","contact.statusInvalid":"Some fields need your attention.","contact.statusOk":"Opening your email app with your message ready to send…",
-  "footer.built":"Built by","footer.tag":"Ready for live portfolio demos."
-},
-ar: {
-  "a11y.themeToggle":"تبديل النمط الداكن/الفاتح","a11y.langToggle":"تبديل اللغة","a11y.burger":"تبديل قائمة التنقل",
-  "nav.home":"الرئيسية","nav.about":"نبذة عني","nav.projects":"المشاريع","nav.skills":"المهارات","nav.contact":"تواصل",
-  "logo.mark":"مـ","logo.name":"مجتبى المدن",
-  "hero.kickerBadge":"مهندس حاسب وتقنية معلومات (IT)","hero.kickerCompany":"شركة الخنيني العالمية • المنطقة الشرقية",
-  "hero.title":"بناء أنظمة موثوقة من <span class=\"gradient\">IoT إلى الذكاء الاصطناعي (AI)</span> وأدوات Backend قابلة للتوسع.",
-  "hero.subtitle":"يعمل مجتبى كمهندس حاسب وتقنية معلومات (IT) في شركة الخنيني العالمية المحدودة، وهو حاصل على بكالوريوس هندسة الحاسب من جامعة الملك فهد للبترول والمعادن (KFUPM) ويتابع حاليًا دراسة الماجستير. يصمم حلولًا جاهزة للإنتاج تشمل الأدوات الداخلية، تكامل الذكاء الاصطناعي، وأنظمة Full-stack.",
-  "hero.tag1":"مهندس حاسب - الأنظمة والأدوات الداخلية (Khonaini)","hero.tag2":"بكالوريوس هندسة حاسب - KFUPM","hero.tag3":"يتابع حاليًا دراسات الماجستير","hero.tag4":"الروبوتات، الذكاء الاصطناعي وتصميم أنظمة Full-stack",
-  "hero.ctaProjects":"عرض المشاريع والخبرات","hero.ctaContact":"تواصل معي",
-  "hero.meta1":"المنطقة الشرقية، المملكة العربية السعودية","hero.meta2":"من الأنظمة المدمجة والروبوتات إلى أنظمة Backend بـ Django","hero.meta3":"خبرة في Ubuntu، SQL والبنية التحتية القابلة للتوسع",
-  "hero.cardSnapshot":"نظرة مهنية عامة","hero.cardSnapshotSub":"مهندس حاسب و IT • الخنيني","hero.status":"متاح للمقابلات التقنية","hero.cardFocus":"مجالات التركيز الأساسية",
-  "hero.m1label":"الأنظمة والأدوات الداخلية","hero.m1val":"Django، REST APIs، SQL، وأنظمة إدارة الأصول والموظفين",
-  "hero.m2label":"الذكاء الاصطناعي و Computer Vision","hero.m2val":"اكتشاف الأجسام، OpenCV، دمج نماذج AI",
-  "hero.m3label":"عمليات تقنية المعلومات","hero.m3val":"نشر الأنظمة، التعريفات، استكشاف أخطاء الشبكات، كتابة التوثيق",
-  "hero.m4label":"الأساس الأكاديمي","hero.m4val":"معمارية الحاسب، أنظمة التشغيل، الشبكات، التصميم الرقمي",
-  "hero.footerNote":"يجمع بين الأساس الأكاديمي القوي والخبرة العملية في بناء أنظمة حقيقية في بيئات المؤسسات.",
-  "about.tag":"نبذة عني","about.heading":"مهندس حاسب يربط بين الروبوتات، AI وأنظمة Full-stack.",
-  "about.p1":"تخرج مجتبى بدرجة البكالوريوس في هندسة الحاسب من جامعة الملك فهد للبترول والمعادن (KFUPM)، ويتابع حاليًا دراسة الماجستير لتعميق خبرته في الأنظمة الذكية والقابلة للتوسع.",
-  "about.p2":"على الصعيد المهني، يعمل كمهندس حاسب وتقنية معلومات (IT) في شركة الخنيني العالمية المحدودة، حيث يصمم وينفذ أنظمة داخلية لإدارة الأصول والموظفين باستخدام Django و SQL، ويحل محل أدوات المؤسسة القديمة، بالإضافة إلى إدارة البنية التحتية لتقنية المعلومات من نشر أنظمة التشغيل وحتى استكشاف أعطال الشبكات.",
-  "about.p3":"سابقًا في UAS2030، ساهم كمهندس دمج للذكاء الاصطناعي، حيث تعاون في بناء أنظمة التعرف وتتبع الأجسام، ودمج وحدات AI ضمن منظومات أكبر مع التركيز على الموثوقية والعمل الجماعي.",
-  "about.h1t":"الدور الحالي - شركة الخنيني","about.h1d":"تصميم وصيانة الأنظمة الداخلية لإدارة الأصول والموظفين باستخدام Django وقواعد البيانات العلاقية، إلى جانب الإشراف على بيئات الإنتاج ومتابعة أعطال الشبكات.",
-  "about.h2t":"تكامل الذكاء الاصطناعي - UAS2030","about.h2d":"المساعدة في تطوير أنظمة AI لتتبع الأجسام وتقييمها عبر بيئات مختلفة، ودمج النماذج في مهام وأنظمة الروبوتات.",
-  "about.h3t":"الأساس الأكاديمي - KFUPM","about.h3d":"إكمال مقررات متقدمة في معمارية الحاسب، التصميم الرقمي، المعالجات الدقيقة، معالجة الإشارات، أنظمة التحكم، أنظمة التشغيل، والشبكات.",
-  "about.h4t":"المهارات الشخصية","about.h4d":"حل المشكلات بأسلوب هيكلي، التواصل التقني، التعاون بين الفرق، القدرة على التكيف، إدارة الأولويات، والاهتمام بالتفاصيل.",
-  "about.timelineLabel":"المسيرة المهنية والأكاديمية",
-  "about.t1title":"مهندس حاسب - الأنظمة والأدوات الداخلية","about.t1sub":"شركة الخنيني العالمية • يوليو 2023 - الحاضر","about.t1desc":"بناء وصيانة منصة داخلية لإدارة الأصول والموظفين باستخدام Django و SQL، لتحل محل سير العمل اليدوي والبرامج القديمة، وتوفير التوثيق والتدريب الواضح للمستخدمين النهائيين.",
-  "about.t2title":"مهندس دمج تقنيات AI","about.t2sub":"UAS2030 • يونيو 2021 - يناير 2023","about.t2desc":"تطوير ودمج وحدات AI للتعرف على الأجسام وتتبعها، والمساعدة في اختبار موثوقية النظام في البيئات والسيناريوهات المختلفة.",
-  "about.t3title":"بكالوريوس في هندسة الحاسب","about.t3sub":"KFUPM • 2017 - 2023","about.t3desc":"بناء أساس قوي في مجالات هندسة الحاسب مع استكشاف الروبوتات، الذكاء الاصطناعي، والتصميم على مستوى النظام.",
-  "about.t4title":"دراسات الماجستير قيد التنفيذ","about.t4sub":"الحاضر","about.t4desc":"متابعة الدراسات العليا لتعميق الخبرة في أنظمة البرمجيات المتقدمة، الذكاء الاصطناعي، والهندسة القائمة على البيانات.",
-  "about.t5title":"مسابقة AUSVI SUAS","about.t5sub":"تصميم نماذج AI/ML","about.t5desc":"المشاركة في مسابقة SUAS، بتقديم نموذج ذكاء اصطناعي قوي لمهام الأنظمة الجوية غير المأهولة، معتمدًا على مهارات رؤية الحاسب واتخاذ القرارات في الوقت الفعلي.",
-  "projects.tag":"المشاريع والخبرات","projects.heading":"أنظمة تتراوح بين الأدوات الداخلية، الذكاء الاصطناعي والأتمتة.","projects.sub":"مزيج من الأدوار المهنية والأعمال التقنية المختارة التي تبرز التفكير الشامل لأنظمة Full-stack، دمج تقنيات AI، وهندسة البنية التحتية.",
-  "projects.filterAll":"الكل","projects.filterBackend":"Backend / ويب","projects.filterAi":"AI / رؤية الحاسب","projects.filterInfra":"IT والأنظمة","projects.hint":"مرر المؤشر فوق البطاقات للشعور بالتفاعلات الدقيقة.",
-  "projects.p1title":"نظام إدارة الأصول والموظفين الداخلي","projects.p1chip":"Backend","projects.p1desc":"تصميم وتنفيذ نظام داخلي قابل للتوسع في شركة الخنيني لإدارة بيانات الأصول والموظفين، واستبدال البرامج القديمة والجداول اليدوية بمنصة تعتمد على Django و SQL تركز على اتساق البيانات وقابلية الصيانة.","projects.p1link":"أدوات داخلية جاهزة للإنتاج",
-  "projects.p2title":"أتمتة البنية التحتية للـ IT والنشر","projects.p2sub":"نشر أنظمة التشغيل • التعريفات • الشبكات","projects.p2chip":"IT Ops","projects.p2desc":"تجهيز وتهيئة الأجهزة والموارد الحاسوبية للمؤسسة، وحل مشاكل الاتصال بالشبكات والخوادم، وكتابة توثيقات موجهة للمستخدمين والمواد التدريبية لدعم العمليات اليومية الموثوقة.","projects.p2tag2":"الشبكات","projects.p2tag3":"كتابة التوثيق","projects.p2link":"عمليات يومية موثوقة",
-  "projects.p3title":"تكامل تقنيات AI لتتبع الأجسام","projects.p3sub":"UAS2030 • خطوط سير AI","projects.p3chip":"تكامل AI","projects.p3desc":"العمل مع متخصصين في رؤية الحاسب و ML في UAS2030 لدمج وحدات AI للتعرف على الأجسام وتتبعها ضمن مسارات أوسع للمهام، وإجراء تجارب للتحقق من الموثوقية في ظروف مختلفة.","projects.p3tag1":"خطوط سير AI","projects.p3tag2":"تتبع الأجسام","projects.p3tag3":"الاختبار","projects.p3link":"دمج ذكاء اصطناعي شامل",
-  "projects.p4title":"نموذج SUAS AI/ML للمسابقات","projects.p4sub":"AUSVI SUAS • الروبوتات","projects.p4desc":"المشاركة في مسابقة AUSVI SUAS، وتصميم نموذج ذكاء اصطناعي قوي لمهام الأنظمة الجوية غير المأهولة، يجمع بين قيود رؤية الحاسب والروبوتات.","projects.p4tag2":"الروبوتات","projects.p4tag3":"مسابقات","projects.p4link":"نموذج AI موجه للمهام",
-  "projects.p5title":"ممارسات تصميم أنظمة Full-stack","projects.p5desc":"التطوير المستمر لمهارات Full-stack، بما في ذلك تصميم RESTful API ونمذجة قواعد البيانات، ودمج مكونات الذكاء الاصطناعي في خدمات الـ Backend مع التركيز على الكود القابل للاختبار والصيانة.","projects.p5tag3":"تصميم قواعد البيانات","projects.p5link":"من الفكرة إلى النشر",
-  "projects.p6title":"التوثيق التقني والتدريب","projects.p6sub":"أدلة المستخدمين • مسارات IT","projects.p6chip":"التمكين","projects.p6desc":"إعداد التوثيق الواضح والمواد التدريبية للأدوات الداخلية وأنظمة تقنية المعلومات، لمساعدة المستخدمين غير التقنيين على التكيف مع مسارات العمل الجديدة وضمان انتقال سلس بين الفرق.","projects.p6tag1":"التوثيق","projects.p6tag2":"تدريب المستخدمين","projects.p6tag3":"الدعم الفني","projects.p6link":"التواصل كنقطة ارتكاز",
-  "skills.tag":"المهارات","skills.heading":"من أنظمة الـ Backend بـ Django إلى الذكاء الاصطناعي والبنية التحتية.","skills.sub":"تبرز أشرطة المهارات التفاعلية المزيج بين هندسة الواجهات الخلفية، دمج AI، وعمليات تقنية المعلومات استنادًا إلى الخبرة العملية والتأسيس الأكاديمي.",
-  "skills.tabAll":"الكل","skills.tabBackend":"Backend والويب","skills.tabAi":"AI ورؤية الحاسب","skills.tabInfra":"أنظمة الـ IT",
-  "skills.s1name":"Python و Django","skills.s2name":"RESTful APIs وتصميم قواعد البيانات","skills.s3name":"SQL ونمذجة البيانات","skills.s4name":"دمج AI واكتشاف الأجسام","skills.s5name":"OpenCV ودمج النماذج","skills.s6name":"أنظمة الـ IT والنشر","skills.s7name":"استكشاف أخطاء الشبكات والاتصال","skills.s8name":"التوثيق التقني والتدريب","skills.s9name":"حل المشكلات والتعاون الفعّال",
-  "skills.lvlAdv":"متقدم","skills.lvlInt":"متوسط فأعلى",
-  "skills.summary":"يجمع ملف مجتبى بين الهندسة القوية للواجهات الخلفية (Python/Django/SQL)، خبرة دمج الذكاء الاصطناعي، وعمليات أنظمة IT العملية، مدعومًا بمهارات تواصل ممتازة وقدرة على التعاون بين الفرق.",
-  "skills.radarTitle":"كيف يُترجم هذا على أرض الواقع","skills.radarText":"في العمل اليومي، يعني هذا القدرة على تخطيط وبناء الأدوات الداخلية من البداية للنهاية، وتتبع وتصحيح المشاكل عبر مختلف الطبقات (من قاعدة البيانات إلى الشبكة)، ودمج وحدات AI في الخدمات القائمة مع الحفاظ على الأداء وسهولة الاستخدام.",
-  "skills.b1":"تحليل الأسباب الجذرية","skills.b2":"توثيق واضح","skills.b3":"وعي بالبنية التحتية","skills.b4":"كتابة كود نظيف وقابل للصيانة","skills.b5":"التعاون بين الفرق المختلفة",
-  "contact.tag":"تواصل معي","contact.heading":"دعنا نتحدث عن جعل الأنظمة أكثر موثوقية وذكاءً.","contact.sub":"سواء كان الأمر يتعلق بأدوات الـ Backend، أو تكامل AI، أو عمليات تقنية المعلومات، فإن مجتبى منفتح على النقاشات حول الأدوار الوظيفية، التعاون، والتحديات التقنية.",
-  "contact.basedLabel":"الموقع","contact.basedVal":"المنطقة الشرقية، المملكة العربية السعودية",
-  "contact.roleLabel":"الدور الحالي","contact.roleVal":"مهندس حاسب وتقنية معلومات (IT) في شركة الخنيني العالمية المحدودة، يركز على الأدوات الداخلية، النشر، ودعم تقنية المعلومات.",
-  "contact.eduLabel":"التعليم الأكاديمي","contact.eduVal":"بكالوريوس هندسة حاسب من جامعة KFUPM؛ ويتابع حاليًا دراسات الماجستير لزيادة التعمق في البرمجيات وأنظمة الذكاء الاصطناعي.",
-  "contact.emailDirect":"راسلني مباشرة على mojtaba.almadan@gmail.com",
-  "contact.nameLabel":"الاسم *","contact.namePh":"اسمك","contact.emailLabel":"البريد الإلكتروني *","contact.msgLabel":"كيف يمكن لمجتبى المساعدة؟ *","contact.msgPh":"شارك بعض السياق حول الدور، المشروع، أو النظام الذي تود مناقشته.","contact.send":"إرسال الرسالة",
-  "contact.errName":"الرجاء إدخال اسمك.","contact.errEmail":"الرجاء إدخال بريدك الإلكتروني.","contact.errEmailInvalid":"الرجاء إدخال بريد إلكتروني صحيح.","contact.errMessage":"الرجاء إضافة رسالة قصيرة.","contact.statusInvalid":"بعض الحقول تحتاج إلى مراجعة.","contact.statusOk":"يتم فتح تطبيق البريد لديك مع تجهيز رسالتك للإرسال…",
-  "footer.built":"صُنع بواسطة","footer.tag":"جاهز لعروض النماذج الحية."
-}
-};
+        <dl class="contact-list">
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:mojtaba.almadan@gmail.com">mojtaba.almadan@gmail.com</a></dd>
+          </div>
+          <div>
+            <dt>LinkedIn</dt>
+            <dd><a href="https://www.linkedin.com/in/mojtaba-almadan/" target="_blank" rel="noopener">linkedin.com/in/mojtaba-almadan</a></dd>
+          </div>
+          <div>
+            <dt>GitHub</dt>
+            <dd><a href="https://github.com/mjs19999" target="_blank" rel="noopener">github.com/mjs19999</a></dd>
+          </div>
+          <div>
+            <dt>Based in</dt>
+            <dd>Eastern Province, Saudi Arabia</dd>
+          </div>
+          <div>
+            <dt>CV</dt>
+            <dd><a href="assets/pdf/mojtaba-almadan-cv.pdf">mojtaba-almadan-cv.pdf</a></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
 
-let currentLang = localStorage.getItem("lang") || "en";
+</main>
 
-function applyTranslations(lang){
-  const dict = I18N[lang];
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    if (dict[key] !== undefined) el.innerHTML = dict[key];
-  });
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-    const key = el.getAttribute("data-i18n-placeholder");
-    if (dict[key] !== undefined) el.setAttribute("placeholder", dict[key]);
-  });
-  document.querySelectorAll("[data-i18n-title]").forEach(el => {
-    const key = el.getAttribute("data-i18n-title");
-    if (dict[key] !== undefined) el.setAttribute("title", dict[key]);
-  });
-  document.querySelectorAll("[data-i18n-aria-label]").forEach(el => {
-    const key = el.getAttribute("data-i18n-aria-label");
-    if (dict[key] !== undefined) el.setAttribute("aria-label", dict[key]);
-  });
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-  document.getElementById("langLabel").textContent = lang === "ar" ? "EN" : "AR";
-  localStorage.setItem("lang", lang);
-  currentLang = lang;
-}
+<footer class="footer">
+  <div class="shell footer__inner">
+    <span>Mojtaba Almadan &middot; Eastern Province, Saudi Arabia</span>
+    <span>
+      Static HTML and CSS, no build step &mdash;
+      <a href="https://github.com/mjs19999/portfolio" target="_blank" rel="noopener">source</a>
+    </span>
+  </div>
+</footer>
 
-document.addEventListener("DOMContentLoaded", () => {
-  applyTranslations(currentLang);
-
-  // Theme
-  const root = document.documentElement;
-  const themeToggle = document.getElementById("themeToggle");
-  const themeIcon = document.getElementById("themeIcon");
-  const savedTheme = localStorage.getItem("theme") ||
-    (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-  root.setAttribute("data-theme", savedTheme);
-  themeIcon.className = savedTheme === "light" ? "fa-solid fa-sun" : "fa-solid fa-moon";
-
-  themeToggle.addEventListener("click", () => {
-    const isLight = root.getAttribute("data-theme") === "light";
-    const next = isLight ? "dark" : "light";
-    root.setAttribute("data-theme", next);
-    themeIcon.className = next === "light" ? "fa-solid fa-sun" : "fa-solid fa-moon";
-    localStorage.setItem("theme", next);
-  });
-
-  // Language
-  document.getElementById("langToggle").addEventListener("click", () => {
-    applyTranslations(currentLang === "en" ? "ar" : "en");
-  });
-
-  // Mobile nav
-  const burger = document.getElementById("burgerBtn");
-  const mobileNav = document.getElementById("mobileNav");
-  burger.addEventListener("click", () => {
-    burger.classList.toggle("active");
-    mobileNav.classList.toggle("open");
-  });
-  mobileNav.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      burger.classList.remove("active");
-      mobileNav.classList.remove("open");
-    });
-  });
-
-  // Particles
-  const particlesContainer = document.getElementById("particles");
-  const particleCount = window.innerWidth < 640 ? 16 : 32;
-  for (let i = 0; i < particleCount; i++) {
-    const p = document.createElement("div");
-    p.classList.add("particle");
-    const size = 2 + Math.random() * 4;
-    p.style.width = size + "px";
-    p.style.height = size + "px";
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.top = Math.random() * 100 + "vh";
-    particlesContainer.appendChild(p);
-    if (window.gsap) {
-      const duration = 18 + Math.random() * 22;
-      const offset = Math.random() * 50;
-      gsap.to(p, { duration, y: -40 - offset, x: 20 + offset, repeat: -1, yoyo: true, ease: "sine.inOut", delay: Math.random() * 10 });
-      gsap.to(p, { duration: duration * 0.7, opacity: 0.15 + Math.random() * 0.4, repeat: -1, yoyo: true, ease: "sine.inOut" });
-    }
-  }
-
-  // Hero tilt (desktop only, mouse-capable)
-  const heroCard = document.getElementById("heroCard");
-  if (heroCard && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    heroCard.addEventListener("mousemove", (e) => {
-      const rect = heroCard.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      if (window.gsap) gsap.to(heroCard, { duration: 0.35, rotateX: (-y / rect.height) * 4, rotateY: (x / rect.width) * 4, transformPerspective: 800 });
-    });
-    heroCard.addEventListener("mouseleave", () => {
-      if (window.gsap) gsap.to(heroCard, { duration: 0.45, rotateX: 0, rotateY: 0 });
-    });
-  }
-
-  // Scroll reveals
-  if (window.gsap && window.ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.utils.toArray(".reveal").forEach(el => {
-      gsap.fromTo(el, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power2.out",
-        scrollTrigger: { trigger: el, start: "top 85%" } });
-    });
-    const skillBars = document.querySelectorAll(".skill-bar-fill");
-    ScrollTrigger.create({
-      trigger: "#skills", start: "top 75%", once: true,
-      onEnter: () => skillBars.forEach(bar => {
-        gsap.to(bar, { width: bar.getAttribute("data-level") + "%", duration: 1, ease: "power2.out" });
-      })
-    });
-  } else {
-    document.querySelectorAll(".skill-bar-fill").forEach(bar => bar.style.width = bar.getAttribute("data-level") + "%");
-  }
-
-  // Project filters
-  const projectFilters = document.getElementById("projectFilters");
-  const projectCards = document.querySelectorAll(".project-card");
-  projectFilters.addEventListener("click", (e) => {
-    const btn = e.target.closest(".filter-chip");
-    if (!btn) return;
-    projectFilters.querySelectorAll(".filter-chip").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    const filter = btn.getAttribute("data-filter");
-    projectCards.forEach(card => {
-      const tags = card.getAttribute("data-tags");
-      const match = filter === "all" || (tags && tags.includes(filter));
-      card.style.display = match ? "block" : "none";
-    });
-  });
-
-  // Skills tabs
-  const skillsTabs = document.getElementById("skillsTabs");
-  const skillItems = document.querySelectorAll(".skill-item");
-  skillsTabs.addEventListener("click", (e) => {
-    const tab = e.target.closest(".skills-tab");
-    if (!tab) return;
-    skillsTabs.querySelectorAll(".skills-tab").forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
-    const scope = tab.getAttribute("data-scope");
-    skillItems.forEach(item => {
-      const match = scope === "all" || item.getAttribute("data-scope").includes(scope);
-      item.style.display = match ? "block" : "none";
-    });
-  });
-
-  // Contact form -> mailto (no backend)
-  const form = document.getElementById("contactForm");
-  const nameInput = document.getElementById("name");
-  const emailInput = document.getElementById("email");
-  const messageInput = document.getElementById("message");
-  const nameError = document.getElementById("nameError");
-  const emailError = document.getElementById("emailError");
-  const messageError = document.getElementById("messageError");
-  const formStatus = document.getElementById("formStatus");
-
-  function validateEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  }
-  function clearErrors() {
-    nameError.textContent = "";
-    emailError.textContent = "";
-    messageError.textContent = "";
-    formStatus.textContent = "";
-  }
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    clearErrors();
-    const dict = I18N[currentLang];
-    let valid = true;
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const message = messageInput.value.trim();
-
-    if (!name) { nameError.textContent = dict["contact.errName"]; valid = false; }
-    if (!email) { emailError.textContent = dict["contact.errEmail"]; valid = false; }
-    else if (!validateEmail(email)) { emailError.textContent = dict["contact.errEmailInvalid"]; valid = false; }
-    if (!message) { messageError.textContent = dict["contact.errMessage"]; valid = false; }
-
-    if (!valid) {
-      formStatus.textContent = dict["contact.statusInvalid"];
-      formStatus.style.color = "var(--danger)";
-      return;
-    }
-
-    const subject = "Portfolio inquiry from " + name;
-    const body = "Name: " + name + "\nEmail: " + email + "\n\n" + message;
-    const mailtoLink = "mailto:" + MAILTO_ADDRESS + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-
-    formStatus.textContent = dict["contact.statusOk"];
-    formStatus.style.color = "var(--accent-fg)";
-    window.location.href = mailtoLink;
-    form.reset();
-  });
-});
-</script>
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/nav.js" defer></script>
 </body>
 </html>

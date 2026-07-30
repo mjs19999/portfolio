@@ -1,0 +1,699 @@
+/* ==========================================================================
+   components.css — the layer stack, spec blocks, tiers, roles, controls.
+   ========================================================================== */
+
+/* ==========================================================================
+   THE LAYER STACK — the signature element.
+   A real stack diagram: 07 at the top, 01 at the bottom, read downward toward
+   the hardware. The "backed by" column is a constraint, not decoration — a row
+   cannot exist here without an artifact someone can open.
+   ========================================================================== */
+
+/* It is a table: four columns, a header row, one row per layer. So it is
+   marked up as one. */
+.layers {
+  width: 100%;
+  margin-top: var(--space-7);
+  border-collapse: collapse;
+  border-top: 1px solid var(--rule-strong);
+  text-align: start;
+}
+
+.layers th,
+.layers td {
+  padding: var(--space-4) var(--space-3);
+  border-bottom: 1px solid var(--rule);
+  text-align: start;
+  vertical-align: baseline;
+}
+
+.layers thead th {
+  padding-block: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.layers tbody tr {
+  transition: background var(--fast) var(--ease),
+    box-shadow var(--fast) var(--ease);
+}
+
+.layers tbody tr:hover,
+.layers tbody tr:focus-within {
+  background: var(--paper-sunk);
+  box-shadow: inset 2px 0 0 var(--signal);
+}
+
+.layer__num {
+  width: 3rem;
+  font-family: var(--font-mono);
+  font-size: var(--step-mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+}
+
+.layer__name {
+  width: 6.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--step-mono);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.layer__what {
+  font-size: var(--step-small);
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.layer__proof {
+  width: 1%;
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: var(--ink-faint);
+}
+
+.layer__proof a {
+  color: var(--signal);
+  text-decoration: none;
+}
+
+.layers tbody tr:hover .layer__proof a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* One orchestrated moment on the whole page: the stack assembles from the
+   hardware upward, so the delays run against document order and 01 lands
+   first. Assumes seven rows — extend the list if you add a layer. */
+@media (prefers-reduced-motion: no-preference) {
+  .layers tbody tr {
+    opacity: 0;
+    animation: layer-in 420ms var(--ease) both;
+  }
+
+  .layers tbody tr:nth-child(1) { animation-delay: 420ms; }
+  .layers tbody tr:nth-child(2) { animation-delay: 350ms; }
+  .layers tbody tr:nth-child(3) { animation-delay: 280ms; }
+  .layers tbody tr:nth-child(4) { animation-delay: 210ms; }
+  .layers tbody tr:nth-child(5) { animation-delay: 140ms; }
+  .layers tbody tr:nth-child(6) { animation-delay: 70ms; }
+  .layers tbody tr:nth-child(7) { animation-delay: 0ms; }
+}
+
+@keyframes layer-in {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Below 720px the four columns stop fitting, so each row becomes a block with
+   the layer number and name on one line and the rest beneath. */
+@media (max-width: 720px) {
+  .layers,
+  .layers tbody,
+  .layers tbody tr,
+  .layers tbody th,
+  .layers tbody td {
+    display: block;
+    width: auto;
+  }
+
+  .layers thead {
+    display: none;
+  }
+
+  .layers tbody tr {
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .layers tbody th,
+  .layers tbody td {
+    padding: 0 var(--space-3);
+    border-bottom: 0;
+  }
+
+  .layer__num {
+    display: inline-block;
+  }
+
+  .layer__name {
+    display: inline-block;
+    padding-left: 0;
+  }
+
+  .layer__what {
+    margin-top: var(--space-2);
+  }
+
+  .layer__proof {
+    margin-top: var(--space-2);
+  }
+}
+
+/* ==========================================================================
+   SPEC BLOCK — how each project is presented: a titled block with a mono
+   parameter table, the way a component datasheet lists its characteristics.
+   ========================================================================== */
+
+.spec {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+}
+
+.spec:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.spec__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.spec__title {
+  margin: 0;
+}
+
+.spec__meta {
+  margin: 0 0 var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+
+.spec__meta > div {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: var(--space-2);
+  border-bottom: 1px solid var(--rule);
+}
+
+.spec__meta dt {
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.spec__meta dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step-mono);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.spec__body {
+  font-size: var(--step-small);
+}
+
+.spec__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+@media (max-width: 520px) {
+  .spec__meta > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+}
+
+/* ==========================================================================
+   ROLE — an entry in the work history.
+   ========================================================================== */
+
+.role {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+}
+
+.role:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.role__head {
+  margin-bottom: var(--space-3);
+}
+
+.role__org {
+  display: block;
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--step-mono);
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+.role__body {
+  font-size: var(--step-small);
+}
+
+/* ==========================================================================
+   TIER — the skills inventory. Grouped by what actually backs the claim,
+   because a percentage backs nothing.
+   ========================================================================== */
+
+.tier {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+
+.tier:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.tier__label {
+  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--step-mono);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.tier__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tier__items li {
+  padding: 0.28rem 0.55rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.tier--open .tier__label {
+  color: var(--signal);
+}
+
+.tier--open .tier__items li {
+  border-style: dashed;
+}
+
+/* ==========================================================================
+   NOTES, TAGS, CONTROLS
+   ========================================================================== */
+
+.note {
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--signal);
+  font-size: var(--step-small);
+  color: var(--ink-soft);
+}
+
+.tag {
+  padding: 0.2rem 0.45rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.tag--signal {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+.link-mono {
+  font-family: var(--font-mono);
+  font-size: var(--step-mono);
+  letter-spacing: 0.03em;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: var(--step-mono);
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color var(--fast) var(--ease),
+    background var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+
+.btn:hover {
+  border-color: var(--signal);
+  background: var(--signal-wash);
+  color: var(--signal);
+}
+
+.btn--solid {
+  border-color: var(--signal);
+  background: var(--signal);
+  color: var(--paper);
+}
+
+.btn--solid:hover {
+  border-color: var(--signal-hover);
+  background: var(--signal-hover);
+  color: var(--paper);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex: none;
+  padding: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  transition: border-color var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+
+.icon-btn:hover {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+/* ==========================================================================
+   CONTACT
+   ========================================================================== */
+
+.contact-list {
+  border-top: 1px solid var(--rule);
+}
+
+.contact-list > div {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+.contact-list dt {
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.contact-list dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step-mono);
+  color: var(--ink-soft);
+}
+
+.contact-list dd a {
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================================
+   CASE-STUDY PAGE
+   ========================================================================== */
+
+.figure {
+  margin: var(--space-6) 0;
+  padding: var(--space-5);
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  overflow-x: auto;
+}
+
+.figure__cap {
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  line-height: 1.6;
+  color: var(--ink-faint);
+}
+
+/* Diagram strokes and labels follow the theme rather than being hardcoded.
+   The min-width keeps it legible; .figure scrolls it on narrow screens. */
+.diagram {
+  min-width: 700px;
+}
+
+.diagram .box {
+  fill: var(--paper-raised);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+
+.diagram .box--key {
+  stroke: var(--signal);
+}
+
+.diagram .edge {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+
+.diagram .entity {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  fill: var(--ink);
+}
+
+.diagram .field {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--ink-soft);
+}
+
+.diagram .card {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  fill: var(--ink-faint);
+}
+
+/* ==========================================================================
+   UI SKETCH — the internal app's information architecture, redrawn in this
+   site's own visual language. Explicitly not a screenshot: the data is
+   invented, and the caption says so.
+   ========================================================================== */
+
+.ui {
+  min-width: 560px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  background: var(--paper-raised);
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+.ui__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: 0.45rem 0.7rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-sunk);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.ui__bar span:last-child {
+  font-weight: 400;
+  color: var(--ink-faint);
+}
+
+.ui__body {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+}
+
+.ui__side {
+  padding: 0.5rem 0;
+  border-right: 1px solid var(--rule);
+  background: var(--paper-sunk);
+}
+
+.ui__side i {
+  display: block;
+  padding: 0.28rem 0.7rem;
+  font-style: normal;
+  color: var(--ink-soft);
+}
+
+.ui__side i[data-on] {
+  background: var(--signal-wash);
+  box-shadow: inset 2px 0 0 var(--signal);
+  color: var(--signal);
+  font-weight: 600;
+}
+
+.ui__main {
+  padding: 0.7rem;
+}
+
+.ui__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: 0.5rem;
+}
+
+.ui__search {
+  flex: 1;
+  padding: 0.22rem 0.4rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  color: var(--ink-faint);
+}
+
+.ui__row--split {
+  justify-content: space-between;
+}
+
+.ui__row strong {
+  font-size: var(--step-mono);
+  color: var(--ink);
+}
+
+.ui__chip {
+  padding: 0.18rem 0.4rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.ui__chip[data-on] {
+  border-color: var(--signal);
+  background: var(--signal-wash);
+  color: var(--signal);
+  font-weight: 600;
+}
+
+.ui table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ui th,
+.ui td {
+  padding: 0.3rem 0.4rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: start;
+  white-space: nowrap;
+}
+
+.ui th {
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+
+.ui td {
+  color: var(--ink-soft);
+}
+
+.ui tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* A visible, unmissable block for content only Mojtaba can write. Remove each
+   one as you fill it in. Nothing here should survive to a published page. */
+.todo {
+  margin: var(--space-5) 0;
+  padding: var(--space-4);
+  border: 1px dashed #b4552d;
+  border-radius: 2px;
+  background: rgba(180, 85, 45, 0.06);
+  font-family: var(--font-mono);
+  font-size: var(--step-mono);
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+.todo b {
+  display: block;
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b4552d;
+}
+
+/* Emphasis inside a TODO's body text, rather than another heading. */
+.todo b.inl {
+  display: inline;
+  margin: 0;
+  letter-spacing: inherit;
+  text-transform: none;
+  color: inherit;
+}
+
+html[data-theme="dark"] .todo {
+  border-color: #d98a63;
+  background: rgba(217, 138, 99, 0.08);
+}
+
+html[data-theme="dark"] .todo b {
+  color: #d98a63;
+}
+
+.prose h3 {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.prose ul.bullets {
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-5);
+  list-style: disc;
+}
+
+.prose ul.bullets li {
+  margin-bottom: var(--space-2);
+}

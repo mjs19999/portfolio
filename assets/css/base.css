@@ -1,0 +1,133 @@
+/* ==========================================================================
+   base.css — reset and element-level typography. Elements only, no classes.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--masthead-h) + var(--space-5));
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-body);
+  font-weight: 400;
+  line-height: 1.7;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-display);
+  font-weight: 620;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  font-size: var(--step-h2);
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: var(--step-h3);
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0 0 var(--space-4);
+  text-wrap: pretty;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--signal);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color var(--fast) var(--ease);
+}
+
+a:hover {
+  color: var(--signal-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+strong {
+  font-weight: 600;
+}
+
+code,
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  cursor: pointer;
+}
+
+hr {
+  height: 0;
+  margin: var(--space-6) 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
