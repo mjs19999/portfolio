@@ -49,7 +49,7 @@
 
   <section class="section section--hero">
     <div class="shell">
-      <p class="eyebrow">Case study &middot; Khonaini International Company Ltd. &middot; Jul 2023 &mdash; present</p>
+      <p class="eyebrow">Case study &middot; Khonaini International Company Ltd. &middot; Jul 2023 &ndash; present</p>
       <h1>The system that knows who has the laptop.</h1>
       <p class="lead hero__lead">
         An internal platform for IT asset custody: what the company owns, who is
@@ -63,13 +63,13 @@
         <div><dt>Stack</dt><dd>Django 6.0 &middot; PostgreSQL &middot; server-rendered templates &middot; no SPA, no build step</dd></div>
         <div><dt>Reference data</dt><dd>22 projects &middot; 11 categories &middot; 10 brands</dd></div>
         <div><dt>Access</dt><dd>5 accounts across 4 permission groups, gated per view</dd></div>
-        <div><dt>Role</dt><dd>Sole engineer &mdash; schema, application, deployment, backups, training</dd></div>
+        <div><dt>Role</dt><dd>Sole engineer: schema, application, deployment, backups, training</dd></div>
       </dl>
 
       <p class="note u-spaced">
         The repository is private: it holds employee records, government ID
         numbers and scanned signatures. So this page is the design rather than
-        the code &mdash; the schema, how a custody transfer is written, the two
+        the code: the schema, how a custody transfer is written, the two
         decisions I would defend, and the one I would reverse.
       </p>
     </div>
@@ -88,7 +88,7 @@
         <p>
           Two systems of record held the same facts. A legacy application had
           part of the asset inventory; spreadsheets held the rest, plus
-          everything the legacy product could not represent &mdash; which
+          everything the legacy product could not represent, which
           included the only thing anyone actually needed to look up, namely who
           currently has a given machine.
         </p>
@@ -219,7 +219,7 @@
             <text class="card" x="762" y="339">SET_NULL</text>
           </svg>
           <figcaption class="figure__cap">
-            Fig. 1 &mdash; The real schema, fields abbreviated. The
+            Fig. 1. The real schema, fields abbreviated. The
             <code>on_delete</code> annotations are the design: everything that
             carries custody history is <code>PROTECT</code>, everything
             organisational is <code>SET_NULL</code>. A null
@@ -242,7 +242,7 @@
           </p>
           <p>
             You cannot delete an employee who has ever signed for a machine.
-            Deleting them would destroy the evidence that they did &mdash; which
+            Deleting them would destroy the evidence that they did, which
             is the one thing the system exists to hold. So an employee who
             leaves gets <code>is_active = False</code>; 23 of the 933 records
             are inactive rather than absent. Projects are different: a project
@@ -285,14 +285,14 @@
               <div><dt>0007</dt><dd>unique_together = set()   &nbsp;&larr; removed</dd></div>
             </dl>
             <figcaption class="figure__cap">
-              Fig. 2 &mdash; Six migrations apart.
+              Fig. 2. Six migrations apart.
             </figcaption>
           </figure>
           <p>
             The intent was: an asset can only have one row where
             <code>returned_at</code> is null. The problem is that this does not
             work, and it does not work for a reason that is easy to say and easy
-            to forget &mdash; <strong>in SQL, null is not equal to
+            to forget. <strong>in SQL, null is not equal to
             null.</strong> A unique index treats every null as distinct, so
             <code>(asset&nbsp;42, null)</code> and
             <code>(asset&nbsp;42, null)</code> do not collide. The constraint
@@ -301,7 +301,7 @@
             return timestamp.
           </p>
           <p>
-            The right tool is a <strong>partial unique index</strong> &mdash; a
+            The right tool is a <strong>partial unique index</strong>, a
             uniqueness rule that applies to a filtered subset of rows. In
             PostgreSQL that is <code>CREATE UNIQUE INDEX … WHERE returned_at IS
             NULL</code>; in Django it is:
@@ -311,7 +311,7 @@
               <div><dt>constraint</dt><dd>UniqueConstraint(<br>&nbsp;&nbsp;fields=["asset"],<br>&nbsp;&nbsp;condition=Q(returned_at__isnull=True),<br>&nbsp;&nbsp;name="one_open_assignment_per_asset",<br>)</dd></div>
             </dl>
             <figcaption class="figure__cap">
-              Fig. 3 &mdash; Uniqueness over the open rows only. Closed
+              Fig. 3. Uniqueness over the open rows only. Closed
               assignments are unconstrained, so an asset can be issued and
               returned any number of times, but only ever held once.
             </figcaption>
@@ -325,9 +325,8 @@
           <p>
             To be straight about the current state: that constraint is
             <strong>not in the database yet</strong>. Between migration 0007 and
-            now, the invariant has been enforced by the application flow alone
-            &mdash; the issue path looks for an open assignment and closes it
-            before creating the next one &mdash; which works right up until two
+            now, the invariant has been enforced by the application flow alone. The issue path looks for an open assignment and closes it
+            before creating the next one, which works right up until two
             requests do it at the same time. It is the next change I am making,
             and it goes in alongside the transaction fix in the
             <a href="#gaps">known gaps</a> below.
@@ -335,7 +334,7 @@
           <p>
             The migration will apply cleanly. I checked all 428 open assignments
             and no asset is open more than once, so there is nothing to
-            reconcile first &mdash; which is luck rather than safety. One person
+            reconcile first, which is luck rather than safety. One person
             using an internal tool on a LAN very rarely races against
             themselves.
           </p>
@@ -373,9 +372,9 @@
             <div><dt>7 &middot; Redirect</dt><dd>Back to the asset list</dd></div>
           </dl>
           <figcaption class="figure__cap">
-            Fig. 4 &mdash; Step 4 is a transfer, not a rejection: issuing an
+            Fig. 4. Step 4 is a transfer, not a rejection: issuing an
             asset someone else holds closes their assignment automatically
-            rather than erroring. That was a deliberate choice &mdash; in
+            rather than erroring. That was a deliberate choice. In
             practice equipment moves desk to desk without coming back to IT
             first, and a system that refuses to record what already happened
             just gets worked around.
@@ -389,13 +388,13 @@
             equipment and an authority releasing it. Neither is optional, both
             are captured on a signature pad in the browser, and a separate
             <code>view_signatures</code> permission controls who can look at
-            them afterwards &mdash; they are specimen signatures of real people,
+            them afterwards. They are specimen signatures of real people,
             not decoration.
           </p>
           <p>
             Storing them exposed a small gap in Django. An
             <code>upload_to</code> callable receives the model instance and the
-            filename, but not <em>which field</em> triggered it &mdash; so with
+            filename, but not <em>which field</em> triggered it, so with
             two <code>ImageField</code>s on one model it cannot tell an employee
             signature from an authority signature, and both would land on the
             same path. My workaround is to set a temporary attribute on the
@@ -408,7 +407,7 @@
               <div><dt>cost</dt><dd>Two extra <code>save(update_fields=[…])</code> calls per assignment, because the id must exist before the path can be built</dd></div>
             </dl>
             <figcaption class="figure__cap">
-              Fig. 5 &mdash; It works and it is contained, but it is state
+              Fig. 5. It works and it is contained, but it is state
               smuggled through an instance attribute, and I would rather have
               two explicit callables. Naming the files by role instead of by
               upload means a signature can be found from an assignment id alone,
@@ -434,7 +433,7 @@
         <div class="prose">
           <p>
             Server-rendered Django templates. No SPA, no build step, no
-            JavaScript framework &mdash; the only real JavaScript is the
+            JavaScript framework. The only real JavaScript is the
             signature pad and the modal that hosts the wizards. Every sidebar
             entry is gated on a permission, so two accounts in different groups
             see different navigation.
@@ -502,9 +501,9 @@
             </div>
           </div>
           <figcaption class="figure__cap">
-            Fig. 6 &mdash; <strong>An interface sketch, redrawn for this page in
+            Fig. 6. <strong>An interface sketch, redrawn for this page in
             this site's own styling. It is not a screenshot, and every brand,
-            model, serial and number in it is invented</strong> &mdash; the real
+            model, serial and number in it is invented</strong>. The real
             screens carry employee names, government ID numbers, mobile numbers
             and signatures, none of which belongs on a public page. What is
             faithful is the structure: a sidebar where every entry is gated on a
@@ -542,12 +541,12 @@
         <figure class="figure">
           <dl class="spec__meta">
             <div><dt>Database</dt><dd><code>dumpdata --natural-foreign --natural-primary --exclude=contenttypes --exclude=auth.Permission</code></dd></div>
-            <div><dt>Signatures</dt><dd>The media signatures tree, zipped &mdash; the images are the evidence, so they travel with the rows that reference them</dd></div>
+            <div><dt>Signatures</dt><dd>The media signatures tree, zipped. The images are the evidence, so they travel with the rows that reference them</dd></div>
             <div><dt>Source</dt><dd><code>config/</code>, <code>core/</code>, <code>static/</code> zipped</dd></div>
             <div><dt>Naming</dt><dd>Timestamped file plus a <code>_latest</code> pointer, so restore has a sane default</dd></div>
           </dl>
           <figcaption class="figure__cap">
-            Fig. 7 &mdash; The two <code>--exclude</code> flags are there
+            Fig. 7. The two <code>--exclude</code> flags are there
             because of a failed restore, not because a tutorial said so.
             <code>dumpdata</code> serialises <code>contenttypes</code> and
             <code>auth.Permission</code>, then <code>loaddata</code> collides
@@ -585,8 +584,8 @@
           <p>
             <code>brand</code> and <code>category</code> are foreign keys to
             reference tables. <code>model</code> is a free-text
-            <code>CharField</code>. At the time that looked like pragmatism
-            &mdash; there are thousands of hardware models and I did not want to
+            <code>CharField</code>. At the time that looked like pragmatism.
+            There are thousands of hardware models and I did not want to
             maintain a catalogue of them. What it actually bought was this:
           </p>
         </div>
@@ -595,12 +594,12 @@
           <dl class="spec__meta">
             <div><dt>Assets</dt><dd>684</dd></div>
             <div><dt>Distinct <code>model</code> strings</dt><dd>255</dd></div>
-            <div><dt>&hellip; after lowercasing and removing punctuation</dt><dd>183 &mdash; so 72 were pure formatting variants</dd></div>
+            <div><dt>&hellip; after lowercasing and removing punctuation</dt><dd>183, so 72 were pure formatting variants</dd></div>
             <div><dt>Dell OptiPlex family</dt><dd>326 assets, spelled <strong>71 different ways</strong></dd></div>
             <div><dt>Lenovo Think&hellip; family</dt><dd>84 assets, spelled 34 different ways</dd></div>
           </dl>
           <figcaption class="figure__cap">
-            Fig. 8 &mdash; Measured over the live data. The OptiPlex variants
+            Fig. 8. Measured over the live data. The OptiPlex variants
             include <code>OPTIPLEX-7000</code>, <code>OptiPlex 7000</code>,
             <code>Optiplex7000</code>, <code>OPTI-PLEX 7000</code>,
             <code>OPTIPOLEX 7000</code> and <code>Optiolex 7000 tower</code>.
@@ -631,7 +630,7 @@
             <div><dt>Completeness</dt><dd>561 of 933 employees have no government ID recorded at all; 27 of the rest are not in the 10-digit national-ID format</dd></div>
           </dl>
           <figcaption class="figure__cap">
-            Fig. 9 &mdash; None of these are typos a person would make twice.
+            Fig. 9. None of these are typos a person would make twice.
             They are what a spreadsheet import does when the source columns
             don't line up and nothing downstream objects. A
             <code>CharField</code> with no validator accepts anything, and 684
@@ -642,8 +641,8 @@
         <div class="prose">
           <p>
             So the same fix has a second half: validators and format checks on
-            the columns that have a known shape &mdash; national ID, mobile
-            number, serial number &mdash; enforced at the database level with
+            the columns that have a known shape (national ID, mobile
+            number, serial number), enforced at the database level with
             <code>CheckConstraint</code> rather than only in a form, so the next
             bulk import cannot route around them the way the last one did.
           </p>
@@ -652,7 +651,7 @@
             <code>Brand</code>, and a data migration to collapse the existing
             strings into it. That migration is the interesting part: exact
             matching after normalisation gets from 255 to 183, and the remaining
-            gap needs fuzzy clustering &mdash; PostgreSQL's
+            gap needs fuzzy clustering: PostgreSQL's
             <code>pg_trgm</code> similarity over the normalised strings, with
             the ambiguous clusters reviewed by hand rather than guessed at. It
             is a day of work I should have spent before importing 684 rows
@@ -673,7 +672,7 @@
             after thirteen. Once other tables have foreign keys into
             <code>auth.User</code>, changing it is a migration problem out of
             proportion to the benefit. What I actually wanted was custom
-            permissions, and those do not require a custom user model &mdash;
+            permissions, and those do not require a custom user model,
             which is where the two permissions on
             <code>AssetAssignment</code> came from instead.
           </p>
@@ -709,7 +708,7 @@
               <strong>The issue path is not transactional.</strong>
               <code>unassign_confirm</code> runs inside
               <code>transaction.atomic()</code>. <code>assign_confirm</code>
-              does not &mdash; it loops over the selected assets, closing an
+              does not. It loops over the selected assets, closing an
               existing assignment and creating a new one per iteration, with a
               read-then-write and no row lock. Two consequences: concurrent
               requests for the same asset could both create an open assignment,

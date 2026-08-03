@@ -167,6 +167,24 @@
   color: var(--ink-soft);
 }
 
+/* Justified running text. Restricted to prose: headings, table cells, figure
+   captions and mono labels stay ragged, because justifying short or tabular
+   lines opens gaps rather than closing them.
+
+   `hyphens: auto` is what makes this safe in English — justification without it
+   is how you get rivers of white space down a column. It relies on the `lang`
+   attribute, which both language versions set on <html>. Arabic does not
+   hyphenate, so the property is inert there and the script justifies the way it
+   traditionally does, on the spaces. */
+.prose p,
+.prose ul.bullets li,
+.lead,
+.note {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
 .eyebrow {
   margin-bottom: var(--space-5);
   font-family: var(--font-mono);

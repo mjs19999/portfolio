@@ -3,14 +3,14 @@
    ========================================================================== */
 
 /* ==========================================================================
-   THE LAYER STACK — the signature element.
-   A real stack diagram: 07 at the top, 01 at the bottom, read downward toward
-   the hardware. The "backed by" column is a constraint, not decoration — a row
-   cannot exist here without an artifact someone can open.
+   THE EVIDENCE TABLE — the signature element.
+   One row per thing built, ordered from the most recent professional work down
+   to the university foundations. The "backed by" column is a constraint, not
+   decoration: a row cannot exist here without an artifact someone can open.
    ========================================================================== */
 
-/* It is a table: four columns, a header row, one row per layer. So it is
-   marked up as one. */
+/* Genuinely tabular — a header row and one row per item — so it is a table.
+   Two columns: the description (which is the row header) and the evidence. */
 .layers {
   width: 100%;
   margin-top: var(--space-7);
@@ -48,26 +48,10 @@
   box-shadow: inset 2px 0 0 var(--signal);
 }
 
-.layer__num {
-  width: 3rem;
-  font-family: var(--font-mono);
-  font-size: var(--step-mono);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink-faint);
-}
-
-.layer__name {
-  width: 6.5rem;
-  font-family: var(--font-mono);
-  font-size: var(--step-mono);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--signal);
-}
-
+/* The description carries the row, so it is the row header. Normal weight:
+   it is a sentence, not a label. */
 .layer__what {
+  font-weight: 400;
   font-size: var(--step-small);
   line-height: 1.55;
   color: var(--ink);
@@ -92,9 +76,9 @@
   text-underline-offset: 0.2em;
 }
 
-/* One orchestrated moment on the whole page: the stack assembles from the
-   hardware upward, so the delays run against document order and 01 lands
-   first. Assumes seven rows — extend the list if you add a layer. */
+/* The one orchestrated moment on the page: rows arrive from the bottom up, so
+   the delays run against document order. Assumes seven rows — extend the list
+   if you add one. */
 @media (prefers-reduced-motion: no-preference) {
   .layers tbody tr {
     opacity: 0;
@@ -121,8 +105,8 @@
   }
 }
 
-/* Below 720px the four columns stop fitting, so each row becomes a block with
-   the layer number and name on one line and the rest beneath. */
+/* Below 720px the two columns stop fitting side by side, so each row becomes a
+   block with the evidence link beneath the description. */
 @media (max-width: 720px) {
   .layers,
   .layers tbody,
@@ -146,19 +130,6 @@
   .layers tbody td {
     padding: 0 var(--space-3);
     border-bottom: 0;
-  }
-
-  .layer__num {
-    display: inline-block;
-  }
-
-  .layer__name {
-    display: inline-block;
-    padding-inline-start: 0;
-  }
-
-  .layer__what {
-    margin-top: var(--space-2);
   }
 
   .layer__proof {

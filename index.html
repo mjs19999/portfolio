@@ -67,64 +67,47 @@
         A 32-bit processor wired up in Logisim and then pipelined. AES as a
         hand-drawn state machine in Verilog. Real-time task scheduling on an
         ESP32. The Django and PostgreSQL custody ledger my company runs on now.
-        Every row below says what backs it &mdash; and where there is no public
+        Every row below says what backs it, and where there is no public
         code, it says that instead.
       </p>
 
       <table class="layers">
         <caption class="u-sr">
-          The layers I have built at, from the service layer down to the gates,
-          with the artifact that backs each one.
+          Things I have built, and the artifact that backs each one.
         </caption>
         <thead>
           <tr>
-            <th scope="col"><span class="u-sr">Layer number</span></th>
-            <th scope="col">Layer</th>
-            <th scope="col">What I built there</th>
+            <th scope="col">What I built</th>
             <th scope="col">Backed by</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="layer__num">07</td>
-            <th scope="row" class="layer__name">Service</th>
-            <td class="layer__what">A custody ledger for 684 assets and 933 employee records, 428 currently signed out, with two signatures required on every transfer.</td>
+            <th scope="row" class="layer__what">A custody ledger for 684 assets and 933 employee records, 428 currently signed out, with two signatures required on every transfer.</th>
             <td class="layer__proof"><a href="work/khonaini-asset-system.html">Case study &rarr;</a></td>
           </tr>
           <tr>
-            <td class="layer__num">06</td>
-            <th scope="row" class="layer__name">Data</th>
-            <td class="layer__what">Demand forecasting over point-of-sale history: 30+ engineered features, three models, the winner picked by 5-fold cross-validation.</td>
+            <th scope="row" class="layer__what">Demand forecasting over point-of-sale history: 30+ engineered features, three models, the winner picked by 5-fold cross-validation.</th>
             <td class="layer__proof"><a href="https://github.com/mjs19999/smart_menu_brain" target="_blank" rel="noopener">Repo &#8599;</a></td>
           </tr>
           <tr>
-            <td class="layer__num">05</td>
-            <th scope="row" class="layer__name">Vision</th>
-            <td class="layer__what">Object identification, recognition and tracking, integrated into a UAS mission pipeline and tested to find where it stopped being reliable.</td>
+            <th scope="row" class="layer__what">Object identification, recognition and tracking, integrated into a UAS mission pipeline and tested to find where it stopped being reliable.</th>
             <td class="layer__proof">Employer's code</td>
           </tr>
           <tr>
-            <td class="layer__num">04</td>
-            <th scope="row" class="layer__name">Firmware</th>
-            <td class="layer__what">Three FreeRTOS tasks sharing one ESP32, scheduled at 100&nbsp;ms, 200&nbsp;ms and event-driven, in that order of priority.</td>
+            <th scope="row" class="layer__what">Three FreeRTOS tasks sharing one ESP32, scheduled at 100&nbsp;ms, 200&nbsp;ms and event-driven, in that order of priority.</th>
             <td class="layer__proof"><a href="https://github.com/mjs19999/SmartOBDII-Final" target="_blank" rel="noopener">Repo &#8599;</a></td>
           </tr>
           <tr>
-            <td class="layer__num">03</td>
-            <th scope="row" class="layer__name">Protocol</th>
-            <td class="layer__what">OBD-II PID queries over UART to an ELM327 adapter, decoding live coolant, RPM, speed and throttle readings off a running engine.</td>
+            <th scope="row" class="layer__what">OBD-II PID queries over UART to an ELM327 adapter, decoding live coolant, RPM, speed and throttle readings off a running engine.</th>
             <td class="layer__proof"><a href="https://github.com/mjs19999/SmartOBDII-Final" target="_blank" rel="noopener">Repo &#8599;</a></td>
           </tr>
           <tr>
-            <td class="layer__num">02</td>
-            <th scope="row" class="layer__name">RTL</th>
-            <td class="layer__what">AES encryption and decryption as an explicit algorithmic state machine in Verilog &mdash; control signals written by hand, not inferred.</td>
+            <th scope="row" class="layer__what">AES encryption and decryption as an explicit algorithmic state machine in Verilog. Control signals written by hand, not inferred.</th>
             <td class="layer__proof"><a href="https://github.com/mjs19999/AES_in_verilog" target="_blank" rel="noopener">Repo &#8599; 6&#9733;</a></td>
           </tr>
           <tr>
-            <td class="layer__num">01</td>
-            <th scope="row" class="layer__name">Gates</th>
-            <td class="layer__what">A 32-bit RISC processor in Logisim, single-cycle and then pipelined, validated by running a selection sort on it in assembly.</td>
+            <th scope="row" class="layer__what">A 32-bit RISC processor in Logisim, single-cycle and then pipelined, validated by running a selection sort on it in assembly.</th>
             <td class="layer__proof"><a href="https://github.com/mjs19999/32-bit-cpu-in-logisim" target="_blank" rel="noopener">Repo &#8599;</a></td>
           </tr>
         </tbody>
@@ -145,21 +128,21 @@
     <div class="shell section__grid">
       <div class="gutter">
         <div class="gutter__label">Work</div>
-        <p class="gutter__meta">2021 &mdash; present<br>Saudi Arabia</p>
+        <p class="gutter__meta">2021 &ndash; present<br>Saudi Arabia</p>
       </div>
 
       <div class="stack-v">
         <article class="role">
           <div class="role__head">
-            <h3>Computer Engineer &mdash; Systems &amp; Internal Tools</h3>
-            <span class="role__org">Khonaini International Company Ltd. &middot; Jubail &middot; Jul 2023 &mdash; present</span>
+            <h3>Computer Engineer, Systems &amp; Internal Tools</h3>
+            <span class="role__org">Khonaini International Company Ltd. &middot; Jubail &middot; Jul 2023 &ndash; present</span>
           </div>
           <div class="role__body prose">
             <p>
               I'm building the system that tracks our assets and employee
-              records &mdash; Django over a relational database &mdash; to
-              replace a legacy enterprise product and the spreadsheets that
-              were being maintained by hand next to it. Keeping the data
+              records. Django over a relational database, replacing a legacy
+              enterprise product and the spreadsheets that were being
+              maintained by hand next to it. Keeping the data
               consistent is the part that actually takes the work; the CRUD is
               the easy half.
             </p>
@@ -167,7 +150,7 @@
               The job is not only code. I image and provision endpoints (OS,
               drivers, software), chase down network and server connectivity
               problems, and write the documentation and training material
-              people use afterwards &mdash; which is usually what decides
+              people use afterwards, which is usually what decides
               whether a new internal tool gets adopted or quietly ignored.
             </p>
             <p>
@@ -179,7 +162,7 @@
         <article class="role">
           <div class="role__head">
             <h3>AI Integration Engineer</h3>
-            <span class="role__org">UAS2030 &middot; Dhahran &middot; Jun 2021 &mdash; Jan 2023</span>
+            <span class="role__org">UAS2030 &middot; Dhahran &middot; Jun 2021 &ndash; Jan 2023</span>
           </div>
           <div class="role__body prose">
             <p>
@@ -191,7 +174,7 @@
               Much of my time went to evaluation rather than model-building:
               running the system across different environments and scenarios to
               find the conditions where it stopped being reliable. That is
-              still the part of this kind of work I find most useful &mdash; a
+              still the part of this kind of work I find most useful. A
               model that performs well in one setting and nowhere else hasn't
               been finished, it has been demonstrated.
             </p>
@@ -228,7 +211,7 @@
             <span class="tag">Employer's code</span>
           </div>
           <dl class="spec__meta">
-            <div><dt>Role</dt><dd>Sole engineer &mdash; schema, app, deployment, backups, training</dd></div>
+            <div><dt>Role</dt><dd>Sole engineer: schema, app, deployment, backups, training</dd></div>
             <div><dt>Stack</dt><dd>Django 6.0 &middot; PostgreSQL &middot; server-rendered templates &middot; no SPA</dd></div>
             <div><dt>Live data</dt><dd>684 assets &middot; 933 employees &middot; 1,423 assignments &middot; 428 open</dd></div>
             <div><dt>Replaces</dt><dd>A legacy enterprise product and hand-maintained spreadsheets</dd></div>
@@ -236,7 +219,7 @@
           </dl>
           <div class="spec__body prose">
             <p>
-              Not really an inventory system &mdash; a custody ledger. Its job is
+              Not really an inventory system. A custody ledger. Its job is
               to prove who accepted responsibility for a machine, so every
               transfer captures two signatures on a pad, the employee's and an
               authority's, and assignment rows are closed rather than deleted.
@@ -257,7 +240,7 @@
 
         <article class="spec">
           <div class="spec__head">
-            <h3 class="spec__title">Menu Brain &mdash; demand forecasting for a restaurant group</h3>
+            <h3 class="spec__title">Menu Brain, demand forecasting for a restaurant group</h3>
             <span class="tag tag--signal">Public</span>
           </div>
           <dl class="spec__meta">
@@ -289,7 +272,7 @@
 
         <article class="spec">
           <div class="spec__head">
-            <h3 class="spec__title">Smart OBD-II &mdash; a diagnostic that reasons instead of reporting</h3>
+            <h3 class="spec__title">Smart OBD-II, a diagnostic that reasons instead of reporting</h3>
             <span class="tag tag--signal">Public</span>
           </div>
           <dl class="spec__meta">
@@ -302,9 +285,9 @@
             <p>
               An ESP32 plugged into a car's OBD-II port, reading live engine
               parameters. The point is that it doesn't just display them: a
-              rule engine watches for dangerous <em>combinations</em> &mdash;
+              rule engine watches for dangerous <em>combinations</em>,
               readings that are each individually fine but together mean
-              something is wrong &mdash; and raises an LED and a buzzer.
+              something is wrong, and raises an LED and a buzzer.
             </p>
             <p>
               Three FreeRTOS tasks share the chip, and the priorities are the
@@ -327,7 +310,7 @@
             <span class="tag tag--signal">Public &middot; 6&#9733; 4 forks</span>
           </div>
           <dl class="spec__meta">
-            <div><dt>Role</dt><dd>Pair, with Hasan Alhussain &mdash; KFUPM</dd></div>
+            <div><dt>Role</dt><dd>Pair with Hasan Alhussain, KFUPM</dd></div>
             <div><dt>Stack</dt><dd>Verilog</dd></div>
             <div><dt>Design</dt><dd>Algorithmic state machine, separate encrypt / decrypt datapaths</dd></div>
             <div><dt>License</dt><dd>Apache-2.0</dd></div>
@@ -337,9 +320,9 @@
               AES encryption and decryption built as an explicit algorithmic
               state machine rather than leaving the control path to be inferred
               by the synthesiser. The round counter, the register enables and
-              the branch conditions &mdash;
+              the branch conditions (
               <code>isRound0</code>, <code>isRound9</code>,
-              <code>isRound10</code>, <code>count_lt_10</code> &mdash; are all
+              <code>isRound10</code>, <code>count_lt_10</code>) are all
               written out, with separate datapaths for encryption and
               decryption covering byte substitution, shift rows, mix columns
               and their inverses.
@@ -361,7 +344,7 @@
             <span class="tag tag--signal">Public</span>
           </div>
           <dl class="spec__meta">
-            <div><dt>Role</dt><dd>Sole author &mdash; KFUPM COE301</dd></div>
+            <div><dt>Role</dt><dd>Sole author, KFUPM COE301</dd></div>
             <div><dt>Stack</dt><dd>Logisim &middot; RISC assembly</dd></div>
             <div><dt>Variants</dt><dd>Single-cycle, then pipelined</dd></div>
             <div><dt>Test</dt><dd>Selection sort, assembled and run to completion</dd></div>
@@ -418,7 +401,7 @@
               <li>Python</li>
               <li>Django</li>
               <li>PostgreSQL</li>
-              <li>SQL &mdash; schema design, constraints, migrations</li>
+              <li>SQL: schema design, constraints, migrations</li>
               <li>Django permissions &amp; groups</li>
               <li>Backup &amp; restore</li>
               <li>Endpoint provisioning (Windows, Linux)</li>
@@ -444,7 +427,7 @@
           </div>
 
           <div class="tier">
-            <div class="tier__label">Coursework foundations &mdash; KFUPM</div>
+            <div class="tier__label">Coursework foundations, KFUPM</div>
             <ul class="tier__items">
               <li>Computer architecture</li>
               <li>Operating systems</li>
@@ -458,12 +441,12 @@
           </div>
 
           <div class="tier tier--open">
-            <div class="tier__label">Learning now &mdash; not yet interview-ready</div>
+            <div class="tier__label">Learning now, not yet interview-ready</div>
             <ul class="tier__items">
               <li>Linux administration beyond daily use</li>
               <li>systemd / journald / permissions</li>
               <li>Performance triage</li>
-              <li>SQL past CRUD &mdash; window functions, EXPLAIN, indexing</li>
+              <li>SQL past CRUD: window functions, EXPLAIN, indexing</li>
               <li>Docker</li>
               <li>Kubernetes</li>
             </ul>
@@ -472,7 +455,7 @@
 
         <p class="note">
           I keep that last group honest and on the page. If something is listed
-          there, I can tell you what I have read and built with it &mdash; not
+          there, I can tell you what I have read and built with it, not
           that I have run it in production. I would rather you know which is
           which before we start talking than find out halfway through a screen
           share.
@@ -488,14 +471,14 @@
     <div class="shell section__grid">
       <div class="gutter">
         <div class="gutter__label">Background</div>
-        <p class="gutter__meta">KFUPM<br>2017 &mdash; present</p>
+        <p class="gutter__meta">KFUPM<br>2017 &ndash; present</p>
       </div>
 
       <div class="stack-v">
         <article class="role">
           <div class="role__head">
             <h3>MSc, Internet of Things</h3>
-            <span class="role__org">King Fahd University of Petroleum &amp; Minerals &middot; 2025 &mdash; present</span>
+            <span class="role__org">King Fahd University of Petroleum &amp; Minerals &middot; 2025 &ndash; present</span>
           </div>
           <div class="role__body prose">
             <p>
@@ -509,15 +492,15 @@
         <article class="role">
           <div class="role__head">
             <h3>BSc, Computer Engineering</h3>
-            <span class="role__org">King Fahd University of Petroleum &amp; Minerals &middot; 2017 &mdash; 2023</span>
+            <span class="role__org">King Fahd University of Petroleum &amp; Minerals &middot; 2017 &ndash; 2023</span>
           </div>
           <div class="role__body prose">
             <p>
               Computer architecture, digital design, microprocessors, signal
               processing, control systems, operating systems and networking. The
-              processor and the AES state machine both came out of this degree
-              &mdash; the architecture and digital design courses are where the
-              gates layer at the top of this page starts.
+              processor and the AES state machine both came out of this degree.
+              The architecture and digital design courses are where the
+              processor at the bottom of the table above begins.
             </p>
           </div>
         </article>
@@ -555,7 +538,7 @@
           <p class="lead">
             I'm most useful on backend systems, embedded work, or anything that
             needs someone who can move between the two without a handover. If
-            you want to dig into any of the projects above, ask &mdash; the
+            you want to dig into any of the projects above, ask. The
             code is all there.
           </p>
         </div>
@@ -592,7 +575,6 @@
   <div class="shell footer__inner">
     <span>Mojtaba Almadan &middot; Eastern Province, Saudi Arabia</span>
     <span>
-      Static HTML and CSS, no build step &mdash;
       <a href="https://github.com/mjs19999/portfolio" target="_blank" rel="noopener">source</a>
       &middot;
       <a href="ar/index.html" hreflang="ar" lang="ar">العربية</a>

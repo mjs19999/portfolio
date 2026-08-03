@@ -5,25 +5,32 @@
    ========================================================================== */
 
 /* --- Arabic type ---------------------------------------------------------
-   Swapping two variables re-skins the whole page, because every rule reads
-   from them. IBM Plex Sans Arabic is the Arabic companion to the IBM Plex Mono
-   already in use; Noto Naskh carries running text the way Newsreader does in
-   English.
+   Aref Ruqaa for display. It is a Ruqaa face — the cursive hand used for
+   signage and headings rather than for books — so it carries a lot of
+   character and looks like nobody's default. That is exactly why it belongs on
+   headings and nowhere near a paragraph: Ruqaa runs its letters along a steep
+   descending baseline, which is handsome at 40px and exhausting at 17px.
+
+   Amiri carries the running text. It is a proper Naskh book face by the same
+   designer as Aref Ruqaa (Khaled Hosny), so the two share a lineage and sit
+   together naturally, and it is far less worn out than Noto Naskh.
 
    The mono stack keeps IBM Plex Mono FIRST and adds Arabic after it. Font
-   fallback is per glyph, so Latin identifiers (Django, PostgreSQL, 0x0C) stay
-   monospaced while Arabic words in the same label render in Plex Sans Arabic
-   instead of a random system face. */
+   fallback is per glyph, so any Latin left in a label (a URL, 0x0C) stays
+   monospaced while Arabic in the same label renders in Amiri rather than a
+   random system face. */
 html[dir="rtl"] {
-  --font-display: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
-  --font-body: "Noto Naskh Arabic", "Times New Roman", serif;
-  --font-mono: "IBM Plex Mono", "IBM Plex Sans Arabic", ui-monospace, monospace;
+  --font-display: "Aref Ruqaa", "Segoe UI", serif;
+  --font-body: "Amiri", "Traditional Arabic", serif;
+  --font-mono: "IBM Plex Mono", "Amiri", ui-monospace, monospace;
 }
 
 /* Arabic needs more leading than Latin: the script sits on a lower baseline and
-   carries dots and diacritics above and below it. */
+   carries dots and diacritics above and below it. Amiri runs small for its
+   point size, so it is nudged up. */
 html[dir="rtl"] body {
-  line-height: 1.9;
+  font-size: 1.15rem;
+  line-height: 1.95;
 }
 
 /* Never letter-space Arabic. The script is cursive, so tracking pulls joined
@@ -38,7 +45,6 @@ html[dir="rtl"] .gutter__label,
 html[dir="rtl"] .gutter__meta,
 html[dir="rtl"] .tier__label,
 html[dir="rtl"] .layers thead th,
-html[dir="rtl"] .layer__name,
 html[dir="rtl"] .spec__meta dt,
 html[dir="rtl"] .contact-list dt,
 html[dir="rtl"] .masthead__nav a {
@@ -52,7 +58,6 @@ html[dir="rtl"] .eyebrow,
 html[dir="rtl"] .gutter__label,
 html[dir="rtl"] .tier__label,
 html[dir="rtl"] .layers thead th,
-html[dir="rtl"] .layer__name,
 html[dir="rtl"] .spec__meta dt,
 html[dir="rtl"] .contact-list dt,
 html[dir="rtl"] .masthead__nav a,
@@ -84,10 +89,21 @@ html[dir="rtl"] .ui__side i[data-on] {
   box-shadow: inset -2px 0 0 var(--signal);
 }
 
+/* Code stays exactly as written: Latin, left-to-right, and sealed off from the
+   surrounding Arabic. `dir="ltr"` in the markup does the isolating; this makes
+   it explicit and adds the monospace face, so an identifier like
+   `returned_at__isnull` cannot be reordered or have its underscores dragged to
+   the wrong end by the bidi algorithm. */
+html[dir="rtl"] code,
+html[dir="rtl"] kbd {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-family: var(--font-mono);
+}
+
 /* Numbers stay Western-Arabic (0-9) and read left-to-right inside RTL text.
    Isolating them stops the bidi algorithm reordering a figure like "684" when
    it sits next to punctuation. */
-html[dir="rtl"] .layer__num,
 html[dir="rtl"] .spec__meta dd,
 html[dir="rtl"] .contact-list dd {
   unicode-bidi: isolate;
