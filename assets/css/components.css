@@ -347,6 +347,28 @@
   border-bottom-color: var(--signal);
 }
 
+/* Mode switch: plain version <-> technical version. Bordered rather than
+   underlined so it outranks the language link, since it is the one control that
+   decides whether a reader stays on the page at all. */
+.mode-link {
+  padding: 0.26rem 0.5rem;
+  border: 1px solid var(--signal);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--step-mono-sm);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--signal);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+
+.mode-link:hover {
+  background: var(--signal);
+  color: var(--paper);
+}
+
 .btn {
   display: inline-flex;
   align-items: center;

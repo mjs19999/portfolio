@@ -9,9 +9,11 @@ Static HTML and CSS. No framework, no build step, no bundler. Clone it and open
 ## Structure
 
 ```
-index.html                           home, English
+index.html                           home, plain English
+ar/index.html                        home, plain Arabic (dir="rtl")
+full/index.html                      home, technical English
+ar/full/index.html                   home, technical Arabic
 work/khonaini-asset-system.html      case study, English
-ar/index.html                        home, Arabic (dir="rtl")
 ar/work/khonaini-asset-system.html   case study, Arabic
 assets/css/tokens.css                colour, type scale, spacing — light and dark
 assets/css/base.css                  reset and element-level typography
@@ -44,7 +46,21 @@ looser leading.
 purpose. Anchors keep working across languages and one `nav.js` serves both.
 
 Both pages exist in both languages, and each links to its own-language CV.
-Editing rule: **content changes must be made in all four files.**
+
+## Two modes
+
+Like a BIOS: easy mode is what you land on, advanced is one click away.
+
+`/` is written so a non-technical reader can follow it. `/full/` is the same person
+described for an engineer, and is the page the case study belongs to. They are
+**different pages about the same subject, not translations of each other**, so they do
+not list each other in `hreflang` — only the two language versions of each do.
+
+There is one case study and it is technical only, so its URL does not encode a mode.
+Its "Plain version" link goes to the simple home page.
+
+Editing rule: a project description now lives in up to **four** files — plain and
+technical, English and Arabic. The case study makes six pages in total.
 
 The ER diagram and the interface sketch stay left-to-right on the Arabic pages.
 Technical drawings conventionally do, and mirroring them would put the foreign

@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Mojtaba Almadan — computer engineer</title>
+<title>Mojtaba Almadan, computer engineer</title>
 <meta name="description" content="Computer engineer in Eastern Province, Saudi Arabia. Django and SQL systems, ESP32 firmware, Verilog, and a 32-bit processor built in Logisim. Every claim links to the code.">
-<link rel="canonical" href="https://mjs19999.github.io/portfolio/">
-<link rel="alternate" hreflang="en" href="https://mjs19999.github.io/portfolio/">
-<link rel="alternate" hreflang="ar" href="https://mjs19999.github.io/portfolio/ar/">
-<link rel="alternate" hreflang="x-default" href="https://mjs19999.github.io/portfolio/">
+<link rel="canonical" href="https://mjs19999.github.io/portfolio/full/">
+<link rel="alternate" hreflang="en" href="https://mjs19999.github.io/portfolio/full/">
+<link rel="alternate" hreflang="ar" href="https://mjs19999.github.io/portfolio/ar/full/">
+<link rel="alternate" hreflang="x-default" href="https://mjs19999.github.io/portfolio/full/">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mojtaba Almadan — computer engineer">
-<meta property="og:description" content="I build at every layer, from gates to services. Every claim links to the code.">
+<meta property="og:title" content="Mojtaba Almadan, computer engineer">
+<meta property="og:description" content="I build software and the hardware underneath it. Every claim links to the code.">
 
 <!-- Set the theme before first paint so the page never flashes the wrong one. -->
 <script>
@@ -30,10 +30,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400..600&display=swap">
 
-<link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/layout.css">
-<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/layout.css">
+<link rel="stylesheet" href="../assets/css/components.css">
 </head>
 <body>
 
@@ -49,7 +49,8 @@
       <a href="#background">Background</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="lang-link" href="ar/index.html" hreflang="ar" lang="ar">العربية</a>
+    <a class="mode-link" href="../index.html">Plain version &rarr;</a>
+    <a class="lang-link" href="../ar/full/index.html" hreflang="ar" lang="ar">العربية</a>
     <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch theme">DK</button>
   </div>
 </header>
@@ -62,7 +63,7 @@
   <section class="section section--hero" id="top">
     <div class="shell">
       <p class="eyebrow">Computer engineer &middot; Eastern Province, Saudi Arabia</p>
-      <h1>I build at every layer, from gates to services.</h1>
+      <h1>I build software and the hardware underneath it.</h1>
       <p class="lead hero__lead">
         A 32-bit processor wired up in Logisim and then pipelined. AES as a
         hand-drawn state machine in Verilog. Real-time task scheduling on an
@@ -84,7 +85,7 @@
         <tbody>
           <tr>
             <th scope="row" class="layer__what">A custody ledger for 684 assets and 933 employee records, 428 currently signed out, with two signatures required on every transfer.</th>
-            <td class="layer__proof"><a href="work/khonaini-asset-system.html">Case study &rarr;</a></td>
+            <td class="layer__proof"><a href="../work/khonaini-asset-system.html">Case study &rarr;</a></td>
           </tr>
           <tr>
             <th scope="row" class="layer__what">Demand forecasting over point-of-sale history: 30+ engineered features, three models, the winner picked by 5-fold cross-validation.</th>
@@ -114,7 +115,7 @@
       </table>
 
       <div class="hero__actions">
-        <a class="btn btn--solid" href="assets/pdf/mojtaba-almadan-cv.pdf">Download CV (PDF)</a>
+        <a class="btn btn--solid" href="../assets/pdf/mojtaba-almadan-cv.pdf">Download CV (PDF)</a>
         <a class="btn" href="https://github.com/mjs19999" target="_blank" rel="noopener">GitHub &#8599;</a>
         <a class="btn" href="https://www.linkedin.com/in/mojtaba-almadan/" target="_blank" rel="noopener">LinkedIn &#8599;</a>
       </div>
@@ -154,7 +155,7 @@
               whether a new internal tool gets adopted or quietly ignored.
             </p>
             <p>
-              <a class="link-mono" href="work/khonaini-asset-system.html">Read the architecture write-up &rarr;</a>
+              <a class="link-mono" href="../work/khonaini-asset-system.html">Read the architecture write-up &rarr;</a>
             </p>
           </div>
         </article>
@@ -199,7 +200,7 @@
         <div class="section__intro">
           <h2>Five things I have actually built.</h2>
           <p class="lead">
-            Not a grid padded out to a round number. Four of these have code
+            There are five because that is how many I have. Four have code
             you can read; the fifth belongs to my employer, so it gets an
             architecture write-up instead of a repository link.
           </p>
@@ -234,7 +235,7 @@
             </p>
           </div>
           <div class="spec__links">
-            <a class="btn" href="work/khonaini-asset-system.html">Architecture write-up &rarr;</a>
+            <a class="btn" href="../work/khonaini-asset-system.html">Architecture write-up &rarr;</a>
           </div>
         </article>
 
@@ -357,9 +358,8 @@
             </p>
             <p>
               It is validated by assembling a selection sort and running it on
-              the machine until it halts with the array in order. That is a
-              harsh test: every instruction in the path, the memory interface
-              and every control signal has to be right, not merely plausible.
+              the machine until it halts with the array in order. If any instruction in the path, the memory interface or a
+              single control signal is wrong, the array comes back scrambled.
             </p>
             <p>
               This is the project I point at when someone asks whether I
@@ -455,10 +455,9 @@
 
         <p class="note">
           I keep that last group honest and on the page. If something is listed
-          there, I can tell you what I have read and built with it, not
-          that I have run it in production. I would rather you know which is
-          which before we start talking than find out halfway through a screen
-          share.
+          there, I can tell you what I have read and what I have built
+          with it. I have not run it in production. Better you know that before
+          we start talking than halfway through a screen share.
         </p>
       </div>
     </div>
@@ -562,7 +561,7 @@
           </div>
           <div>
             <dt>CV</dt>
-            <dd><a href="assets/pdf/mojtaba-almadan-cv.pdf">mojtaba-almadan-cv.pdf</a> &middot; <a href="assets/pdf/mojtaba-almadan-cv-ar.pdf" hreflang="ar" lang="ar">النسخة العربية</a></dd>
+            <dd><a href="../assets/pdf/mojtaba-almadan-cv.pdf">mojtaba-almadan-cv.pdf</a> &middot; <a href="../assets/pdf/mojtaba-almadan-cv-ar.pdf" hreflang="ar" lang="ar">النسخة العربية</a></dd>
           </div>
         </dl>
       </div>
@@ -577,12 +576,12 @@
     <span>
       <a href="https://github.com/mjs19999/portfolio" target="_blank" rel="noopener">source</a>
       &middot;
-      <a href="ar/index.html" hreflang="ar" lang="ar">العربية</a>
+      <a href="../ar/full/index.html" hreflang="ar" lang="ar">العربية</a>
     </span>
   </div>
 </footer>
 
-<script src="assets/js/theme.js" defer></script>
-<script src="assets/js/nav.js" defer></script>
+<script src="../assets/js/theme.js" defer></script>
+<script src="../assets/js/nav.js" defer></script>
 </body>
 </html>

@@ -85,11 +85,28 @@
   border-bottom-color: var(--signal);
 }
 
-/* Nav labels are the first thing to go on a narrow screen — the page is
+/* Nav labels are the first thing to go on a narrow screen: the page is
    short enough to scroll. The theme control stays. */
 @media (max-width: 560px) {
   .masthead__nav {
     display: none;
+  }
+
+  /* With four controls in the bar, the full name is what has to give. Zeroing
+     the font size collapses the text node while leaving the MA badge sized
+     normally, and unlike display:none it stays available to a screen reader.
+     Tightening the gap buys back the rest. */
+  .masthead__inner {
+    gap: var(--space-3);
+  }
+
+  .masthead__name {
+    font-size: 0;
+    gap: 0;
+  }
+
+  .masthead__name b {
+    font-size: var(--step-mono);
   }
 }
 

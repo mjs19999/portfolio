@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>KIC Asset Management — a case study — Mojtaba Almadan</title>
+<title>KIC Asset Management, a case study, Mojtaba Almadan</title>
 <link rel="canonical" href="https://mjs19999.github.io/portfolio/work/khonaini-asset-system.html">
 <link rel="alternate" hreflang="en" href="https://mjs19999.github.io/portfolio/work/khonaini-asset-system.html">
 <link rel="alternate" hreflang="ar" href="https://mjs19999.github.io/portfolio/ar/work/khonaini-asset-system.html">
@@ -36,10 +36,11 @@
 
 <header class="masthead">
   <div class="shell masthead__inner">
-    <a class="masthead__name" href="../index.html"><b>MA</b> Mojtaba Almadan</a>
+    <a class="masthead__name" href="../full/index.html"><b>MA</b> Mojtaba Almadan</a>
     <nav class="masthead__nav" aria-label="Sections">
-      <a href="../index.html#built">&larr; All projects</a>
+      <a href="../full/index.html#built">&larr; All projects</a>
     </nav>
+    <a class="mode-link" href="../index.html">Plain version &rarr;</a>
     <a class="lang-link" href="../ar/work/khonaini-asset-system.html" hreflang="ar" lang="ar">العربية</a>
     <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch theme">DK</button>
   </div>
@@ -224,8 +225,8 @@
             carries custody history is <code>PROTECT</code>, everything
             organisational is <code>SET_NULL</code>. A null
             <code>returned_at</code> means the assignment is open. Rows are
-            closed, never deleted, so the custody history of any asset is a
-            query rather than an excavation.
+            closed, never deleted, so the custody history of any asset is one
+            query.
           </figcaption>
         </figure>
 
@@ -242,10 +243,10 @@
           </p>
           <p>
             You cannot delete an employee who has ever signed for a machine.
-            Deleting them would destroy the evidence that they did, which
-            is the one thing the system exists to hold. So an employee who
-            leaves gets <code>is_active = False</code>; 23 of the 933 records
-            are inactive rather than absent. Projects are different: a project
+            Their signature is the evidence, and keeping it is the whole
+            reason the system exists. So an employee who
+            leaves gets <code>is_active = False</code>; 23 of the 933 records are flagged
+            inactive, and none have been removed. Projects are different: a project
             ending is normal, and it should not take an asset's history with it,
             so those references go null and the assignment survives.
           </p>
@@ -334,7 +335,7 @@
           <p>
             The migration will apply cleanly. I checked all 428 open assignments
             and no asset is open more than once, so there is nothing to
-            reconcile first, which is luck rather than safety. One person
+            reconcile first. I would not call that safe, though. One person
             using an internal tool on a LAN very rarely races against
             themselves.
           </p>
@@ -388,8 +389,7 @@
             equipment and an authority releasing it. Neither is optional, both
             are captured on a signature pad in the browser, and a separate
             <code>view_signatures</code> permission controls who can look at
-            them afterwards. They are specimen signatures of real people,
-            not decoration.
+            them afterwards. They are specimen signatures of real people.
           </p>
           <p>
             Storing them exposed a small gap in Django. An
@@ -547,7 +547,7 @@
           </dl>
           <figcaption class="figure__cap">
             Fig. 7. The two <code>--exclude</code> flags are there
-            because of a failed restore, not because a tutorial said so.
+            because of a failed restore.
             <code>dumpdata</code> serialises <code>contenttypes</code> and
             <code>auth.Permission</code>, then <code>loaddata</code> collides
             with the rows Django's own migrations have already created in the
@@ -559,8 +559,8 @@
 
         <div class="prose">
           <p>
-            The reason I know that is that the first restore failed on an
-            integrity error, which is a better teacher than a working one. It
+            I know that because the first restore failed on an integrity
+            error, and it took a while to work out why. It
             also means the honest answer to "have you ever restored a backup" is
             yes, more than once, and I know which flags matter.
           </p>
@@ -611,8 +611,8 @@
         <div class="prose">
           <p>
             The practical damage is that you cannot answer "how many OptiPlex
-            7000s do we have" with a <code>GROUP BY</code>, which is the sort of
-            question the system was built to answer. Grouping by
+            7000s do we have" with a <code>GROUP BY</code>. That is one of the
+            questions the system was built for. Grouping by
             <code>model</code> returns 255 groups for maybe thirty real
             machines.
           </p>
@@ -653,7 +653,7 @@
             matching after normalisation gets from 255 to 183, and the remaining
             gap needs fuzzy clustering: PostgreSQL's
             <code>pg_trgm</code> similarity over the normalised strings, with
-            the ambiguous clusters reviewed by hand rather than guessed at. It
+            the ambiguous clusters reviewed by hand. It
             is a day of work I should have spent before importing 684 rows
             instead of after.
           </p>
@@ -672,9 +672,8 @@
             after thirteen. Once other tables have foreign keys into
             <code>auth.User</code>, changing it is a migration problem out of
             proportion to the benefit. What I actually wanted was custom
-            permissions, and those do not require a custom user model,
-            which is where the two permissions on
-            <code>AssetAssignment</code> came from instead.
+            permissions, and those do not require a custom user model. The two permissions on
+            <code>AssetAssignment</code> came out of that.
           </p>
           <p>
             Two traces of the detour are still in the tree: an unused
@@ -755,7 +754,7 @@
       </div>
       <div class="prose">
         <p>
-          <a class="link-mono" href="../index.html#built">&larr; Back to all projects</a>
+          <a class="link-mono" href="../full/index.html#built">&larr; Back to all projects</a>
         </p>
       </div>
     </div>
@@ -766,7 +765,7 @@
 <footer class="footer">
   <div class="shell footer__inner">
     <span>Mojtaba Almadan &middot; Eastern Province, Saudi Arabia</span>
-    <span><a href="../index.html">Home</a> &middot; <a href="../ar/work/khonaini-asset-system.html" hreflang="ar" lang="ar">العربية</a></span>
+    <span><a href="../full/index.html">Home</a> &middot; <a href="../ar/work/khonaini-asset-system.html" hreflang="ar" lang="ar">العربية</a></span>
   </div>
 </footer>
 

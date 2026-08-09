@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Mojtaba Almadan, computer engineer</title>
+<meta name="description" content="Mojtaba Almadan, a computer engineer in Saudi Arabia. I write programs companies use every day, and I have built computer parts from scratch. Everything here links to proof.">
+<link rel="canonical" href="https://mjs19999.github.io/portfolio/">
+<link rel="alternate" hreflang="en" href="https://mjs19999.github.io/portfolio/">
+<link rel="alternate" hreflang="ar" href="https://mjs19999.github.io/portfolio/ar/">
+<link rel="alternate" hreflang="x-default" href="https://mjs19999.github.io/portfolio/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mojtaba Almadan, computer engineer">
+<meta property="og:description" content="I build software and the hardware underneath it. Everything here links to proof.">
+
+<!-- Set the theme before first paint so the page never flashes the wrong one. -->
+<script>
+  (function () {
+    var stored;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    document.documentElement.dataset.theme =
+      stored ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400..600&display=swap">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="masthead__name" href="#top"><b>MA</b> Mojtaba Almadan</a>
+    <a class="mode-link" href="full/index.html">Technical details &rarr;</a>
+    <a class="lang-link" href="ar/index.html" hreflang="ar" lang="ar">العربية</a>
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch theme">DK</button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================================================================
+       WHO I AM
+       =================================================================== -->
+  <section class="section section--hero" id="top">
+    <div class="shell">
+      <p class="eyebrow">Computer engineer &middot; Eastern Province, Saudi Arabia</p>
+      <h1>I build software and the hardware underneath it.</h1>
+      <p class="lead hero__lead">
+        I am Mojtaba. I write programs that companies use every day. I have also
+        built computer parts from scratch, so I know how they work underneath.
+        Everything on this page links to the thing itself, so you can check it.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="assets/pdf/mojtaba-almadan-cv.pdf">Download my CV (PDF)</a>
+        <a class="btn" href="https://github.com/mjs19999" target="_blank" rel="noopener">GitHub &#8599;</a>
+        <a class="btn" href="https://www.linkedin.com/in/mojtaba-almadan/" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       WHAT I HAVE MADE
+       =================================================================== -->
+  <section class="section" id="made">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">What I made</div>
+        <p class="gutter__meta">6 things<br>4 you can open</p>
+      </div>
+
+      <div>
+        <p class="lead">
+          Six things I have built. Four of them you can open and read. One belongs
+          to my employer, so I cannot share the code, and I say so.
+        </p>
+
+        <table class="layers">
+          <caption class="u-sr">
+            Things I have made, and where you can see each one.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">What I made</th>
+              <th scope="col">See it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="layer__what">A program my company uses to keep track of its computers, phones and other equipment, and who has each one. It looks after 684 items and 933 staff records.</th>
+              <td class="layer__proof"><a href="work/khonaini-asset-system.html">Read more &rarr;</a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="layer__what">A program that works out how much food a restaurant will sell. Staff order the right amount, so less food gets thrown away.</th>
+              <td class="layer__proof"><a href="https://github.com/mjs19999/smart_menu_brain" target="_blank" rel="noopener">Code &#8599;</a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="layer__what">Software that spots objects in a video and follows them as they move. It was used on an aircraft that flies by itself.</th>
+              <td class="layer__proof">My employer owns it</td>
+            </tr>
+            <tr>
+              <th scope="row" class="layer__what">A small computer you plug into a car. It reads the engine while you drive, and it beeps and flashes if something looks wrong.</th>
+              <td class="layer__proof"><a href="https://github.com/mjs19999/SmartOBDII-Final" target="_blank" rel="noopener">Code &#8599;</a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="layer__what">A circuit that scrambles secret messages so nobody else can read them. Six people found it online and used it in their own work.</th>
+              <td class="layer__proof"><a href="https://github.com/mjs19999/AES_in_verilog" target="_blank" rel="noopener">Code &#8599; 6&#9733;</a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="layer__what">A working computer processor. I built it from scratch out of simple switches, then ran a real program on it to prove it worked.</th>
+              <td class="layer__proof"><a href="https://github.com/mjs19999/32-bit-cpu-in-logisim" target="_blank" rel="noopener">Code &#8599;</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       WHERE I HAVE WORKED
+       =================================================================== -->
+  <section class="section" id="work">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">My jobs</div>
+        <p class="gutter__meta">2021 to now</p>
+      </div>
+
+      <div class="stack-v">
+        <article class="role">
+          <div class="role__head">
+            <h3>Computer engineer at Khonaini International Company</h3>
+            <span class="role__org">Jubail &middot; 2023 to now</span>
+          </div>
+          <div class="role__body prose">
+            <p>
+              I build and look after the programs the company uses inside the
+              business. The main one is the equipment tracker above. Before it,
+              staff kept these records in spreadsheets by hand, and the numbers
+              often did not agree.
+            </p>
+            <p>
+              The job is not only writing programs. I also set up new computers
+              for staff, fix the network when it stops working, and write the
+              guides people use to learn a new tool.
+            </p>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role__head">
+            <h3>Engineer at UAS2030</h3>
+            <span class="role__org">Dhahran &middot; 2021 to 2023</span>
+          </div>
+          <div class="role__body prose">
+            <p>
+              I worked with a team on software that finds objects in camera
+              pictures. Most of my time went on testing it. My job was to find
+              the moments when it stopped working well, so the team could fix
+              them before it mattered.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       WHAT I USE
+       =================================================================== -->
+  <section class="section" id="skills">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">What I use</div>
+        <p class="gutter__meta">And what<br>is next</p>
+      </div>
+
+      <div class="stack-v--tight stack-v">
+        <div class="tier">
+          <div class="tier__label">I use these every day</div>
+          <ul class="tier__items">
+            <li>Python</li>
+            <li>Django</li>
+            <li>Databases</li>
+            <li>Setting up Windows and Linux computers</li>
+            <li>Fixing networks</li>
+            <li>Writing guides for staff</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <div class="tier__label">I have built projects with these</div>
+          <ul class="tier__items">
+            <li>Machine learning</li>
+            <li>Computer vision</li>
+            <li>C++ on small chips</li>
+            <li>Verilog, for designing circuits</li>
+            <li>Git</li>
+          </ul>
+        </div>
+
+        <div class="tier tier--open">
+          <div class="tier__label">What I am learning next</div>
+          <ul class="tier__items">
+            <li>Running Linux servers well</li>
+            <li>Docker</li>
+            <li>Kubernetes</li>
+          </ul>
+        </div>
+
+        <p class="note">
+          Those last three are tools companies use to pack up a program and run
+          it on many machines at once. I am working through them now, and I would
+          rather tell you that than let you find out later.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SCHOOL
+       =================================================================== -->
+  <section class="section" id="school">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">School</div>
+        <p class="gutter__meta">KFUPM</p>
+      </div>
+
+      <div class="prose">
+        <p>
+          I studied at King Fahd University of Petroleum and Minerals. I finished
+          my first degree in computer engineering in 2023, and I am studying for
+          a master's degree there now.
+        </p>
+        <p>
+          The processor and the secret message circuit in the list above both
+          came out of that first degree.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       CONTACT
+       =================================================================== -->
+  <section class="section" id="contact">
+    <div class="shell section__grid">
+      <div class="gutter">
+        <div class="gutter__label">Contact</div>
+        <p class="gutter__meta">Email is<br>fastest</p>
+      </div>
+
+      <div class="stack-v">
+        <p class="lead">
+          Happy to talk. If you want to know more about any of the things above,
+          just ask.
+        </p>
+
+        <dl class="contact-list">
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:mojtaba.almadan@gmail.com">mojtaba.almadan@gmail.com</a></dd>
+          </div>
+          <div>
+            <dt>LinkedIn</dt>
+            <dd><a href="https://www.linkedin.com/in/mojtaba-almadan/" target="_blank" rel="noopener">linkedin.com/in/mojtaba-almadan</a></dd>
+          </div>
+          <div>
+            <dt>GitHub</dt>
+            <dd><a href="https://github.com/mjs19999" target="_blank" rel="noopener">github.com/mjs19999</a></dd>
+          </div>
+          <div>
+            <dt>Based in</dt>
+            <dd>Eastern Province, Saudi Arabia</dd>
+          </div>
+          <div>
+            <dt>CV</dt>
+            <dd><a href="assets/pdf/mojtaba-almadan-cv.pdf">mojtaba-almadan-cv.pdf</a>
+              &middot; <a href="assets/pdf/mojtaba-almadan-cv-ar.pdf" hreflang="ar" lang="ar">النسخة العربية</a></dd>
+          </div>
+        </dl>
+
+        <p class="note">
+          This page keeps things short on purpose. If you write software yourself
+          and want the detail, the
+          <a href="full/index.html">technical version</a> has the schemas, the
+          numbers and the parts I got wrong.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer__inner">
+    <span>Mojtaba Almadan &middot; Eastern Province, Saudi Arabia</span>
+    <span>
+      <a href="full/index.html">Technical version</a>
+      &middot;
+      <a href="ar/index.html" hreflang="ar" lang="ar">العربية</a>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/js/theme.js" defer></script>
+</body>
+</html>
